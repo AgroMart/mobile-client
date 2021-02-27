@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { View } from 'react-native';
-import MyCarousel from '../../components/Carousel';
+import QuantityInput from '../../components/QuantityInput';
 
 const Homescreen: React.FunctionComponent = () => {
+  const [quantity, setQuantity] = useState(1);
+
+  const addItemHandler = useCallback(() => {
+    setQuantity(quantity + 1);
+  }, [quantity]);
+
+  const subItemHandler = useCallback(() => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  }, [quantity]);
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <MyCarousel />
+      <QuantityInput
+        initialState={quantity}
+        addFunction={addItemHandler}
+        subFunction={subItemHandler}
+      />
     </View>
   );
 };

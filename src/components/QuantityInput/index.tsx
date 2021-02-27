@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Feather } from '@expo/vector-icons';
 import {
   Container,
@@ -7,24 +7,24 @@ import {
   AddItemButton,
 } from './styles';
 
-const QuantityInput: React.FC = () => {
-  const [quantity, setQuantity] = useState(1);
-  const removeItemHandler = (): void => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
+type QuantityInputProps = {
+  initialState: number;
+  addFunction: () => void;
+  subFunction: () => void;
+};
 
-  const addItemHandler = (): void => {
-    setQuantity(quantity + 1);
-  };
+const QuantityInput: React.FC<QuantityInputProps> = ({
+  initialState,
+  addFunction,
+  subFunction,
+}) => {
   return (
     <Container>
-      <RemoveItemButton onPress={removeItemHandler}>
+      <RemoveItemButton onPress={subFunction}>
         <Feather name="minus" color="#F80505" size={20} />
       </RemoveItemButton>
-      <QuantityItems editable={false} value={quantity.toString()} />
-      <AddItemButton onPress={addItemHandler}>
+      <QuantityItems editable={false} value={initialState.toString()} />
+      <AddItemButton onPress={addFunction}>
         <Feather name="plus" color="#00CC76" size={20} />
       </AddItemButton>
     </Container>
