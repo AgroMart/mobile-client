@@ -1,11 +1,11 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import QuantityInput from '../../components/QuantityInput';
+import { View } from 'react-native';
+import MyCarousel from '../../components/Carousel';
 
 const Homescreen: React.FunctionComponent = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <QuantityInput />
+      <MyCarousel />
     </View>
   );
 };
