@@ -1,8 +1,6 @@
-import { TextInput, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 
-export const Container = styled(View)`
+export const Container = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -13,21 +11,21 @@ export const Container = styled(View)`
   width: 27%;
 `;
 
-export const RemoveItemButton = styled(TouchableOpacity)`
+export const RemoveItemButton = styled.TouchableOpacity`
   flex: 1;
   justify-content: center;
   align-items: center;
   width: 40px;
 `;
 
-export const AddItemButton = styled(TouchableOpacity)`
+export const AddItemButton = styled.TouchableOpacity`
   flex: 1;
   justify-content: center;
   align-items: center;
   width: 40px;
 `;
 
-export const QuantityItems = styled(TextInput)`
+export const QuantityItems = styled.TextInput`
   text-align: center;
   color: #000;
 `;

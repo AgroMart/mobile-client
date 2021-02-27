@@ -1,29 +1,27 @@
-import { Image, SafeAreaView, Text, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 
-export const Container = styled(SafeAreaView)`
+export const Container = styled.SafeAreaView`
   flex: 1;
   background: #fff;
 `;
 
-export const Banner = styled(Image)`
+export const Banner = styled.Image`
   width: 100%;
   height: 25.3%;
 `;
 
-export const Content = styled(View)`
+export const Content = styled.View`
   width: 85%;
   margin: 0 auto;
 `;
 
-export const FarmName = styled(Text)`
+export const FarmName = styled.Text`
   margin-top: 1.6%;
   margin-bottom: 1%;
   font-size: 27px;
 `;
 
-export const ContactView = styled(View)`
+export const ContactView = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -31,21 +29,21 @@ export const ContactView = styled(View)`
   border-color: #d3d3d3;
 `;
 
-export const City = styled(Text)`
+export const City = styled.Text`
   margin-top: 1.6%;
   margin-bottom: 5%;
   color: gray;
   font-size: 20px;
 `;
 
-export const MessageIcon = styled(TouchableOpacity)``;
+export const MessageIcon = styled.TouchableOpacity``;
 
-export const DescriptionTitle = styled(Text)`
+export const DescriptionTitle = styled.Text`
   font-size: 22px;
   margin-top: 1%;
 `;
 
-export const DescriptionText = styled(Text)`
+export const DescriptionText = styled.Text`
   font-size: 18px;
   margin-top: 1%;
   padding-bottom: 10px;

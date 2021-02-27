@@ -1,7 +1,6 @@
-import { ScrollView } from 'react-native';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 
-export const Container = styled(ScrollView)`
+export const Container = styled.ScrollView`
   width: 85%;
   margin: 0 auto;
 `;
