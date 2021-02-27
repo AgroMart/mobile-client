@@ -1,29 +1,46 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+export const Container = styled.View.attrs({
+  shadowColor: '#000',
+  shadowOffset: {
+    width: 0,
+    height: 1,
+  },
+  shadowOpacity: 0.22,
+  shadowRadius: 2.22,
+
+  elevation: 1,
+})`
   padding: 18px 10px;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border-width: 0.5px;
-  border-color: gray;
-  border-radius: 5px;
-  margin: 10px 0;
+  margin: 5px 0;
+  border-bottom-width: 0px;
 `;
 
-export const ProductInfo = styled.View``;
+export const ProductInfo = styled.View`
+  margin-bottom: 10px;
+`;
 
 export const ProductName = styled.Text`
   font-size: 20px;
   font-weight: bold;
 `;
-
-export const ProductQuantity = styled.Text`
-  font-size: 17px;
+export const InfoView = styled.View`
+  flex-direction: row;
+  align-items: baseline;
 `;
 
-export const ProductPrice = styled.Text`
+export const InfoTitle = styled.Text`
   font-size: 17px;
+  font-weight: bold;
+`;
+
+export const ProductData = styled.Text`
+  font-size: 17px;
+  font-weight: bold;
+  color: #00aa95;
 `;
 
 export const ImageView = styled.View``;

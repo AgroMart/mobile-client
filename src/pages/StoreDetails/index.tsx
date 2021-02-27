@@ -19,14 +19,10 @@ import ProductList from '../../components/ProductList';
 
 export type StoreDetailsProps = {
   image?: string;
-  nome: string;
-  cidade: string;
-  descricao: string;
+  nome?: string;
+  cidade?: string;
+  descricao?: string;
 };
-
-const FirstRoute: React.FC = () => <View />;
-
-const SecondRoute: React.FC = () => <View />;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const renderTabBar: React.FC<any> = props => (
@@ -50,15 +46,15 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({
 }) => {
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'cesta', title: 'Cestas' },
-    { key: 'planos', title: 'Planos' },
     { key: 'produtos', title: 'Produtos' },
+    { key: 'cestas', title: 'Cestas' },
+    { key: 'planos', title: 'Planos' },
   ]);
 
   const renderScene = SceneMap({
-    cesta: FirstRoute,
-    planos: SecondRoute,
     produtos: ProductList,
+    cestas: ProductList,
+    planos: ProductList,
   });
   return (
     <Container>

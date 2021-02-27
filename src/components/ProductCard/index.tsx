@@ -1,15 +1,15 @@
 /* eslint-disable camelcase */
 import React from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
 import {
   Container,
   ProductInfo,
   ImageView,
   ProductImage,
   ProductName,
-  ProductQuantity,
-  ProductPrice,
+  InfoView,
+  InfoTitle,
+  ProductData,
 } from './styles';
 
 type ProductCardProps = {
@@ -32,10 +32,14 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <Container>
         <ProductInfo>
           <ProductName>{nome}</ProductName>
-          <ProductQuantity>{`Qtd disponível: ${quantidade}`}</ProductQuantity>
-          <ProductPrice>
-            {`Valor por ${unidade_medida.slice(0, 3)} : R$ ${valor}`}
-          </ProductPrice>
+          <InfoView>
+            <InfoTitle>Qtd disponível: </InfoTitle>
+            <ProductData>{`${quantidade}`}</ProductData>
+          </InfoView>
+          <InfoView>
+            <InfoTitle>{`Valor por ${unidade_medida.slice(0, 3)} :`}</InfoTitle>
+            <ProductData>{` R$ ${valor}`}</ProductData>
+          </InfoView>
         </ProductInfo>
         <ImageView>
           <ProductImage source={{ uri: imagem }} />
