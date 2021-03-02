@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Switch } from "react-native";
 
-const SwitchButton = () => {
+const SwitchButton: React.FC = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 

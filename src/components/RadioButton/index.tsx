@@ -3,7 +3,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { ViewDisable,ViewEnable } from './styles';
 
 
-const RadioButton = () => {
+const RadioButton: React.FC = () => {
 
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
