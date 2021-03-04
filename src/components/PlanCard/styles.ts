@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-//import FastImage from 'react-native-fast-image';
 
 export const Card = styled.View.attrs({
   shadowOffset: { height: 0, width: 0 },
@@ -8,7 +7,7 @@ export const Card = styled.View.attrs({
   elevation: 1,
 })`
   width:84%;
-  height: 68%;
+  height: 75%;
   flex-direction: column;
   border-bottom-width: 0px;
   background-color: white;
@@ -19,7 +18,6 @@ export const Card = styled.View.attrs({
   border-width: 0px;
   align-self: stretch;
   margin-bottom: 14px;
-  margin-top: 20%;
 `;
 
 export const Image = styled.Image`

@@ -1,13 +1,14 @@
 import styled from 'styled-components/native';
 
 export const ViewDisable = styled.View`
-  height: 24;
-  width: 24;
+  height: 22;
+  width: 22;
   borderWidth: 2;
-  borderColor: #00CC76;
+  borderColor: #000000;
   alignItems: center;
   borderRadius: 20;
   justifyContent: center;
+  margin-top:3px;
 `;
 
 export const ViewEnable = styled.View`
