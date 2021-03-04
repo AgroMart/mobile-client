@@ -6,10 +6,10 @@ import { ViewDisable,ViewEnable } from './styles';
 const RadioButton: React.FC = () => {
 
   const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const toggle = () => setIsEnabled(previousState => !previousState);
 
   return (
-    <TouchableOpacity onPress={toggleSwitch}>
+    <TouchableOpacity onPress={toggle}>
       <ViewDisable>
         {isEnabled ? <ViewEnable/>: null}
       </ViewDisable>
