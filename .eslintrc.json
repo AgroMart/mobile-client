@@ -35,7 +35,11 @@
       {
         "extensions": [".tsx"]
       }
+    
     ],
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
     "import/prefer-default-export": "off",
     "react/prop-types": "off",
     "no-unused-expressions": "off",
