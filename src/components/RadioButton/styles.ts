@@ -1,20 +1,20 @@
 import styled from 'styled-components/native';
 
+import { colors } from '../../styles';
+
 export const ViewDisable = styled.View`
-  height: 22;
-  width: 22;
-  borderWidth: 2;
-  borderColor: #000000;
-  alignItems: center;
-  borderRadius: 20;
-  justifyContent: center;
-  margin-top:3px;
+  height: 17px;
+  width: 17px;
+  border-width: 1px;
+  border-color: ${colors.shadow};
+  align-items: center;
+  border-radius: 9px;
+  justify-content: center;
 `;
 
 export const ViewEnable = styled.View`
-  height: 14;
-  width: 14;
-  borderRadius: 6;
-  backgroundColor: #00CC76;
+  height: 11px;
+  width: 11px;
+  border-radius: 6px;
+  background: ${colors.primary};
 `;
-

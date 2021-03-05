@@ -1,11 +1,12 @@
 import styled from 'styled-components/native';
-import { metrics, fonts } from '../../styles';
+import { colors } from '../../styles';
 
 type ViewProps = { error: boolean };
 
 export const Container = styled.View<ViewProps>`
   padding: 0 4%;
-  border-color: ${props => (props.error ? 'red' : '#c9c9c9')};
+  border-color: ${props =>
+    props.error ? `${colors.error}` : `${colors.lightGray}`};
   border-width: 1px;
   border-radius: 10px;
   flex-direction: row;
@@ -22,10 +23,10 @@ export const TextErrorInput = styled.Text`
   text-align: left;
   padding-left: 5px;
   align-self: stretch;
-  color: red;
+  color: ${colors.error};
 `;
 
 export const TextLabel = styled.Text`
-  font-size: 20px;
+  font-size: 16px;
   padding: 5px;
 `;

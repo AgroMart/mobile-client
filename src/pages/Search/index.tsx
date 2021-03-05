@@ -1,12 +1,12 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-const SearchScreen: React.FunctionComponent = () => {
+const Search: React.FC = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>SearchScreen!</Text>
+      <Text>Search!</Text>
     </View>
   );
 };
 
-export default SearchScreen;
+export default Search;

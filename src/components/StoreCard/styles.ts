@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-//import FastImage from 'react-native-fast-image';
+import { colors } from '../../styles';
 
 export const Card = styled.View.attrs({
   shadowOffset: { height: 0, width: 0 },
@@ -7,11 +7,11 @@ export const Card = styled.View.attrs({
   shadowRadius: 2.22,
   elevation: 1,
 })`
-  width:80%;
+  width: 80%;
   height: 53%;
   flex-direction: column;
   border-bottom-width: 0px;
-  background-color: white;
+  background-color: ${colors.white};
   margin-left: 10%;
   margin-right: 10%;
   padding: 8px;
@@ -23,19 +23,19 @@ export const Card = styled.View.attrs({
 `;
 
 export const Image = styled.Image`
-align-self: stretch;
-height: 120px;
-margin-bottom: 8px;
-border-radius: 3px;
+  align-self: stretch;
+  height: 120px;
+  margin-bottom: 8px;
+  border-radius: 3px;
 `;
 export const TitleCard = styled.Text`
-  color: #000000;
+  color: ${colors.shadow};
   font-size: 16px;
   align-self: stretch;
 `;
 
 export const LocationCard = styled.Text`
-  color: #000000;
+  color: ${colors.shadow};
   font-size: 14px;
   align-self: stretch;
   margin-left: 3%;

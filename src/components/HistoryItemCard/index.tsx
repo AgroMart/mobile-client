@@ -1,49 +1,48 @@
-/* eslint-disable camelcase */
-import moment from 'moment';
 import React from 'react';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import moment from 'moment';
+
 import TextButton from '../TextButton';
+
 import {
   Container,
   HistoryInfo,
-  SellerName,
+  InfoText,
   InfoView,
   InfoTitle,
-  ProductData,
   TextButtonView,
+  GreenText,
 } from './styles';
 
 type HistoryCardProps = {
-  vendedor?: string;
-  dataCompra?: Date;
-  valor?: number;
-  children: string;
+  seller?: string;
+  date?: Date;
+  value?: number;
+  buttonText: string;
 };
 
 const HistoryItemCard: React.FC<HistoryCardProps> = ({
-  vendedor = 'Moacir',
-  dataCompra = moment(new Date()).format('DD/MM/YYYY'),
-  valor = '1.80',
-  children,
+  seller = 'Moacir',
+  date = moment(new Date()).format('DD/MM/YYYY'),
+  value = '1.80',
+  buttonText = 'Ver Detalhes',
 }) => {
   return (
     <Container>
       <HistoryInfo>
         <InfoView>
           <InfoTitle>Vendedor: </InfoTitle>
-          <SellerName>{vendedor}</SellerName>
+          <InfoText>{seller}</InfoText>
         </InfoView>
         <InfoView>
           <InfoTitle>Data da compra: </InfoTitle>
-          <ProductData>{`${dataCompra}`}</ProductData>
+          <InfoText>{`${date}`}</InfoText>
         </InfoView>
         <InfoView>
-          <InfoTitle>Valor :</InfoTitle>
-          <ProductData>{` R$ ${valor}`}</ProductData>
+          <GreenText>Valor : {` R$ ${value}`}</GreenText>
         </InfoView>
       </HistoryInfo>
       <TextButtonView>
-        <TextButton>{children}</TextButton>
+        <TextButton>{buttonText}</TextButton>
       </TextButtonView>
     </Container>
   );

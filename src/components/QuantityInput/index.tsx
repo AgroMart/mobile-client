@@ -1,5 +1,8 @@
 import React from 'react';
 import { Feather } from '@expo/vector-icons';
+
+import { colors } from '../../styles';
+
 import {
   Container,
   RemoveItemButton,
@@ -8,24 +11,24 @@ import {
 } from './styles';
 
 type QuantityInputProps = {
-  initialState: number;
+  value: number;
   addFunction: () => void;
   subFunction: () => void;
 };
 
 const QuantityInput: React.FC<QuantityInputProps> = ({
-  initialState,
+  value,
   addFunction,
   subFunction,
 }) => {
   return (
     <Container>
       <RemoveItemButton onPress={subFunction}>
-        <Feather name="minus" color="#F80505" size={20} />
+        <Feather name="minus" color={`${colors.error}`} size={20} />
       </RemoveItemButton>
-      <QuantityItems editable={false} value={initialState.toString()} />
+      <QuantityItems editable={false} value={value.toString()} />
       <AddItemButton onPress={addFunction}>
-        <Feather name="plus" color="#00CC76" size={20} />
+        <Feather name="plus" color={`${colors.secondary}`} size={20} />
       </AddItemButton>
     </Container>
   );

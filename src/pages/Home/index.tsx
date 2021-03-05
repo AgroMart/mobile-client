@@ -1,10 +1,9 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import { View } from 'react-native';
-import ProductCard from '../../components/ProductCard';
-import QuantityInput from '../../components/QuantityInput';
+
 import StoreDetails from '../StoreDetails';
 
-const Homescreen: React.FunctionComponent = () => {
+const Home: React.FC = () => {
   return (
     <View style={{ flex: 1 }}>
       <StoreDetails />
@@ -12,4 +11,4 @@ const Homescreen: React.FunctionComponent = () => {
   );
 };
 
-export default Homescreen;
+export default Home;

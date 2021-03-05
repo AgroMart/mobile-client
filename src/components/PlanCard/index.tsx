@@ -1,64 +1,91 @@
-import React from "react";
-import { Card, Image, InfoTitle, Info, InfoView} from "./styles";
+import React from 'react';
 import SwitchButton from '../SwitchButton';
 import RadioButton from '../RadioButton';
 
+import {
+  Card,
+  Image,
+  InfoTitle,
+  Info,
+  InfoView,
+  InfoContainer,
+} from './styles';
+
 interface StoreCardProps {
-  loja: string;
-  contato: string;
-  dataAquisicao: string;
-  cestasDisponiveis: string;
-  cestasRecebidas: string;
-  imagem: string;
+  store: string;
+  contact: string;
+  acquisitionDate: string;
+  avaliableBasket: string;
+  recievedBasket: string;
+  image: string;
 }
 
 const PlanCard: React.FC<StoreCardProps> = ({
-  imagem,
-  loja,
-  contato,
-  dataAquisicao,
-  cestasDisponiveis,
-  cestasRecebidas}) => {
+  image,
+  store,
+  contact,
+  acquisitionDate,
+  avaliableBasket,
+  recievedBasket,
+}) => {
   return (
-      <Card>
-        <Image
+    <Card>
+      <Image
         source={{
-          uri: imagem,
-        }}/>
+          uri: image,
+        }}
+      />
+      <InfoContainer>
         <InfoView>
-            <InfoTitle>Loja: </InfoTitle>
-            <Info>{loja}</Info>
+          <InfoTitle>Loja: </InfoTitle>
+          <Info>{store}</Info>
         </InfoView>
         <InfoView>
-            <InfoTitle>Contato: </InfoTitle>
-            <Info>{contato}</Info>
+          <InfoTitle>Contato: </InfoTitle>
+          <Info>{contact}</Info>
         </InfoView>
         <InfoView>
-            <InfoTitle>Data de aquisição: </InfoTitle>
-            <Info>{dataAquisicao}</Info>
+          <InfoTitle>Data de aquisição: </InfoTitle>
+          <Info>{acquisitionDate}</Info>
         </InfoView>
         <InfoView>
-            <InfoTitle>Cesta(s) disponíveis: </InfoTitle>
-            <Info>{cestasDisponiveis}</Info>
+          <InfoTitle>Cesta(s) disponíveis: </InfoTitle>
+          <Info>{avaliableBasket}</Info>
         </InfoView>
         <InfoView>
-            <InfoTitle>Cesta(s) recebidas: </InfoTitle>
-            <Info>{cestasRecebidas}</Info>
+          <InfoTitle>Cesta(s) recebidas: </InfoTitle>
+          <Info>{recievedBasket}</Info>
         </InfoView>
         <InfoView>
-            <InfoTitle>Pular cesta da semana </InfoTitle>
-            <SwitchButton value={false} enable={()=>{}}/>
+          <InfoTitle>Pular cesta da semana </InfoTitle>
+          <SwitchButton
+            value={false}
+            enable={() => {
+              console.log('pular');
+            }}
+          />
         </InfoView>
         <InfoView>
-            <InfoTitle>Receber cesta  </InfoTitle>
-            <RadioButton value={false} enable={()=>{}}/>
+          <InfoTitle>Receber cesta </InfoTitle>
+          <RadioButton
+            value
+            enable={() => {
+              console.log('receber');
+            }}
+          />
         </InfoView>
         <InfoView>
-            <InfoTitle>Buscar  </InfoTitle>
-            <RadioButton value={false} enable={()=>{}}/>
+          <InfoTitle>Buscar </InfoTitle>
+          <RadioButton
+            value={false}
+            enable={() => {
+              console.log('buscar');
+            }}
+          />
         </InfoView>
-      </Card>
+      </InfoContainer>
+    </Card>
   );
-}
+};
 
 export default PlanCard;

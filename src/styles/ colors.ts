@@ -1,0 +1,11 @@
+const Colors = {
+  primary: '#00CC76',
+  secondary: '#00AA95',
+  white: '#ffffff',
+  shadow: '#000',
+  lightGray: '#c9c9c9',
+  gray: '#949494',
+  error: '#c53030',
+};
+
+export default Colors;

@@ -1,44 +1,42 @@
 import styled from 'styled-components/native';
+import { colors } from '../../styles';
 
 export const Card = styled.View.attrs({
   shadowOffset: { height: 0, width: 0 },
   shadowOpacity: 0.22,
   shadowRadius: 2.22,
-  elevation: 1,
+  elevation: 3,
 })`
-  width:84%;
-  height: 75%;
+  height: 85%;
+  max-height: 441px;
   flex-direction: column;
   border-bottom-width: 0px;
-  background-color: white;
-  margin-left: 8%;
-  margin-right: 8%;
-  padding: 8px;
+  background-color: ${colors.white};
   border-radius: 4px;
   border-width: 0px;
-  align-self: stretch;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 `;
 
 export const Image = styled.Image`
-align-self: stretch;
-height: 130px;
-width: 100%;
-margin-bottom: 8px;
-border-radius: 3px;
+  height: 150px;
+  width: 100%;
 `;
 
-
 export const Info = styled.Text`
-  font-size: 20px;
+  font-size: 17px;
 `;
 export const InfoView = styled.View`
   flex-direction: row;
-  margin-left: 10px;
-  margin-top: 2px;
+  align-items: center;
 `;
 
 export const InfoTitle = styled.Text`
-  font-size: 20px;
+  font-size: 17px;
   font-weight: bold;
+`;
+
+export const InfoContainer = styled.View`
+  flex: 1;
+  justify-content: space-between;
+  padding: 10px 10px 40px 10px;
 `;

@@ -1,9 +1,10 @@
-/* eslint-disable no-nested-ternary */
 import React from 'react';
 import { TextInputProps } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Container, StyledInput, TextLabel } from './styles';
 import _default from '../../@types/MaterialCommunityIcons';
+
+import { colors } from '../../styles';
 
 interface InputProps extends TextInputProps {
   icon?: typeof _default;
@@ -26,12 +27,15 @@ const Input: React.FC<InputProps> = ({
       {label && <TextLabel>{label}</TextLabel>}
       <Container error={error}>
         {icon ? (
-          <MaterialCommunityIcons name={icon} size={24} color="#949494" />
+          <MaterialCommunityIcons
+            name={icon}
+            size={20}
+            color={`${colors.gray}`}
+          />
         ) : null}
         <StyledInput
-          placeholderTextColor="#949494"
+          placeholderTextColor={`${colors.gray}`}
           placeholder={placeholder}
-          {...rest}
           secureTextEntry={type === 'password'}
           keyboardType={
             type === 'email'
@@ -40,6 +44,7 @@ const Input: React.FC<InputProps> = ({
               ? 'numeric'
               : 'default'
           }
+          {...rest}
         />
       </Container>
     </>

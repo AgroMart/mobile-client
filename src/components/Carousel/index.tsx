@@ -1,16 +1,11 @@
-/* eslint-disable react/no-unused-prop-types */
 import React, { useState, useCallback, useRef } from 'react';
 import { View, Dimensions, Image } from 'react-native';
-
 import Carousel, { Pagination } from 'react-native-snap-carousel';
+
+import { colors } from '../../styles';
 
 type ItemProps = {
   image: string;
-};
-
-type RenderItemProps = {
-  item: ItemProps;
-  index: number;
 };
 
 const imagesUrl = [
@@ -43,15 +38,15 @@ const CustomCarousel: React.FC = () => {
 
   const windowWidth = Dimensions.get('window').width;
 
-  const renderItem = useCallback(({ item }: RenderItemProps) => {
-    return <Image source={{ uri: item.image }} style={{ flex: 1 }} />;
+  const renderItem = useCallback(({ item }) => {
+    return <Image source={{ uri: item.image as string }} style={{ flex: 1 }} />;
   }, []);
 
   return (
-    <View style={{ height: '22%' }}>
+    <View style={{ height: '25%' }}>
       <View>
         <Carousel
-          layout="tinder"
+          layout="default"
           ref={ref}
           data={carouselItems}
           sliderWidth={windowWidth}
@@ -73,7 +68,7 @@ const CustomCarousel: React.FC = () => {
           borderRadius: 5,
           marginHorizontal: 8,
           opacity: 1,
-          backgroundColor: '#fff',
+          backgroundColor: `${colors.white}`,
         }}
         inactiveDotOpacity={0.7}
         inactiveDotScale={0.8}

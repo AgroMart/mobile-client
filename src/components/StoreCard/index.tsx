@@ -7,20 +7,16 @@ import { Card, Image, TitleCard, LocationCard } from './styles';
 interface StoreCardProps {
   id: string;
   image: string;
-  nome: string;
-  cidade: string;
+  name: string;
+  city: string;
 }
 
-const StoreCard: React.FC<StoreCardProps> = ({
-  id,
-  image,
-  nome,
-  cidade,}) => {
+const StoreCard: React.FC<StoreCardProps> = ({ id, image, name, city }) => {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity
-      // onPress={() => navigation.navigate('StoreDetail', { storeId: id })}
+    // onPress={() => navigation.navigate('StoreDetail', { storeId: id })}
     >
       <Card>
         <Image
@@ -28,8 +24,8 @@ const StoreCard: React.FC<StoreCardProps> = ({
             uri: image,
           }}
         />
-        <TitleCard>{nome}</TitleCard>
-        <LocationCard>{cidade}</LocationCard>
+        <TitleCard>{name}</TitleCard>
+        <LocationCard>{city}</LocationCard>
       </Card>
     </TouchableOpacity>
   );
