@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ViewDisable,ViewEnable } from './styles';
 
+type RadioButtonProps = {
+  value: boolean;
+  enable: () => void;
+};
 
-const RadioButton: React.FC = () => {
 
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggle = () => setIsEnabled(previousState => !previousState);
-
+const RadioButton: React.FC<RadioButtonProps> = ({value, enable}) => {
   return (
-    <TouchableOpacity onPress={toggle}>
+    <TouchableOpacity onPress={enable}>
       <ViewDisable>
-        {isEnabled ? <ViewEnable/>: null}
+        {value ? <ViewEnable/>: null}
       </ViewDisable>
     </TouchableOpacity>
   );
