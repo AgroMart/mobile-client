@@ -14,6 +14,7 @@ export const Container = styled.View.attrs({
 })`
   padding: 15px;
   height: 138px;
+  width: 80%;
   flex-direction: column;
   justify-content: space-between;
   border-bottom-width: 0px;
@@ -28,15 +29,17 @@ export const TextButtonView = styled.View`
 export const HistoryInfo = styled.View``;
 
 export const InfoText = styled.Text`
-  font-size: ${fonts.EXTRA_MEDIUM}px;
+  font-size: ${fonts.MEDIUM}px;
+  font-family: Montserrat_600SemiBold;
 `;
+
 export const InfoView = styled.View`
   flex-direction: row;
 `;
 
 export const InfoTitle = styled.Text`
-  font-size: ${fonts.EXTRA_MEDIUM}px;
-  font-weight: bold;
+  font-size: ${fonts.MEDIUM}px;
+  font-family: Montserrat_700Bold;
 `;
 
 export const GreenText = styled(InfoTitle)`

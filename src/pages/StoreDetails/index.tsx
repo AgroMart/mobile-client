@@ -51,11 +51,12 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({
     { key: 'planos', title: 'Planos' },
   ]);
 
-  const renderScene = SceneMap({
-    produtos: ProductList,
-    cestas: ProductList,
-    planos: ProductList,
-  });
+  // const renderScene = SceneMap({
+  //   produtos: ProductList,
+  //   cestas: ProductList,
+  //   planos: ProductList,
+  // });
+
   return (
     <Container>
       <Banner
@@ -74,12 +75,12 @@ const StoreDetails: React.FC<StoreDetailsProps> = ({
         <DescriptionTitle>Descrição:</DescriptionTitle>
         <DescriptionText numberOfLines={2}>{descricao}</DescriptionText>
       </Content>
-      <TabView
+      {/* <TabView
         renderTabBar={renderTabBar}
         navigationState={{ index, routes }}
         renderScene={renderScene}
         onIndexChange={setIndex}
-      />
+      /> */}
     </Container>
   );
 };

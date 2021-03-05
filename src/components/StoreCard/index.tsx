@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { Card, Image, TitleCard, LocationCard } from './styles';
+import { Card, Image, Title, Location } from './styles';
 
 interface StoreCardProps {
   id: string;
@@ -24,8 +24,8 @@ const StoreCard: React.FC<StoreCardProps> = ({ id, image, name, city }) => {
             uri: image,
           }}
         />
-        <TitleCard>{name}</TitleCard>
-        <LocationCard>{city}</LocationCard>
+        <Title>{name}</Title>
+        <Location>{city}</Location>
       </Card>
     </TouchableOpacity>
   );

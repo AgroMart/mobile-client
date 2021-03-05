@@ -11,6 +11,7 @@ export const Container = styled.View<ViewProps>`
   border-radius: 10px;
   flex-direction: row;
   align-items: center;
+  width: 100%;
 `;
 
 export const StyledInput = styled.TextInput`
@@ -29,4 +30,5 @@ export const TextErrorInput = styled.Text`
 export const TextLabel = styled.Text`
   font-size: ${fonts.MEDIUM}px;
   padding: 5px;
+  font-family: Montserrat_400Regular;
 `;

@@ -24,6 +24,7 @@ export const Image = styled.Image`
 
 export const Info = styled.Text`
   font-size: ${fonts.EXTRA_MEDIUM}px;
+  font-family: Montserrat_400Regular;
 `;
 export const InfoView = styled.View`
   flex-direction: row;
@@ -33,6 +34,7 @@ export const InfoView = styled.View`
 export const InfoTitle = styled.Text`
   font-size: ${fonts.EXTRA_MEDIUM}px;
   font-weight: bold;
+  font-family: Montserrat_600SemiBold;
 `;
 
 export const InfoContainer = styled.View`

@@ -6,22 +6,22 @@ import {
   ProductInfo,
   ImageView,
   ProductImage,
-  ProductName,
+  ProductDesc,
   InfoView,
-  ProductData,
+  ProductPrice,
   InfoContainer,
 } from './styles';
 
 type ProductViewCardProps = {
-  description?: string;
-  value?: number;
-  image?: string;
+  description: string;
+  value: string;
+  image: string;
 };
 
 const ProductViewCard: React.FC<ProductViewCardProps> = ({
-  description = 'Cesta produzida em brazlândia, contem arroz, batata e etc ',
-  value = '1.80',
-  image = 'https://http2.mlstatic.com/D_NQ_NP_2X_914388-MLB31366464206_072019-F.webp',
+  description,
+  value,
+  image,
 }) => {
   return (
     <TouchableOpacity>
@@ -29,9 +29,9 @@ const ProductViewCard: React.FC<ProductViewCardProps> = ({
         <ProductImage source={{ uri: image }} />
         <InfoContainer>
           <ProductInfo>
-            <ProductName>{description}</ProductName>
+            <ProductDesc>{description}</ProductDesc>
             <InfoView>
-              <ProductData>{`Valor: R$ ${value}`}</ProductData>
+              <ProductPrice>{`Valor: R$ ${value}`}</ProductPrice>
             </InfoView>
           </ProductInfo>
           <ImageView />

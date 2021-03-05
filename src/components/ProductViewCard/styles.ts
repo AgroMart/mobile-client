@@ -25,8 +25,9 @@ export const ProductInfo = styled.View`
   margin-bottom: 10px;
 `;
 
-export const ProductName = styled.Text`
+export const ProductDesc = styled.Text`
   font-size: ${fonts.EXTRA_MEDIUM}px;
+  font-family: Montserrat_700Bold;
   margin-top: 10px;
 `;
 
@@ -35,8 +36,9 @@ export const InfoView = styled.View`
   align-items: baseline;
 `;
 
-export const ProductData = styled.Text`
+export const ProductPrice = styled.Text`
   font-size: ${fonts.MEDIUM}px;
+  font-family: Montserrat_400Regular;
   margin-top: 10px;
   color: ${colors.secondary};
 `;

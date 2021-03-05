@@ -34,6 +34,7 @@ export const City = styled.Text`
   margin-bottom: 5%;
   color: gray;
   font-size: 20px;
+  font-family: Montserrat_400Regular;
 `;
 
 export const MessageIcon = styled.TouchableOpacity``;

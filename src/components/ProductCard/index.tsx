@@ -13,20 +13,20 @@ import {
   GreenText,
 } from './styles';
 
-type ProductCardProps = {
-  name?: string;
-  quantity?: number;
-  value?: number;
-  image?: string;
+export type ProductCardProps = {
+  name: string;
+  quantity: number;
+  value: number;
+  image: string;
   unity?: string;
 };
 
 const ProductCard: React.FC<ProductCardProps> = ({
-  name = 'Alface Roxo',
-  quantity = 100,
-  value = '1.80',
-  unity = 'unidade',
-  image = 'https://cdn.awsli.com.br/600x450/1552/1552869/produto/58429742/136797bb1d.jpg',
+  name,
+  quantity,
+  value,
+  unity = 'Unidade',
+  image,
 }) => {
   return (
     <TouchableOpacity>

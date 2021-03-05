@@ -29,15 +29,17 @@ export const Image = styled.Image`
   margin-bottom: 8px;
   border-radius: 3px;
 `;
-export const TitleCard = styled.Text`
+export const Title = styled.Text`
   color: ${colors.shadow};
   font-size: ${fonts.MEDIUM}px;
+  font-family: Montserrat_700Semi-Bold;
   align-self: stretch;
 `;
 
-export const LocationCard = styled.Text`
+export const Location = styled.Text`
   color: ${colors.shadow};
   font-size: ${fonts.SMALL}px;
+  font-family: Montserrat_400Regular;
   align-self: stretch;
   margin-left: 3%;
 `;

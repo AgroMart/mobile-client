@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 
 import TextButton from '../TextButton';
 
@@ -14,16 +13,16 @@ import {
 } from './styles';
 
 type HistoryCardProps = {
-  seller?: string;
-  date?: Date;
-  value?: number;
-  buttonText: string;
+  seller: string;
+  date: Date;
+  value: number;
+  buttonText?: string;
 };
 
 const HistoryItemCard: React.FC<HistoryCardProps> = ({
-  seller = 'Moacir',
-  date = moment(new Date()).format('DD/MM/YYYY'),
-  value = '1.80',
+  seller,
+  date,
+  value,
   buttonText = 'Ver Detalhes',
 }) => {
   return (
