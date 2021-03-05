@@ -1,19 +1,10 @@
 import React from 'react';
-import { View } from 'react-native';
-
-import Input from '../../components/Input';
+import { View, Text } from 'react-native';
 
 const Search: React.FC = () => {
   return (
-    <View
-      style={{
-        flex: 1,
-        width: '80%',
-        justifyContent: 'center',
-        alignSelf: 'center',
-      }}
-    >
-      <Input placeholder="oi" label="Nome" />
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Search!</Text>
     </View>
   );
 };
