@@ -47,15 +47,15 @@ const PlanCard: React.FC<StoreCardProps> = ({
         </InfoView>
         <InfoView>
             <InfoTitle>Pular cesta da semana </InfoTitle>
-            <SwitchButton />
+            <SwitchButton value={false} enable={()=>{}}/>
         </InfoView>
         <InfoView>
             <InfoTitle>Receber cesta  </InfoTitle>
-            <RadioButton />
+            <RadioButton value={false} enable={()=>{}}/>
         </InfoView>
         <InfoView>
             <InfoTitle>Buscar  </InfoTitle>
-            <RadioButton />
+            <RadioButton value={false} enable={()=>{}}/>
         </InfoView>
       </Card>
   );
