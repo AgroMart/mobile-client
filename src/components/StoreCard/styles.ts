@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
-import { colors } from '../../styles';
+
+import { colors, fonts } from '../../styles';
 
 export const Card = styled.View.attrs({
   shadowOffset: { height: 0, width: 0 },
@@ -30,13 +31,13 @@ export const Image = styled.Image`
 `;
 export const TitleCard = styled.Text`
   color: ${colors.shadow};
-  font-size: 16px;
+  font-size: ${fonts.MEDIUM}px;
   align-self: stretch;
 `;
 
 export const LocationCard = styled.Text`
   color: ${colors.shadow};
-  font-size: 14px;
+  font-size: ${fonts.SMALL}px;
   align-self: stretch;
   margin-left: 3%;
 `;

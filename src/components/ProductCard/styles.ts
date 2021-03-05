@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { colors } from '../../styles';
+import { colors, fonts } from '../../styles';
 
 export const Container = styled.View.attrs({
   shadowColor: `${colors.shadow}`,
@@ -15,6 +15,7 @@ export const Container = styled.View.attrs({
 })`
   padding: 15px;
   flex-direction: row;
+  border-radius: 4px;
   align-items: center;
   justify-content: space-between;
   margin: 5px 0px;
@@ -25,7 +26,7 @@ export const Container = styled.View.attrs({
 export const ProductInfo = styled.View``;
 
 export const ProductName = styled.Text`
-  font-size: 18px;
+  font-size: ${fonts.EXTRA_MEDIUM}px;
   font-weight: bold;
 `;
 export const InfoView = styled.View`
@@ -35,12 +36,12 @@ export const InfoView = styled.View`
 `;
 
 export const InfoTitle = styled.Text`
-  font-size: 15px;
+  font-size: ${fonts.MEDIUM}px;
   font-weight: bold;
 `;
 
 export const ProductData = styled.Text`
-  font-size: 17px;
+  font-size: ${fonts.MEDIUM}px;
   color: ${colors.shadow};
 `;
 

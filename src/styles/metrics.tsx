@@ -6,9 +6,4 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 export default {
   SCREEN_WIDTH,
   SCREEN_HEIGHT,
-
-  PADDING_SCREEN: 20,
-
-  icon_size: 28,
-  button_opacity: 0.7,
 };

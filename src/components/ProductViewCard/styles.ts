@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { colors } from '../../styles';
+import { colors, fonts } from '../../styles';
 
 export const Container = styled.View.attrs({
   shadowColor: `${colors.shadow}`,
@@ -17,6 +17,7 @@ export const Container = styled.View.attrs({
   align-items: center;
   justify-content: space-between;
   margin: 5px 0;
+  border-radius: 4px;
   border-bottom-width: 0px;
 `;
 
@@ -25,7 +26,7 @@ export const ProductInfo = styled.View`
 `;
 
 export const ProductName = styled.Text`
-  font-size: 18px;
+  font-size: ${fonts.EXTRA_MEDIUM}px;
   margin-top: 10px;
 `;
 
@@ -35,7 +36,7 @@ export const InfoView = styled.View`
 `;
 
 export const ProductData = styled.Text`
-  font-size: 16px;
+  font-size: ${fonts.MEDIUM}px;
   margin-top: 10px;
   color: ${colors.secondary};
 `;

@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { colors } from '../../styles';
+import { colors, fonts } from '../../styles';
 
 type ViewProps = { error: boolean };
 
@@ -27,6 +27,6 @@ export const TextErrorInput = styled.Text`
 `;
 
 export const TextLabel = styled.Text`
-  font-size: 16px;
+  font-size: ${fonts.MEDIUM}px;
   padding: 5px;
 `;

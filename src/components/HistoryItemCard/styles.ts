@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { colors } from '../../styles';
+import { colors, fonts } from '../../styles';
 
 export const Container = styled.View.attrs({
   shadowColor: `${colors.white}`,
@@ -28,14 +28,14 @@ export const TextButtonView = styled.View`
 export const HistoryInfo = styled.View``;
 
 export const InfoText = styled.Text`
-  font-size: 17px;
+  font-size: ${fonts.EXTRA_MEDIUM}px;
 `;
 export const InfoView = styled.View`
   flex-direction: row;
 `;
 
 export const InfoTitle = styled.Text`
-  font-size: 17px;
+  font-size: ${fonts.EXTRA_MEDIUM}px;
   font-weight: bold;
 `;
 

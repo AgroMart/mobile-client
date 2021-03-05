@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { colors } from '../../styles';
+import { colors, fonts } from '../../styles';
 
 export const Card = styled.View.attrs({
   shadowOffset: { height: 0, width: 0 },
@@ -23,7 +23,7 @@ export const Image = styled.Image`
 `;
 
 export const Info = styled.Text`
-  font-size: 17px;
+  font-size: ${fonts.EXTRA_MEDIUM}px;
 `;
 export const InfoView = styled.View`
   flex-direction: row;
@@ -31,7 +31,7 @@ export const InfoView = styled.View`
 `;
 
 export const InfoTitle = styled.Text`
-  font-size: 17px;
+  font-size: ${fonts.EXTRA_MEDIUM}px;
   font-weight: bold;
 `;
 
