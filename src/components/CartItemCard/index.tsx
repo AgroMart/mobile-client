@@ -1,5 +1,8 @@
 import React from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
+
+import { colors } from '../../styles';
+
 import {
   Container,
   Img,
@@ -9,31 +12,36 @@ import {
   IternalContainerRight,
   PriceText,
   InfoLabel,
-  InternalText,
   ButtonText,
 } from './styles';
 
-interface Props {
-  photo?: string;
+interface CartItemCardProps {
+  photo: string;
   name: string;
-  quantity: number;
-  price: number;
-  id: number;
+  quantity: string;
+  price: string;
+  handleDelete(): void;
 }
 
-const CartItemCard: React.FC<Props> = props => {
-  const { photo, name, quantity, price, id } = props;
-
+const CartItemCard: React.FC<CartItemCardProps> = ({
+  photo,
+  name,
+  quantity,
+  price,
+  handleDelete,
+}) => {
   return (
     <Container>
       <IternalContainerLeft>
         <ProductName>{name}</ProductName>
-        <InfoLabel>
-          Quantidade: <InternalText>{quantity}</InternalText>
-        </InfoLabel>
-        <RemoveItemButton onPress={() => {}}>
-          <MaterialIcons name="delete-forever" size={24} color="red" />
-          <ButtonText style={{ color: 'red' }}>Remover</ButtonText>
+        <InfoLabel>{`Quantidade: ${quantity}`}</InfoLabel>
+        <RemoveItemButton onPress={handleDelete}>
+          <MaterialIcons
+            name="delete-forever"
+            size={18}
+            color={`${colors.red}`}
+          />
+          <ButtonText>Remover</ButtonText>
         </RemoveItemButton>
       </IternalContainerLeft>
       <IternalContainerRight>
@@ -44,11 +52,4 @@ const CartItemCard: React.FC<Props> = props => {
   );
 };
 
-CartItemCard.defaultProps = {
-  photo:
-    'https://thumbs.web.sapo.io/?W=800&H=0&delay_optim=1&epic=NGNl88jzGknot26JMojOuazXgJK7LxXKMWes/sScQk5fBN0SWv2+xq8Og5AdjwcYXZJl2CwN0AY5Ofv1E2o6thyTdQ==',
-  name: '',
-  quantity: 1,
-  price: 0.0,
-};
 export default CartItemCard;

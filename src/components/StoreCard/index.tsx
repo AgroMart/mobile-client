@@ -1,33 +1,30 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
 import { Card, Image, Title, Location } from './styles';
 
 interface StoreCardProps {
-  id: string;
   image: string;
   name: string;
   city: string;
+  onPress(): void;
 }
 
-const StoreCard: React.FC<StoreCardProps> = ({ id, image, name, city }) => {
-  const navigation = useNavigation();
-
+const StoreCard: React.FC<StoreCardProps> = ({
+  image,
+  name,
+  city,
+  onPress,
+}) => {
   return (
-    <TouchableOpacity
-    // onPress={() => navigation.navigate('StoreDetail', { storeId: id })}
-    >
-      <Card>
-        <Image
-          source={{
-            uri: image,
-          }}
-        />
-        <Title>{name}</Title>
-        <Location>{city}</Location>
-      </Card>
-    </TouchableOpacity>
+    <Card onPress={onPress}>
+      <Image
+        source={{
+          uri: image,
+        }}
+      />
+      <Title>{name}</Title>
+      <Location>{city}</Location>
+    </Card>
   );
 };
 

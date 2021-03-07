@@ -24,7 +24,7 @@ const QuantityInput: React.FC<QuantityInputProps> = ({
   return (
     <Container>
       <RemoveItemButton onPress={subFunction}>
-        <Feather name="minus" color={`${colors.error}`} size={20} />
+        <Feather name="minus" color={`${colors.red}`} size={20} />
       </RemoveItemButton>
       <QuantityItems editable={false} value={value.toString()} />
       <AddItemButton onPress={addFunction}>

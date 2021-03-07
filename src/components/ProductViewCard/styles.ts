@@ -17,6 +17,7 @@ export const Container = styled.View.attrs({
   align-items: center;
   justify-content: space-between;
   margin: 5px 0;
+  width: 100%;
   border-radius: 4px;
   border-bottom-width: 0px;
 `;
@@ -27,8 +28,9 @@ export const ProductInfo = styled.View`
 
 export const ProductDesc = styled.Text`
   font-size: ${fonts.EXTRA_MEDIUM}px;
-  font-family: Montserrat_700Bold;
+  font-family: ${fonts.REGULAR};
   margin-top: 10px;
+  color: ${colors.gray};
 `;
 
 export const InfoView = styled.View`
@@ -37,22 +39,21 @@ export const InfoView = styled.View`
 `;
 
 export const ProductPrice = styled.Text`
-  font-size: ${fonts.MEDIUM}px;
-  font-family: Montserrat_400Regular;
+  font-size: ${fonts.EXTRA_MEDIUM}px;
+  font-family: ${fonts.REGULAR};
   margin-top: 10px;
   color: ${colors.secondary};
 `;
 
-export const ImageView = styled.View``;
-
 export const ProductImage = styled.Image`
-  width: 348px;
+  width: 100%;
   height: 190px;
 `;
 
 export const InfoContainer = styled.View`
+  width: 100%;
   background: ${colors.white};
-  padding: 10px;
+  padding: 10px 20px;
   border-top-width: 0.7px;
   border-color: ${colors.lightGray};
 `;

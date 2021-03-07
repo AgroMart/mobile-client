@@ -1,7 +1,8 @@
 import styled from 'styled-components/native';
+
 import { colors, fonts } from '../../styles';
 
-export const Container = styled.View.attrs({
+export const Container = styled.TouchableOpacity.attrs({
   shadowColor: `${colors.white}`,
   shadowOffset: {
     width: 0,
@@ -30,7 +31,7 @@ export const HistoryInfo = styled.View``;
 
 export const InfoText = styled.Text`
   font-size: ${fonts.MEDIUM}px;
-  font-family: Montserrat_600SemiBold;
+  font-family: ${fonts.SEMIBOLD};
 `;
 
 export const InfoView = styled.View`
@@ -39,7 +40,7 @@ export const InfoView = styled.View`
 
 export const InfoTitle = styled.Text`
   font-size: ${fonts.MEDIUM}px;
-  font-family: Montserrat_700Bold;
+  font-family: ${fonts.BOLD};
 `;
 
 export const GreenText = styled(InfoTitle)`

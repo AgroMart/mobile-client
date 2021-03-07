@@ -1,23 +1,33 @@
 import styled from 'styled-components/native';
+import { metrics, fonts, colors } from '../../styles';
 
-export const Container = styled.View`
+export const CardCity = styled.TouchableOpacity`
+  position: relative;
+  background: rgba(0, 0, 0, 0.5);
+  margin: ${metrics.PADDING_SCREEN * 0.6}px;
   justify-content: center;
-  align-items: center;
+  border-radius: 4px;
 `;
 
-export const Img = styled.Image`
-  width: 100%;
-  height: 100%;
-`;
-export const Text = styled.Text`
-  font-size: 25px;
+export const CityText = styled.Text`
   position: absolute;
-  font-weight: bold;
-  color: #fff;
+  align-self: center;
+  font-family: ${fonts.SEMIBOLD};
+  color: ${colors.white};
+  font-size: ${fonts.EXTRA_MEDIUM}px;
 `;
 
-export const Button = styled.TouchableOpacity`
-  height: 150px;
-  width: 150px;
-  border-width: 2px;
+export const CardMask = styled.View`
+  position: absolute;
+  justify-content: center;
+  width: ${metrics.SCREEN_WIDTH * 0.41}px;
+  height: ${metrics.SCREEN_WIDTH * 0.41}px;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 4px;
+`;
+
+export const CityImage = styled.Image`
+  width: ${metrics.SCREEN_WIDTH * 0.41}px;
+  height: ${metrics.SCREEN_WIDTH * 0.41}px;
 `;

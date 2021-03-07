@@ -27,7 +27,7 @@ export const ProductInfo = styled.View``;
 
 export const ProductName = styled.Text`
   font-size: ${fonts.EXTRA_MEDIUM}px;
-  font-family: Montserrat_700Bold;
+  font-family: ${fonts.BOLD};
 `;
 export const InfoView = styled.View`
   flex-direction: row;
@@ -37,12 +37,12 @@ export const InfoView = styled.View`
 
 export const InfoTitle = styled.Text`
   font-size: ${fonts.MEDIUM}px;
-  font-family: Montserrat_600SemiBold;
+  font-family: ${fonts.SEMIBOLD};
 `;
 
 export const ProductData = styled.Text`
   font-size: ${fonts.MEDIUM}px;
-  font-family: Montserrat_600SemiBold;
+  font-family: ${fonts.SEMIBOLD};
   color: ${colors.shadow};
 `;
 

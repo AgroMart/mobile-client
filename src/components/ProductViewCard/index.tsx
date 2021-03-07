@@ -1,10 +1,8 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import {
   Container,
   ProductInfo,
-  ImageView,
   ProductImage,
   ProductDesc,
   InfoView,
@@ -24,20 +22,17 @@ const ProductViewCard: React.FC<ProductViewCardProps> = ({
   image,
 }) => {
   return (
-    <TouchableOpacity>
-      <Container>
-        <ProductImage source={{ uri: image }} />
-        <InfoContainer>
-          <ProductInfo>
-            <ProductDesc>{description}</ProductDesc>
-            <InfoView>
-              <ProductPrice>{`Valor: R$ ${value}`}</ProductPrice>
-            </InfoView>
-          </ProductInfo>
-          <ImageView />
-        </InfoContainer>
-      </Container>
-    </TouchableOpacity>
+    <Container>
+      <ProductImage source={{ uri: image }} />
+      <InfoContainer>
+        <ProductInfo>
+          <ProductDesc>{description}</ProductDesc>
+          <InfoView>
+            <ProductPrice>{`Valor: R$ ${value}`}</ProductPrice>
+          </InfoView>
+        </ProductInfo>
+      </InfoContainer>
+    </Container>
   );
 };
 

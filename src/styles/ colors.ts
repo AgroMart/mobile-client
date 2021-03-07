@@ -5,7 +5,7 @@ const Colors = {
   shadow: '#000',
   lightGray: '#c9c9c9',
   gray: '#949494',
-  error: '#c53030',
+  red: '#c53030',
 };
 
 export default Colors;

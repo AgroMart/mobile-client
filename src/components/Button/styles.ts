@@ -26,5 +26,5 @@ export const Container = styled(RectButton)`
 export const ButtonText = styled.Text`
   color: ${colors.white};
   font-size: ${fonts.EXTRA_MEDIUM}px;
-  font-family: Montserrat_700Bold;
+  font-family: ${fonts.BOLD};
 `;

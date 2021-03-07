@@ -17,6 +17,7 @@ type HistoryCardProps = {
   date: Date;
   value: number;
   buttonText?: string;
+  onPress(): void;
 };
 
 const HistoryItemCard: React.FC<HistoryCardProps> = ({
@@ -24,9 +25,10 @@ const HistoryItemCard: React.FC<HistoryCardProps> = ({
   date,
   value,
   buttonText = 'Ver Detalhes',
+  onPress,
 }) => {
   return (
-    <Container>
+    <Container onPress={onPress}>
       <HistoryInfo>
         <InfoView>
           <InfoTitle>Vendedor: </InfoTitle>

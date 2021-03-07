@@ -1,27 +1,31 @@
 import React from 'react';
+
+import DefaultProfile from '../../assets/defaultAvatar.png';
+
 import { Container, Img, Text } from './styles';
 
-interface Props {
+interface UserHeaderProps {
   photo?: string;
-  name: string;
-  logged?: boolean;
+  name?: string;
 }
 
-const UserHeader: React.FC<Props> = props => {
-  const { photo, name, logged } = props;
+const UserHeader: React.FC<UserHeaderProps> = ({
+  photo = DefaultProfile,
+  name,
+}) => {
   return (
-    <Container>
+    <Container onPress={() => console.log('profile')}>
       <Img source={{ uri: photo }} />
       <Text>
-        Olá, <Text logged={logged}>{name}</Text>
+        Olá,{' '}
+        {name ? (
+          <Text logged={!!name}>{name}.</Text>
+        ) : (
+          'faça login ou cadastro.'
+        )}
       </Text>
     </Container>
   );
 };
 
-UserHeader.defaultProps = {
-  photo:
-    'https://avatars.githubusercontent.com/u/19879482?s=460&u=1d5013de9c596079541d855a8eb7b06ba570b4d8&v=4',
-  name: 'faça login ou cadastro',
-};
 export default UserHeader;

@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 
+import { fonts } from '../../styles';
+
 export const Container = styled.SafeAreaView`
   flex: 1;
   background: #fff;
@@ -34,7 +36,7 @@ export const City = styled.Text`
   margin-bottom: 5%;
   color: gray;
   font-size: 20px;
-  font-family: Montserrat_400Regular;
+  font-family: ${fonts.REGULAR};
 `;
 
 export const MessageIcon = styled.TouchableOpacity``;

@@ -19,6 +19,7 @@ export type ProductCardProps = {
   value: number;
   image: string;
   unity?: string;
+  onPress(): void;
 };
 
 const ProductCard: React.FC<ProductCardProps> = ({
@@ -27,9 +28,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
   value,
   unity = 'Unidade',
   image,
+  onPress,
 }) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onPress}>
       <Container>
         <ProductInfo>
           <ProductName>{name}</ProductName>

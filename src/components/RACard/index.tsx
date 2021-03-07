@@ -1,25 +1,23 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
-import { Container, Img, Text, Button } from './styles';
+import { CardCity, CardMask, CityText, CityImage } from './styles';
 
-interface Props {
+interface RACardProps {
   photo?: string;
   name: string;
 }
 
-const RACard: React.FC<Props> = props => {
-  const { photo, name } = props;
+const RACard: React.FC<RACardProps> = ({
+  photo = 'https://super.abril.com.br/wp-content/uploads/2018/09/cidade.png',
+  name,
+}) => {
   return (
-    <Button>
-      <Container>
-        <Img source={{ uri: photo }} />
-        <Text>{name}</Text>
-      </Container>
-    </Button>
+    <CardCity onPress={() => console.log(name)}>
+      <CardMask>
+        <CityText>{name}</CityText>
+      </CardMask>
+      <CityImage source={{ uri: photo }} />
+    </CardCity>
   );
 };
 
-RACard.defaultProps = {
-  photo: 'https://super.abril.com.br/wp-content/uploads/2018/09/cidade.png',
-};
 export default RACard;
