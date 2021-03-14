@@ -15,8 +15,7 @@ export const Container = styled.TouchableOpacity`
 `;
 
 export const Img = styled.Image`
-  border-radius: 5px;
-  border: 2px #000;
+  border: solid 2px #000;
   height: ${metrics.PADDING_SCREEN * 2.8}px;
   width: ${metrics.PADDING_SCREEN * 2.8}px;
   border-radius: ${metrics.PADDING_SCREEN * 1.5}px;

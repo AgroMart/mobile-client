@@ -11,19 +11,11 @@ type ItemProps = {
 const imagesUrl = [
   {
     image:
+      'https://media-cdn.tripadvisor.com/media/photo-s/12/51/e0/0b/vista-da-chegada-na-pousada.jpg',
+  },
+  {
+    image:
       'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
-  },
-  {
-    image:
-      'https://media-cdn.tripadvisor.com/media/photo-s/12/51/e0/0b/vista-da-chegada-na-pousada.jpg',
-  },
-  {
-    image:
-      'https://media-cdn.tripadvisor.com/media/photo-s/12/51/e0/0b/vista-da-chegada-na-pousada.jpg',
-  },
-  {
-    image:
-      'https://media-cdn.tripadvisor.com/media/photo-s/12/51/e0/0b/vista-da-chegada-na-pousada.jpg',
   },
   {
     image:
@@ -43,7 +35,7 @@ const CustomCarousel: React.FC = () => {
   }, []);
 
   return (
-    <View style={{ height: '25%' }}>
+    <View>
       <View>
         <Carousel
           layout="default"

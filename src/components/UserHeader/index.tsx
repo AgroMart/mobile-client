@@ -9,13 +9,11 @@ interface UserHeaderProps {
   name?: string;
 }
 
-const UserHeader: React.FC<UserHeaderProps> = ({
-  photo = DefaultProfile,
-  name,
-}) => {
+const UserHeader: React.FC<UserHeaderProps> = ({ photo, name }) => {
   return (
     <Container onPress={() => console.log('profile')}>
-      <Img source={{ uri: photo }} />
+      {console.log(photo)}
+      <Img source={photo ? { uri: photo } : DefaultProfile} />
       <Text>
         Olá,{' '}
         {name ? (

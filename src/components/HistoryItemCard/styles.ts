@@ -2,7 +2,11 @@ import styled from 'styled-components/native';
 
 import { colors, fonts } from '../../styles';
 
-export const Container = styled.TouchableOpacity.attrs({
+export const Container = styled.TouchableOpacity`
+  flex: 1;
+`;
+
+export const Content = styled.View.attrs({
   shadowColor: `${colors.white}`,
   shadowOffset: {
     width: 0,
