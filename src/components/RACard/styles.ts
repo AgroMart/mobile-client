@@ -6,7 +6,6 @@ export const CardCity = styled.TouchableOpacity`
   background: rgba(0, 0, 0, 0.5);
   margin: ${metrics.PADDING_SCREEN * 0.6}px;
   justify-content: center;
-  border-radius: 4px;
 `;
 
 export const CityText = styled.Text`
@@ -14,7 +13,7 @@ export const CityText = styled.Text`
   align-self: center;
   font-family: ${fonts.SEMIBOLD};
   color: ${colors.white};
-  font-size: ${fonts.EXTRA_MEDIUM}px;
+  font-size: ${fonts.MEDIUM}px;
 `;
 
 export const CardMask = styled.View`
@@ -24,7 +23,6 @@ export const CardMask = styled.View`
   height: ${metrics.SCREEN_WIDTH * 0.41}px;
   z-index: 1;
   background: rgba(0, 0, 0, 0.35);
-  border-radius: 4px;
 `;
 
 export const CityImage = styled.Image`
