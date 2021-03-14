@@ -11,7 +11,7 @@ export const CardCity = styled.TouchableOpacity`
 export const CityText = styled.Text`
   position: absolute;
   align-self: center;
-  font-family: ${fonts.SEMIBOLD};
+  font-family: ${fonts.REGULAR};
   color: ${colors.white};
   font-size: ${fonts.MEDIUM}px;
 `;

@@ -24,7 +24,11 @@ const Search: React.FC = () => {
         }}
         data={data}
         renderItem={({ item }) => (
-          <RACard name={item.city} photo={item.urlImage} />
+          <RACard
+            name={item.city}
+            photo={item.urlImage}
+            onPress={() => console.log(item.city)}
+          />
         )}
         horizontal={false}
         keyExtractor={item => item.city}
