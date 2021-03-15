@@ -46,10 +46,9 @@ const Home: React.FC = () => {
           <Carousel />
         </CarouselContainer>
         <StoresContainer>
-          {stores.map((store, idx) => (
+          {stores.map(store => (
             <StoreCard
-              // eslint-disable-next-line react/no-array-index-key
-              key={idx}
+              key={store.name}
               name={store.name}
               city={store.city}
               image={store.image}

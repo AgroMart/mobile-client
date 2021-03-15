@@ -9,3 +9,9 @@ export const InputContainer = styled.View`
   width: 90%;
   margin: 10px 0;
 `;
+
+export const StoresContainer = styled.View`
+  flex: 1;
+  width: 90%;
+  align-self: center;
+`;
