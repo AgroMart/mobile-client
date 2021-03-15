@@ -7,11 +7,12 @@ import { Container, Img, Text } from './styles';
 interface UserHeaderProps {
   photo?: string;
   name?: string;
+  disabled?: boolean;
 }
 
-const UserHeader: React.FC<UserHeaderProps> = ({ photo, name }) => {
+const UserHeader: React.FC<UserHeaderProps> = ({ photo, name, disabled }) => {
   return (
-    <Container onPress={() => console.log('profile')}>
+    <Container onPress={() => console.log('profile')} disabled={disabled}>
       {console.log(photo)}
       <Img source={photo ? { uri: photo } : DefaultProfile} />
       <Text>

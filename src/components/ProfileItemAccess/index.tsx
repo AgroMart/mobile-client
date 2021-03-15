@@ -17,6 +17,7 @@ interface ProfileItemAccessProps {
   icon: typeof _default;
   title: string;
   subtitle: string;
+  disabled?: boolean;
   onPress(): void;
 }
 
@@ -24,14 +25,15 @@ const ProfileItemAccess: React.FC<ProfileItemAccessProps> = ({
   icon,
   title,
   subtitle,
+  disabled,
   onPress,
 }) => {
   return (
-    <Container onPress={onPress}>
+    <Container onPress={onPress} disabled={disabled}>
       <Content>
         <MaterialCommunityIcons
           name={icon}
-          size={40}
+          size={30}
           color={`${colors.secondary}`}
         />
         <TextContainer>

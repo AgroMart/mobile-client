@@ -2,9 +2,7 @@ import styled from 'styled-components/native';
 
 import { colors, fonts } from '../../styles';
 
-export const Container = styled.TouchableOpacity`
-  flex: 1;
-`;
+export const Container = styled.TouchableOpacity``;
 
 export const Content = styled.View`
   flex-direction: row;
@@ -12,6 +10,7 @@ export const Content = styled.View`
   align-items: center;
   border-bottom-width: 1px;
   border-bottom-color: ${colors.border};
+  background: ${colors.white};
 `;
 
 export const TextContainer = styled.View`
