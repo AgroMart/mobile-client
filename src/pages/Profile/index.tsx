@@ -19,13 +19,19 @@ const Profile: React.FC = () => {
         icon="map-marker"
         title="Meus endereços"
         subtitle="Meus endereços de entrega"
-        onPress={() => console.log('dados')}
+        onPress={() => console.log('entrega')}
+      />
+      <ProfileItemAccess
+        icon="basket"
+        title="Meus planos"
+        subtitle="Planos assinados"
+        onPress={() => console.log('plano')}
       />
       <ProfileItemAccess
         icon="logout"
         title="Sair"
         subtitle="Fazer logout do app"
-        onPress={() => console.log('dados')}
+        onPress={() => console.log('logout')}
       />
     </Container>
   );

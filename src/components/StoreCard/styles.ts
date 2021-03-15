@@ -2,9 +2,7 @@ import styled from 'styled-components/native';
 
 import { colors, fonts, metrics } from '../../styles';
 
-export const Container = styled.TouchableOpacity`
-  flex: 1;
-`;
+export const Container = styled.TouchableOpacity``;
 
 export const Card = styled.View.attrs({
   shadowColor: `${colors.shadow}`,
