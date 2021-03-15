@@ -1,11 +1,21 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+
+import ProfileItemAccess from '../../components/ProfileItemAccess';
+import UserHeader from '../../components/UserHeader';
+
+import { Container } from './styles';
 
 const Profile: React.FC = () => {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Profile!</Text>
-    </View>
+    <Container>
+      <UserHeader />
+      <ProfileItemAccess
+        icon="account"
+        title="Meus dados"
+        subtitle="Alterar meus dados de perfil"
+        onPress={() => console.log('dados')}
+      />
+    </Container>
   );
 };
 

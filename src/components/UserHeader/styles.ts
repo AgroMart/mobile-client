@@ -9,13 +9,13 @@ export const Container = styled.TouchableOpacity`
   padding-left: ${metrics.PADDING_SCREEN}px;
   flex-direction: row;
   align-items: center;
-  background-color: #fff;
+  background-color: ${colors.white};
   border-bottom-width: 2px;
-  border-bottom-color: #b4b4b4;
+  border-bottom-color: ${colors.border};
 `;
 
 export const Img = styled.Image`
-  border: solid 2px #000;
+  border: solid 2px ${colors.shadow};
   height: ${metrics.PADDING_SCREEN * 2.8}px;
   width: ${metrics.PADDING_SCREEN * 2.8}px;
   border-radius: ${metrics.PADDING_SCREEN * 1.5}px;
@@ -27,7 +27,7 @@ interface TextProps {
 }
 
 export const Text = styled.Text<TextProps>`
-  color: #000;
+  color: ${colors.shadow};
   font-size: ${fonts.MEDIUM}px;
   font-family: ${fonts.REGULAR};
   color: ${({ logged }) =>
