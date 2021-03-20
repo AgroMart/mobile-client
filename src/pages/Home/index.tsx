@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ScrollView } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 import UserHeader from '../../components/UserHeader';
 import Carousel from '../../components/Carousel';
@@ -34,6 +34,8 @@ type Stores = Omit<StoreCardProps, 'onPress'>;
 const Home: React.FC = () => {
   const [stores, setStores] = useState<Stores[]>([]);
 
+  const navigation = useNavigation();
+
   useFocusEffect(() => {
     setStores(storeMock);
   });
@@ -42,9 +44,7 @@ const Home: React.FC = () => {
     <Container>
       <UserHeader />
       <ScrollView>
-        <CarouselContainer>
-          <Carousel />
-        </CarouselContainer>
+        <CarouselContainer>{/* <Carousel /> */}</CarouselContainer>
         <StoresContainer>
           {stores.map(store => (
             <StoreCard
@@ -52,7 +52,7 @@ const Home: React.FC = () => {
               name={store.name}
               city={store.city}
               image={store.image}
-              onPress={() => console.log(store.name)}
+              onPress={() => navigation.navigate('StoreDetail')}
             />
           ))}
         </StoresContainer>

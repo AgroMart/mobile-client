@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import TabRoutes from './tab.routes';
+import { StoreDetails } from '../pages';
 
 const App = createStackNavigator();
 
@@ -14,6 +15,7 @@ const routes: React.FC = () => {
       }}
     >
       <App.Screen name="Home" component={TabRoutes} />
+      <App.Screen name="StoreDetail" component={StoreDetails} />
     </App.Navigator>
   );
 };

@@ -1,55 +1,48 @@
 import styled from 'styled-components/native';
 
-import { fonts } from '../../styles';
+import { colors, fonts } from '../../styles';
+import { iPhoneHelper } from '../../utils';
+import { RegularText } from '../../components';
 
-export const Container = styled.SafeAreaView`
+export const Container = styled.View`
   flex: 1;
-  background: #fff;
+  background: ${colors.white};
 `;
 
-export const Banner = styled.Image`
+export const Header = styled.View`
   width: 100%;
-  height: 25.3%;
+`;
+
+export const StoreBanner = styled.Image`
+  width: 100%;
+  height: 100px;
+`;
+
+export const HeaderContent = styled.View`
+  padding: 5%;
+  align-items: flex-start;
+`;
+
+export const Separator = styled.View`
+  height: 1px;
+  width: 100%;
+  background-color: ${colors.lightGray};
+  margin: 5px 0;
+`;
+
+export const Title = styled(RegularText)`
+  margin-bottom: 5px;
+`;
+
+export const SubTitle = styled(RegularText)`
+  font-size: ${fonts.SMALL};
+`;
+
+export const StoreRA = styled(RegularText)`
+  color: ${colors.gray};
 `;
 
 export const Content = styled.View`
-  width: 85%;
-  margin: 0 auto;
-`;
-
-export const FarmName = styled.Text`
-  margin-top: 1.6%;
-  margin-bottom: 1%;
-  font-size: 27px;
-`;
-
-export const ContactView = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom-width: 1px;
-  border-color: #d3d3d3;
-`;
-
-export const City = styled.Text`
-  margin-top: 1.6%;
-  margin-bottom: 5%;
-  color: gray;
-  font-size: 20px;
-  font-family: ${fonts.REGULAR};
-`;
-
-export const MessageIcon = styled.TouchableOpacity``;
-
-export const DescriptionTitle = styled.Text`
-  font-size: 22px;
-  margin-top: 1%;
-`;
-
-export const DescriptionText = styled.Text`
-  font-size: 18px;
-  margin-top: 1%;
-  padding-bottom: 10px;
-  border-bottom-width: 1px;
-  border-color: black;
+  flex: 1;
+  margin-bottom: ${iPhoneHelper.getBottomSpace()}px;
 `;

@@ -1,86 +1,74 @@
 import React from 'react';
-import { Text } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
-import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
+import { SectionList } from 'react-native';
 
 import {
   Container,
-  Banner,
-  FarmName,
+  Header,
+  StoreBanner,
+  HeaderContent,
+  Title,
+  StoreRA,
+  SubTitle,
+  Separator,
   Content,
-  City,
-  MessageIcon,
-  ContactView,
-  DescriptionTitle,
-  DescriptionText,
 } from './styles';
 
-import ProductList from '../../components/ProductList';
+const DATA = [
+  {
+    title: 'Main dishes',
+    data: ['Pizza', 'Burger', 'Risotto'],
+  },
+  {
+    title: 'Sides',
+    data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
+  },
+  {
+    title: 'Drinks',
+    data: ['Water', 'Coke', 'Beer'],
+  },
+  {
+    title: 'Desserts',
+    data: ['Cheese Cake', 'Ice Cream'],
+  },
+];
 
-export type StoreDetailsProps = {
-  image?: string;
-  nome?: string;
-  cidade?: string;
-  descricao?: string;
-};
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const renderTabBar: React.FC<any> = props => (
-  <TabBar
-    {...props}
-    renderLabel={({ route, focused }) => (
-      <Text style={{ color: focused ? '#00AA95' : 'gray', margin: 8 }}>
-        {route.title}
-      </Text>
-    )}
-    indicatorStyle={{ color: '#00AA95', backgroundColor: '#00AA95' }}
-    style={{ backgroundColor: 'white' }}
-  />
-);
-
-const StoreDetails: React.FC<StoreDetailsProps> = ({
-  image = 'https://i.pinimg.com/originals/db/fc/e7/dbfce7091d1dca3d3e1b7b846fb55e3a.jpg',
-  nome = 'Fazenda Bonita',
-  cidade = 'Brazlandia',
-  descricao = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-}) => {
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-    { key: 'produtos', title: 'Produtos' },
-    { key: 'cestas', title: 'Cestas' },
-    { key: 'planos', title: 'Planos' },
-  ]);
-
-  // const renderScene = SceneMap({
-  //   produtos: ProductList,
-  //   cestas: ProductList,
-  //   planos: ProductList,
-  // });
-
+const StoreDetails: React.FC = () => {
   return (
     <Container>
-      <Banner
-        source={{
-          uri: image,
-        }}
-      />
+      <Header>
+        <StoreBanner
+          source={{
+            uri:
+              'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
+          }}
+        />
+        <HeaderContent>
+          <Title>Fazenda do alface roxo</Title>
+          <StoreRA>Brazlandia</StoreRA>
+
+          <Separator />
+
+          <Title>Descrição:</Title>
+          <SubTitle>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s,
+          </SubTitle>
+
+          <Separator />
+        </HeaderContent>
+      </Header>
+
       <Content>
-        <FarmName>{nome}</FarmName>
-        <ContactView>
-          <City>{cidade}</City>
-          <MessageIcon>
-            <FontAwesome name="whatsapp" color="#00AA95" size={32} />
-          </MessageIcon>
-        </ContactView>
-        <DescriptionTitle>Descrição:</DescriptionTitle>
-        <DescriptionText numberOfLines={2}>{descricao}</DescriptionText>
+        <SectionList
+          sections={DATA}
+          keyExtractor={(item, index) => item + index}
+          renderItem={({ item }) => <SubTitle>{item}</SubTitle>}
+          renderSectionHeader={({ section: { title } }) => (
+            <Title>{title}</Title>
+          )}
+        />
       </Content>
-      {/* <TabView
-        renderTabBar={renderTabBar}
-        navigationState={{ index, routes }}
-        renderScene={renderScene}
-        onIndexChange={setIndex}
-      /> */}
     </Container>
   );
 };
