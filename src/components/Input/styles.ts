@@ -15,6 +15,7 @@ export const Container = styled.View<ViewProps>`
 `;
 
 export const StyledInput = styled.TextInput`
+  width: 100%;
   margin-left: 8px;
   height: 48px;
 `;

@@ -16,7 +16,7 @@ const Profile: React.FC = () => {
         icon="account"
         title="Meus dados"
         subtitle="Alterar meus dados de perfil"
-        onPress={() => console.log('dados')}
+        onPress={() => navigation.navigate('ProfileInfo')}
       />
       <ProfileItemAccess
         icon="map-marker"
