@@ -5,7 +5,7 @@ import { Feather } from '@expo/vector-icons';
 import Home from '../pages/Home';
 import Search from '../pages/Search';
 import Profile from '../pages/Profile';
-import Info from '../pages/Info';
+import History from '../pages/History';
 
 const Tab = createBottomTabNavigator();
 
@@ -47,10 +47,10 @@ const TabRoutes: React.FC = () => (
     />
     <Tab.Screen
       name="Info"
-      component={Info}
+      component={History}
       options={{
         tabBarIcon: ({ color, size }) => (
-          <Feather name="info" size={size} color={color} />
+          <Feather name="list" size={size} color={color} />
         ),
       }}
     />

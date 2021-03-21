@@ -24,6 +24,7 @@
   },
   "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
   "rules": {
+    "react/no-array-index-key": "off",
     "no-nested-ternary": "off",
     "prettier/prettier": "error",
     "no-underscore-dangle": "off",

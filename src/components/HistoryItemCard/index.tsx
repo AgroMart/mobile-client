@@ -10,14 +10,14 @@ import {
   InfoView,
   InfoTitle,
   TextButtonView,
-  GreenText,
+  GreenTitle,
+  GreenInfo,
 } from './styles';
 
-type HistoryCardProps = {
+export type HistoryCardProps = {
   seller: string;
-  date: Date;
+  date: string;
   value: number;
-  buttonText?: string;
   onPress(): void;
 };
 
@@ -25,7 +25,6 @@ const HistoryItemCard: React.FC<HistoryCardProps> = ({
   seller,
   date,
   value,
-  buttonText = 'Ver Detalhes',
   onPress,
 }) => {
   return (
@@ -41,11 +40,12 @@ const HistoryItemCard: React.FC<HistoryCardProps> = ({
             <InfoText>{`${date}`}</InfoText>
           </InfoView>
           <InfoView>
-            <GreenText>Valor : {` R$ ${value}`}</GreenText>
+            <GreenTitle>Valor: </GreenTitle>
+            <GreenInfo>{` R$ ${value}`}</GreenInfo>
           </InfoView>
         </HistoryInfo>
         <TextButtonView>
-          <TextButton>{buttonText}</TextButton>
+          <TextButton>Ver Detalhes</TextButton>
         </TextButtonView>
       </Content>
     </Container>

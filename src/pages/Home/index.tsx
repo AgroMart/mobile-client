@@ -31,7 +31,7 @@ const storeMock = [
 
 type Stores = Omit<StoreCardProps, 'onPress'>;
 
-const Home: React.FC = () => {
+const History: React.FC = () => {
   const [stores, setStores] = useState<Stores[]>([]);
 
   const navigation = useNavigation();
@@ -44,7 +44,9 @@ const Home: React.FC = () => {
     <Container>
       <UserHeader />
       <ScrollView>
-        <CarouselContainer>{/* <Carousel /> */}</CarouselContainer>
+        <CarouselContainer>
+          <Carousel />
+        </CarouselContainer>
         <StoresContainer>
           {stores.map(store => (
             <StoreCard
@@ -61,4 +63,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default History;

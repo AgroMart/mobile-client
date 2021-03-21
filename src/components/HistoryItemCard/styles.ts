@@ -19,12 +19,13 @@ export const Content = styled.View.attrs({
 })`
   padding: 15px;
   height: 138px;
-  width: 80%;
+  width: 100%;
   flex-direction: column;
   justify-content: space-between;
   border-bottom-width: 0px;
   background: ${colors.white};
   border-radius: 4px;
+  margin-bottom: 10px;
 `;
 
 export const TextButtonView = styled.View`
@@ -35,7 +36,7 @@ export const HistoryInfo = styled.View``;
 
 export const InfoText = styled.Text`
   font-size: ${fonts.MEDIUM}px;
-  font-family: ${fonts.SEMIBOLD};
+  font-family: ${fonts.REGULAR};
 `;
 
 export const InfoView = styled.View`
@@ -47,6 +48,10 @@ export const InfoTitle = styled.Text`
   font-family: ${fonts.BOLD};
 `;
 
-export const GreenText = styled(InfoTitle)`
+export const GreenTitle = styled(InfoTitle)`
+  color: ${colors.secondary};
+`;
+
+export const GreenInfo = styled(InfoText)`
   color: ${colors.secondary};
 `;
