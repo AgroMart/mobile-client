@@ -5,7 +5,7 @@ import { ViewDisable, ViewEnable } from './styles';
 
 type RadioButtonProps = {
   value: boolean;
-  enable: () => void;
+  enable?: () => void;
 };
 
 const RadioButton: React.FC<RadioButtonProps> = ({ value, enable }) => {

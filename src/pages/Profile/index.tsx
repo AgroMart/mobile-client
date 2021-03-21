@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import ProfileItemAccess from '../../components/ProfileItemAccess';
 import UserHeader from '../../components/UserHeader';
@@ -6,6 +7,8 @@ import UserHeader from '../../components/UserHeader';
 import { Container } from './styles';
 
 const Profile: React.FC = () => {
+  const navigation = useNavigation();
+
   return (
     <Container>
       <UserHeader disabled />
@@ -25,7 +28,7 @@ const Profile: React.FC = () => {
         icon="basket"
         title="Meus planos"
         subtitle="Planos assinados"
-        onPress={() => console.log('plano')}
+        onPress={() => navigation.navigate('Plan')}
       />
       <ProfileItemAccess
         icon="logout"

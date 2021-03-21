@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
 import SwitchButton from '../SwitchButton';
 import RadioButton from '../RadioButton';
 
@@ -28,6 +30,13 @@ const PlanCard: React.FC<StoreCardProps> = ({
   avaliableBasket,
   recievedBasket,
 }) => {
+  const [switchValue, setSwitchValue] = useState(false);
+  const [radioValue, setRadioValue] = useState(false);
+
+  const changeRadioValue = useCallback(() => {
+    setRadioValue(state => !state);
+  }, []);
+
   return (
     <Card>
       <Image
@@ -59,30 +68,24 @@ const PlanCard: React.FC<StoreCardProps> = ({
         <InfoView>
           <InfoTitle>Pular cesta da semana </InfoTitle>
           <SwitchButton
-            value={false}
+            value={switchValue}
             enable={() => {
-              console.log('pular');
+              setSwitchValue(state => !state);
             }}
           />
         </InfoView>
-        <InfoView>
-          <InfoTitle>Receber cesta </InfoTitle>
-          <RadioButton
-            value
-            enable={() => {
-              console.log('receber');
-            }}
-          />
-        </InfoView>
-        <InfoView>
-          <InfoTitle>Buscar </InfoTitle>
-          <RadioButton
-            value={false}
-            enable={() => {
-              console.log('buscar');
-            }}
-          />
-        </InfoView>
+        <TouchableOpacity onPress={changeRadioValue} disabled={!radioValue}>
+          <InfoView>
+            <InfoTitle>Receber cesta </InfoTitle>
+            <RadioButton value={!radioValue} />
+          </InfoView>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={changeRadioValue} disabled={!!radioValue}>
+          <InfoView>
+            <InfoTitle>Buscar </InfoTitle>
+            <RadioButton value={radioValue} />
+          </InfoView>
+        </TouchableOpacity>
       </InfoContainer>
     </Card>
   );
