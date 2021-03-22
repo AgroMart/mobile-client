@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import DefaultProfile from '../../assets/defaultAvatar.png';
 
@@ -11,9 +12,13 @@ interface UserHeaderProps {
 }
 
 const UserHeader: React.FC<UserHeaderProps> = ({ photo, name, disabled }) => {
+  const navigation = useNavigation();
+
   return (
-    <Container onPress={() => console.log('profile')} disabled={disabled}>
-      {console.log(photo)}
+    <Container
+      onPress={() => navigation.navigate('SignIn')}
+      disabled={disabled}
+    >
       <Img source={photo ? { uri: photo } : DefaultProfile} />
       <Text>
         Olá,{' '}
