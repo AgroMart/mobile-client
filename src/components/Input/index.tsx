@@ -1,5 +1,5 @@
-import React from 'react';
-import { TextInputProps } from 'react-native';
+import React, { forwardRef } from 'react';
+import { TextInputProps, TextInput } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Container, StyledInput, TextLabel } from './styles';
 import _default from '../../@types/MaterialCommunityIcons';
@@ -14,14 +14,10 @@ interface InputProps extends TextInputProps {
   type?: 'password' | 'email' | 'numeric' | 'default';
 }
 
-const Input: React.FC<InputProps> = ({
-  placeholder,
-  label,
-  type = 'default',
-  icon,
-  error = false,
-  ...rest
-}) => {
+const Input: React.ForwardRefRenderFunction<TextInput, InputProps> = (
+  { placeholder, label, type = 'default', icon, error = false, ...rest },
+  ref,
+) => {
   return (
     <>
       {label && <TextLabel>{label}</TextLabel>}
@@ -37,6 +33,7 @@ const Input: React.FC<InputProps> = ({
           placeholderTextColor={`${colors.gray}`}
           placeholder={placeholder}
           secureTextEntry={type === 'password'}
+          ref={ref}
           keyboardType={
             type === 'email'
               ? 'email-address'
@@ -51,4 +48,4 @@ const Input: React.FC<InputProps> = ({
   );
 };
 
-export default Input;
+export default forwardRef(Input);

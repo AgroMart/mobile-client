@@ -20,7 +20,7 @@ import {
 } from './styles';
 
 const SignIn: React.FC = () => {
-  // const passwordRef = useRef<TextInput | any>();
+  const passwordRef = useRef<TextInput | any>();
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
 
@@ -63,7 +63,7 @@ const SignIn: React.FC = () => {
           placeholder="E-mail"
           autoCorrect={false}
           returnKeyType="next"
-          // onSubmitEditing={() => passwordRef.current.focus()}
+          onSubmitEditing={() => passwordRef.current.focus()}
           value={formik.values.email}
           onChangeText={formik.handleChange('email')}
           icon="email"
@@ -72,7 +72,7 @@ const SignIn: React.FC = () => {
 
         <Input
           placeholder="Senha"
-          // ref={passwordRef}
+          ref={passwordRef}
           autoCorrect={false}
           returnKeyType="send"
           secureTextEntry

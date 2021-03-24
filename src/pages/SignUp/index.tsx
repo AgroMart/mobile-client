@@ -20,10 +20,9 @@ import {
 } from './styles';
 
 const SignUp: React.FC = () => {
-  // const emailRef = useRef<TextInput | any>();
-  // const passwordRef = useRef<TextInput | any>();
-  // const confirmPasswordRef = useRef<TextInput | any>();
-  // const [passwordSecure, setPasswordSecure] = useState(true);
+  const emailRef = useRef<TextInput | any>();
+  const passwordRef = useRef<TextInput | any>();
+  const confirmPasswordRef = useRef<TextInput | any>();
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
 
@@ -76,7 +75,7 @@ const SignUp: React.FC = () => {
             placeholder="Name"
             autoCorrect={false}
             returnKeyType="next"
-            // onSubmitEditing={() => emailRef.current.focus()}
+            onSubmitEditing={() => emailRef.current.focus()}
             value={formik.values.name}
             onChangeText={formik.handleChange('name')}
             icon="account"
@@ -84,10 +83,10 @@ const SignUp: React.FC = () => {
           />
           <Input
             placeholder="E-mail"
-            // ref={emailRef}
+            ref={emailRef}
             autoCorrect={false}
             returnKeyType="next"
-            // onSubmitEditing={() => passwordRef.current.focus()}
+            onSubmitEditing={() => passwordRef.current.focus()}
             value={formik.values.email}
             onChangeText={formik.handleChange('email')}
             icon="email"
@@ -95,12 +94,12 @@ const SignUp: React.FC = () => {
           />
           <Input
             placeholder="Senha"
-            // ref={passwordRef}
+            ref={passwordRef}
             autoCorrect={false}
             returnKeyType="send"
             secureTextEntry
             autoCapitalize="none"
-            // onSubmitEditing={() => confirmPasswordRef.current.focus()}
+            onSubmitEditing={() => confirmPasswordRef.current.focus()}
             value={formik.values.password}
             onChangeText={formik.handleChange('password')}
             icon="lock"
@@ -108,7 +107,7 @@ const SignUp: React.FC = () => {
           />
           <Input
             placeholder="Confirmar Senha"
-            // ref={confirmPasswordRef}
+            ref={confirmPasswordRef}
             autoCorrect={false}
             returnKeyType="send"
             secureTextEntry
