@@ -1,8 +1,11 @@
 import React from 'react';
 import { SectionList } from 'react-native';
 
+import BackHeader from '../../components/BackHeader';
+
 import {
   Container,
+  BackHeaderContainer,
   Header,
   StoreBanner,
   HeaderContent,
@@ -35,6 +38,9 @@ const DATA = [
 const StoreDetails: React.FC = () => {
   return (
     <Container>
+      <BackHeaderContainer>
+        <BackHeader />
+      </BackHeaderContainer>
       <Header>
         <StoreBanner
           source={{
@@ -51,8 +57,8 @@ const StoreDetails: React.FC = () => {
           <Title>Descrição:</Title>
           <SubTitle>
             Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s,
+            industry. Lorem Ipsum has been the industry standard dummy text ever
+            since the 1500s,
           </SubTitle>
 
           <Separator />

@@ -35,7 +35,7 @@ export const Title = styled(RegularText)`
 `;
 
 export const SubTitle = styled(RegularText)`
-  font-size: ${fonts.SMALL};
+  font-size: ${fonts.SMALL}px;
 `;
 
 export const StoreRA = styled(RegularText)`
@@ -45,4 +45,10 @@ export const StoreRA = styled(RegularText)`
 export const Content = styled.View`
   flex: 1;
   margin-bottom: ${iPhoneHelper.getBottomSpace()}px;
+`;
+
+export const BackHeaderContainer = styled.View`
+  position: absolute;
+  top: 0;
+  z-index: 10;
 `;

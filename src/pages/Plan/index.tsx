@@ -1,5 +1,6 @@
 import React from 'react';
 
+import BackHeader from '../../components/BackHeader';
 import PlanCard from '../../components/PlanCard';
 
 import { Container, PlanContainer } from './styles';
@@ -17,6 +18,7 @@ const planMock = {
 const Plan: React.FC = () => {
   return (
     <Container>
+      <BackHeader text="Meus Planos" />
       <PlanContainer>
         <PlanCard {...planMock} />
       </PlanContainer>

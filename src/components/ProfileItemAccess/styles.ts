@@ -19,12 +19,12 @@ export const TextContainer = styled.View`
 
 export const Title = styled.Text`
   font-family: ${fonts.SEMIBOLD};
-  font-size: ${fonts.MEDIUM};
+  font-size: ${fonts.MEDIUM}px;
 `;
 
 export const Subtitle = styled.Text`
   font-family: ${fonts.LIGHT};
-  font-size: ${fonts.SMALL};
+  font-size: ${fonts.SMALL}px;
   color: ${colors.gray};
 `;
 

@@ -8,6 +8,7 @@ import { Feather } from '@expo/vector-icons';
 import LogoAgromart from '../../assets/logo.png';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import BackHeader from '../../components/BackHeader';
 
 import {
   Container,
@@ -53,45 +54,48 @@ const SignIn: React.FC = () => {
   });
 
   return (
-    <Container>
-      <Logo source={LogoAgromart} />
-      <AppName>AgroMart</AppName>
-      <Input
-        placeholder="E-mail"
-        autoCorrect={false}
-        returnKeyType="next"
-        // onSubmitEditing={() => passwordRef.current.focus()}
-        value={formik.values.email}
-        onChangeText={formik.handleChange('email')}
-        icon="email"
-        error={formik.touched.email && !!formik.errors.email}
-      />
+    <>
+      <BackHeader />
+      <Container>
+        <Logo source={LogoAgromart} />
+        <AppName>AgroMart</AppName>
+        <Input
+          placeholder="E-mail"
+          autoCorrect={false}
+          returnKeyType="next"
+          // onSubmitEditing={() => passwordRef.current.focus()}
+          value={formik.values.email}
+          onChangeText={formik.handleChange('email')}
+          icon="email"
+          error={formik.touched.email && !!formik.errors.email}
+        />
 
-      <Input
-        placeholder="Senha"
-        // ref={passwordRef}
-        autoCorrect={false}
-        returnKeyType="send"
-        secureTextEntry
-        autoCapitalize="none"
-        onSubmitEditing={formik.submitForm}
-        value={formik.values.password}
-        onChangeText={formik.handleChange('password')}
-        icon="lock"
-        error={formik.touched.email && !!formik.errors.password}
-      />
-      <Button onPress={formik.submitForm}>
-        {loading ? <AnimationCircule /> : 'Logar'}
-      </Button>
-      <CreateAccountButton
-        onPress={() => {
-          navigation.navigate('SignUp');
-        }}
-      >
-        <Feather name="log-in" size={20} color="#00AA95" />
-        <CreateAccountButtonText>Criar uma conta</CreateAccountButtonText>
-      </CreateAccountButton>
-    </Container>
+        <Input
+          placeholder="Senha"
+          // ref={passwordRef}
+          autoCorrect={false}
+          returnKeyType="send"
+          secureTextEntry
+          autoCapitalize="none"
+          onSubmitEditing={formik.submitForm}
+          value={formik.values.password}
+          onChangeText={formik.handleChange('password')}
+          icon="lock"
+          error={formik.touched.email && !!formik.errors.password}
+        />
+        <Button onPress={formik.submitForm}>
+          {loading ? <AnimationCircule /> : 'Logar'}
+        </Button>
+        <CreateAccountButton
+          onPress={() => {
+            navigation.navigate('SignUp');
+          }}
+        >
+          <Feather name="log-in" size={20} color="#00AA95" />
+          <CreateAccountButtonText>Criar uma conta</CreateAccountButtonText>
+        </CreateAccountButton>
+      </Container>
+    </>
   );
 };
 
