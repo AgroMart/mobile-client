@@ -2,7 +2,14 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import TabRoutes from './tab.routes';
-import { StoreDetails, Plan, ProfileInfo, SignIn, SignUp } from '../pages';
+import {
+  StoreDetails,
+  Plan,
+  ProfileInfo,
+  SignIn,
+  SignUp,
+  AddressForm,
+} from '../pages';
 
 const App = createStackNavigator();
 
@@ -18,6 +25,7 @@ const routes: React.FC = () => {
       <App.Screen name="StoreDetail" component={StoreDetails} />
       <App.Screen name="Plan" component={Plan} />
       <App.Screen name="ProfileInfo" component={ProfileInfo} />
+      <App.Screen name="AddressForm" component={AddressForm} />
       <App.Screen name="SignIn" component={SignIn} />
       <App.Screen name="SignUp" component={SignUp} />
     </App.Navigator>

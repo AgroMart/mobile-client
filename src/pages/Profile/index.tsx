@@ -22,7 +22,7 @@ const Profile: React.FC = () => {
         icon="map-marker"
         title="Meus endereços"
         subtitle="Meus endereços de entrega"
-        onPress={() => console.log('entrega')}
+        onPress={() => navigation.navigate('AddressForm')}
       />
       <ProfileItemAccess
         icon="basket"
