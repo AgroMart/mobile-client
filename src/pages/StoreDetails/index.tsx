@@ -1,7 +1,9 @@
-import React from 'react';
-import { SectionList } from 'react-native';
+import React, { useRef, useState, useCallback } from 'react';
+import { SectionList, View, FlatList } from 'react-native';
+import { navigation, useNavigation } from '@react-navigation/native';
 
 import BackHeader from '../../components/BackHeader';
+import ProductCard from '../../components/ProductCard';
 
 import {
   Container,
@@ -14,28 +16,142 @@ import {
   SubTitle,
   Separator,
   Content,
+  Touchable,
+  ContainerItem,
+  MenuItem,
+  TitleContainer,
+  TitleMenu,
 } from './styles';
 
 const DATA = [
   {
-    title: 'Main dishes',
-    data: ['Pizza', 'Burger', 'Risotto'],
+    id: 1,
+    title: 'Cestas',
+    data: [
+      {
+        id: 1,
+        name: 'Cesta 1',
+        quantity: 2,
+        value: 159.9,
+        image:
+          'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
+        unity: 'não sei',
+      },
+      {
+        id: 2,
+        name: 'Cesta 1',
+        quantity: 2,
+        value: 159.9,
+        image:
+          'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
+        unity: 'não sei',
+      },
+      {
+        id: 3,
+        name: 'Cesta 1',
+        quantity: 2,
+        value: 159.9,
+        image:
+          'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
+        unity: 'não sei',
+      },
+    ],
   },
   {
-    title: 'Sides',
-    data: ['French Fries', 'Onion Rings', 'Fried Shrimps'],
+    id: 2,
+    title: 'Planos',
+    data: [
+      {
+        id: 1,
+        name: 'Cesta 1',
+        quantity: 2,
+        value: 159.9,
+        image:
+          'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
+        unity: 'não sei',
+      },
+      {
+        id: 2,
+        name: 'Cesta 1',
+        quantity: 2,
+        value: 159.9,
+        image:
+          'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
+        unity: 'não sei',
+      },
+      {
+        id: 3,
+        name: 'Cesta 1',
+        quantity: 2,
+        value: 159.9,
+        image:
+          'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
+        unity: 'não sei',
+      },
+    ],
   },
   {
-    title: 'Drinks',
-    data: ['Water', 'Coke', 'Beer'],
-  },
-  {
-    title: 'Desserts',
-    data: ['Cheese Cake', 'Ice Cream'],
+    id: 3,
+    title: 'Produtos',
+    data: [
+      {
+        id: 1,
+        name: 'Cesta 1',
+        quantity: 2,
+        value: 159.9,
+        image:
+          'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
+        unity: 'não sei',
+      },
+      {
+        id: 2,
+        name: 'Cesta 1',
+        quantity: 2,
+        value: 159.9,
+        image:
+          'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
+        unity: 'não sei',
+      },
+      {
+        id: 3,
+        name: 'Cesta 1',
+        quantity: 2,
+        value: 159.9,
+        image:
+          'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
+        unity: 'não sei',
+      },
+    ],
   },
 ];
 
 const StoreDetails: React.FC = () => {
+  const flatListRef = useRef(null);
+  const selectListRef = useRef(null);
+  const [selecedMenu, setSelectedMenu] = useState(0);
+  const navigation = useNavigation();
+
+  const selectMenu = useCallback(index => {
+    setSelectedMenu(index);
+    if (flatListRef.current) {
+      flatListRef.current?.scrollToIndex({
+        animated: true,
+        index,
+        viewPosition: 0.5,
+      });
+    }
+
+    if (selectListRef.current) {
+      selectListRef.current?.scrollToLocation({
+        sectionIndex: index,
+        itemIndex: 0,
+        // viewPosition: 0,
+        viewOffset: 0,
+        animated: true,
+      });
+    }
+  }, []);
+
   return (
     <Container>
       <BackHeaderContainer>
@@ -66,12 +182,44 @@ const StoreDetails: React.FC = () => {
       </Header>
 
       <Content>
+        <View>
+          <FlatList
+            ref={flatListRef}
+            data={DATA}
+            keyExtractor={item => String(item.id)}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({ item, index }) => (
+              <Touchable onPress={() => selectMenu(index)}>
+                <ContainerItem selected={index === selecedMenu}>
+                  <MenuItem selected={index === selecedMenu}>
+                    {item.title}
+                  </MenuItem>
+                </ContainerItem>
+              </Touchable>
+            )}
+            horizontal
+          />
+        </View>
+
         <SectionList
+          ref={selectListRef}
           sections={DATA}
-          keyExtractor={(item, index) => item + index}
-          renderItem={({ item }) => <SubTitle>{item}</SubTitle>}
+          keyExtractor={(item, index) => item.id}
+          renderItem={({ item }) => (
+            <ProductCard
+              image={item.image}
+              name={item.name}
+              quantity={item.quantity}
+              value={item.value}
+              key={item.id}
+              onPress={() => navigation.navigate('ProductPage')}
+            />
+          )}
+          stickySectionHeadersEnabled={false}
           renderSectionHeader={({ section: { title } }) => (
-            <Title>{title}</Title>
+            <TitleContainer>
+              <TitleMenu>{title}</TitleMenu>
+            </TitleContainer>
           )}
         />
       </Content>

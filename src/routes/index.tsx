@@ -9,6 +9,7 @@ import {
   SignIn,
   SignUp,
   AddressForm,
+  ProductPage,
 } from '../pages';
 
 const App = createStackNavigator();
@@ -28,6 +29,7 @@ const routes: React.FC = () => {
       <App.Screen name="AddressForm" component={AddressForm} />
       <App.Screen name="SignIn" component={SignIn} />
       <App.Screen name="SignUp" component={SignUp} />
+      <App.Screen name="ProductPage" component={ProductPage} />
     </App.Navigator>
   );
 };

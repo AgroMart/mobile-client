@@ -1,8 +1,12 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 
 import { colors, fonts } from '../../styles';
 import { iPhoneHelper } from '../../utils';
 import { RegularText } from '../../components';
+
+interface MenuItemProps {
+  selected: boolean;
+}
 
 export const Container = styled.View`
   flex: 1;
@@ -45,10 +49,42 @@ export const StoreRA = styled(RegularText)`
 export const Content = styled.View`
   flex: 1;
   margin-bottom: ${iPhoneHelper.getBottomSpace()}px;
+  padding: 0 5%;
 `;
 
 export const BackHeaderContainer = styled.View`
   position: absolute;
   top: 0;
   z-index: 10;
+`;
+
+export const Touchable = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.7,
+})``;
+
+export const ContainerItem = styled.View<MenuItemProps>`
+  ${props =>
+    props.selected &&
+    css`
+      border-bottom-width: 2px;
+      border-bottom-color: ${colors.primary};
+    `}
+`;
+
+export const MenuItem = styled.Text<MenuItemProps>`
+  font-size: ${fonts.MEDIUM}px;
+  font-family: Montserrat-SemiBold;
+  margin: 0px 15px 15px;
+  color: ${props => (props.selected ? colors.primary : '#000')};
+`;
+
+export const TitleContainer = styled.View`
+  border-top-width: 0.5px;
+  border-top-color: #000;
+`;
+
+export const TitleMenu = styled.Text`
+  font-size: ${fonts.MEDIUM}px;
+  font-family: Montserrat-SemiBold;
+  margin: 20px 0px;
 `;
