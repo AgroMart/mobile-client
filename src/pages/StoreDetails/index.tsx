@@ -1,6 +1,6 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { SectionList, View, FlatList } from 'react-native';
-import { navigation, useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 
 import BackHeader from '../../components/BackHeader';
 import ProductCard from '../../components/ProductCard';
@@ -23,113 +23,85 @@ import {
   TitleMenu,
 } from './styles';
 
-const DATA = [
-  {
-    id: 1,
-    title: 'Cestas',
-    data: [
-      {
-        id: 1,
-        name: 'Cesta 1',
-        quantity: 2,
-        value: 159.9,
-        image:
-          'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
-        unity: 'não sei',
-      },
-      {
-        id: 2,
-        name: 'Cesta 1',
-        quantity: 2,
-        value: 159.9,
-        image:
-          'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
-        unity: 'não sei',
-      },
-      {
-        id: 3,
-        name: 'Cesta 1',
-        quantity: 2,
-        value: 159.9,
-        image:
-          'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
-        unity: 'não sei',
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: 'Planos',
-    data: [
-      {
-        id: 1,
-        name: 'Cesta 1',
-        quantity: 2,
-        value: 159.9,
-        image:
-          'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
-        unity: 'não sei',
-      },
-      {
-        id: 2,
-        name: 'Cesta 1',
-        quantity: 2,
-        value: 159.9,
-        image:
-          'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
-        unity: 'não sei',
-      },
-      {
-        id: 3,
-        name: 'Cesta 1',
-        quantity: 2,
-        value: 159.9,
-        image:
-          'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
-        unity: 'não sei',
-      },
-    ],
-  },
-  {
-    id: 3,
-    title: 'Produtos',
-    data: [
-      {
-        id: 1,
-        name: 'Cesta 1',
-        quantity: 2,
-        value: 159.9,
-        image:
-          'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
-        unity: 'não sei',
-      },
-      {
-        id: 2,
-        name: 'Cesta 1',
-        quantity: 2,
-        value: 159.9,
-        image:
-          'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
-        unity: 'não sei',
-      },
-      {
-        id: 3,
-        name: 'Cesta 1',
-        quantity: 2,
-        value: 159.9,
-        image:
-          'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
-        unity: 'não sei',
-      },
-    ],
-  },
-];
+interface Category {
+  id: number;
+  title: string;
+  data: Item[];
+}
+
+interface Item {
+  id: number;
+  name: string;
+  quantity: number;
+  value: number;
+  image: string | null;
+  unity: string;
+}
+
+type ParamList = {
+  StoreDetails: {
+    id: number;
+    nome: string;
+    descricao: string;
+    banner: string;
+    produtos_avulsos: any[];
+    cestas: any[];
+    planos: any[];
+  };
+};
 
 const StoreDetails: React.FC = () => {
   const flatListRef = useRef(null);
   const selectListRef = useRef(null);
   const [selecedMenu, setSelectedMenu] = useState(0);
   const navigation = useNavigation();
+
+  const [data, setData] = useState<Category[]>([]);
+
+  const {
+    params: { id, nome, descricao, banner, produtos_avulsos, cestas, planos },
+  } = useRoute<RouteProp<ParamList, 'StoreDetails'>>();
+
+  useEffect(() => {
+    setData([
+      {
+        id: 1,
+        title: 'Cestas',
+        data: cestas.map(item => ({
+          id: item.id,
+          name: `Cesta ${item.id}`,
+          image: null,
+          quantity: item.quantidade,
+          value: item.valor,
+          unity: 'unidade',
+        })),
+      },
+      {
+        id: 2,
+        title: 'Planos',
+        data: planos.map(item => ({
+          id: item.id,
+          name: item.nome,
+          image: null,
+          quantity: item.quantidade,
+          value: item.valor,
+          unity: 'unidade',
+        })),
+      },
+      {
+        id: 3,
+        title: 'Produtos',
+        data: produtos_avulsos.map(item => ({
+          id: item.id,
+          name: item.nome,
+          image: item.imagem,
+          quantity: item.quantidade,
+          value: item.valor,
+          unity: item.unidade_medida,
+        })),
+      },
+    ]);
+  }, [cestas, planos, produtos_avulsos]);
 
   const selectMenu = useCallback(index => {
     setSelectedMenu(index);
@@ -160,22 +132,17 @@ const StoreDetails: React.FC = () => {
       <Header>
         <StoreBanner
           source={{
-            uri:
-              'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
+            uri: banner,
           }}
         />
         <HeaderContent>
-          <Title>Fazenda do alface roxo</Title>
+          <Title>{nome}</Title>
           <StoreRA>Brazlandia</StoreRA>
 
           <Separator />
 
           <Title>Descrição:</Title>
-          <SubTitle>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry standard dummy text ever
-            since the 1500s,
-          </SubTitle>
+          <SubTitle>{descricao}</SubTitle>
 
           <Separator />
         </HeaderContent>
@@ -185,7 +152,7 @@ const StoreDetails: React.FC = () => {
         <View>
           <FlatList
             ref={flatListRef}
-            data={DATA}
+            data={data}
             keyExtractor={item => String(item.id)}
             showsHorizontalScrollIndicator={false}
             renderItem={({ item, index }) => (
@@ -203,7 +170,7 @@ const StoreDetails: React.FC = () => {
 
         <SectionList
           ref={selectListRef}
-          sections={DATA}
+          sections={data}
           keyExtractor={(item, index) => item.id}
           renderItem={({ item }) => (
             <ProductCard

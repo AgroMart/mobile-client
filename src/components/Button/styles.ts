@@ -9,7 +9,7 @@ export const LinearGradientButton = styled(LinearGradient).attrs({
   end: { x: 1, y: 0 },
 })`
   height: ${metrics.PADDING_SCREEN * 2.5}px;
-  flex: 1;
+  width: 100%;
   border-radius: 10px;
   margin-top: ${metrics.PADDING_SCREEN}px;
 `;

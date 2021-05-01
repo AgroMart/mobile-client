@@ -5,6 +5,8 @@ import * as Yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
 
+import { useAuth } from '../../hooks/AuthProvider';
+
 import LogoAgromart from '../../assets/logo.png';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -26,23 +28,27 @@ const SignUp: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
 
+  const { signUp } = useAuth();
+
   const handleSubmit = useCallback(
     async data => {
+      setLoading(true);
+
       try {
-        setLoading(true);
         const body = {
-          name: data.name,
+          username: data.name,
           email: data.email,
           password: data.password,
         };
-        console.log(body);
-        navigation.goBack();
+        await signUp(body);
+        navigation.navigate('Home');
       } catch (error) {
         Alert.alert('Erro ao cadastrar usuario');
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     },
-    [navigation],
+    [navigation, signUp],
   );
 
   const SCHEMA = Yup.object().shape({

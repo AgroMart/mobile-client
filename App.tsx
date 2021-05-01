@@ -10,6 +10,7 @@ import {
   Montserrat_600SemiBold,
   Montserrat_700Bold,
 } from '@expo-google-fonts/montserrat';
+import AppProvider from './src/hooks';
 
 import Routes from './src/routes';
 
@@ -27,8 +28,10 @@ const App: React.FC = () => {
 
   return (
     <NavigationContainer>
-      <StatusBar backgroundColor="#EAEAEA" barStyle="dark-content" />
-      <Routes />
+      <AppProvider>
+        <StatusBar backgroundColor="#EAEAEA" barStyle="dark-content" />
+        <Routes />
+      </AppProvider>
     </NavigationContainer>
   );
 };

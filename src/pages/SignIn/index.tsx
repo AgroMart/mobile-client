@@ -5,6 +5,8 @@ import * as Yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 
+import { useAuth } from '../../hooks/AuthProvider';
+
 import LogoAgromart from '../../assets/logo.png';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
@@ -24,18 +26,23 @@ const SignIn: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
 
+  const { signIn } = useAuth();
+
   const handleSubmit = useCallback(
     async data => {
+      setLoading(true);
+
       try {
-        setLoading(true);
-        console.log(data);
+        await signIn({ username: data.email, password: data.password });
         navigation.goBack();
       } catch (error) {
         Alert.alert('Erro ao fazer login');
+        console.log(error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     },
-    [navigation],
+    [navigation, signIn],
   );
 
   const SCHEMA = Yup.object().shape({
