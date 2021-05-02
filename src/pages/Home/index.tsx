@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from 'react';
-import { Alert, ScrollView } from 'react-native';
+import React, { useCallback, useState, useEffect } from 'react';
+import { Alert, ScrollView, Text } from 'react-native';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
 import { useAuth } from '../../hooks/AuthProvider';
@@ -37,13 +37,16 @@ const storeMock = [
 
 interface Store {
   id: number;
-  banner: string;
+  banner: {
+    url: string;
+  };
   nome: string;
   descricao: string;
 }
 
 const History: React.FC = () => {
   const [stores, setStores] = useState<Store[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const navigation = useNavigation();
 
@@ -51,26 +54,24 @@ const History: React.FC = () => {
 
   const loadStores = useCallback(async () => {
     try {
-      const response = await api.get('lojas', {
-        headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjE5ODkxNjY5LCJleHAiOjE2MjI0ODM2Njl9.iib5fF4LjInhAFAXbuhkx20yCqE5yJpS1Yu7sGFoyuE',
-        },
-      });
+      const response = await api.get('lojas');
       setStores(response.data);
+      setLoading(false);
     } catch (err) {
       console.log(err);
       Alert.alert('Ops', 'Não foi possivel carregar as lojas');
     }
   }, []);
 
-  useFocusEffect(() => {
+  useEffect(() => {
     loadStores();
-  });
+  }, [loadStores]);
+
+  if (loading) return <Text>Carregando</Text>;
 
   return (
     <Container>
-      {user ? <UserHeader name={user.username} disabled /> : <UserHeader />}
+      <UserHeader name={user?.username} disabled={!!user} />
       <ScrollView>
         <CarouselContainer>
           <Carousel />
@@ -81,7 +82,7 @@ const History: React.FC = () => {
               key={store.id}
               name={store.nome}
               city={store.descricao}
-              image={store.banner}
+              image={store.banner ? store.banner.url : ''}
               onPress={() => navigation.navigate('StoreDetail', store)}
             />
           ))}

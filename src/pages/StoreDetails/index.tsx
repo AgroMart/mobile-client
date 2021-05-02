@@ -1,6 +1,9 @@
+/* eslint-disable camelcase */
 import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { SectionList, View, FlatList } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+
+import { baseURL } from '../../services/api';
 
 import BackHeader from '../../components/BackHeader';
 import ProductCard from '../../components/ProductCard';
@@ -43,7 +46,9 @@ type ParamList = {
     id: number;
     nome: string;
     descricao: string;
-    banner: string;
+    banner: {
+      url: string;
+    };
     produtos_avulsos: any[];
     cestas: any[];
     planos: any[];
@@ -51,8 +56,8 @@ type ParamList = {
 };
 
 const StoreDetails: React.FC = () => {
-  const flatListRef = useRef(null);
-  const selectListRef = useRef(null);
+  const flatListRef = useRef<any>(null);
+  const selectListRef = useRef<any>(null);
   const [selecedMenu, setSelectedMenu] = useState(0);
   const navigation = useNavigation();
 
@@ -130,11 +135,13 @@ const StoreDetails: React.FC = () => {
         <BackHeader />
       </BackHeaderContainer>
       <Header>
-        <StoreBanner
-          source={{
-            uri: banner,
-          }}
-        />
+        {banner && (
+          <StoreBanner
+            source={{
+              uri: `${baseURL}${banner.url}`,
+            }}
+          />
+        )}
         <HeaderContent>
           <Title>{nome}</Title>
           <StoreRA>Brazlandia</StoreRA>

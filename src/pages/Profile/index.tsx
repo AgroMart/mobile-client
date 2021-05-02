@@ -15,7 +15,7 @@ const Profile: React.FC = () => {
 
   return (
     <Container>
-      {user ? <UserHeader name={user.username} disabled /> : <UserHeader />}
+      <UserHeader name={user?.username} disabled={!!user} />
 
       <ProfileItemAccess
         icon="account"
