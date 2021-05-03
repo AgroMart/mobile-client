@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import { Alert } from 'react-native';
+import api from '../../services/api';
+import { useAuth } from '../../hooks/AuthProvider';
 
 import DefaultProfile from '../../assets/defaultAvatar.png';
 import BackHeader from '../../components/BackHeader';
@@ -8,14 +12,42 @@ import Input from '../../components/Input';
 import { Container, Img, Form } from './styles';
 
 const ProfileInfo: React.FC = () => {
+  const { user } = useAuth();
+
+  const [name, setName] = useState(user.username);
+  const [email, setEmail] = useState(user.email);
+
+  const handleSave = () => {
+    try {
+      api.put(`user/${user.id}`, {
+        ...user,
+        username: name,
+        email,
+      });
+    } catch (err) {
+      console.log(err);
+      Alert.alert('Ops', 'Não foi possivel atualizar seus dados');
+    }
+  };
+
   return (
     <Container>
       <BackHeader text="Meus Dados" />
       <Img source={DefaultProfile} />
       <Form>
-        <Input label="Nome" placeholder="Nome" />
-        <Input label="Email" placeholder="Email" />
-        <Button onPress={() => console.log('salvar')}>Salvar</Button>
+        <Input
+          label="Nome"
+          placeholder="Nome"
+          onChangeText={setName}
+          value={name}
+        />
+        <Input
+          label="Email"
+          placeholder="Email"
+          onChangeText={setEmail}
+          value={email}
+        />
+        <Button onPress={() => handleSave()}>Salvar</Button>
       </Form>
     </Container>
   );
