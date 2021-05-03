@@ -17,30 +17,41 @@ const Profile: React.FC = () => {
     <Container>
       <UserHeader name={user?.username} disabled={!!user} />
 
-      <ProfileItemAccess
-        icon="account"
-        title="Meus dados"
-        subtitle="Alterar meus dados de perfil"
-        onPress={() => navigation.navigate('ProfileInfo')}
-      />
-      <ProfileItemAccess
-        icon="map-marker"
-        title="Meus endereços"
-        subtitle="Meus endereços de entrega"
-        onPress={() => navigation.navigate('AddressForm')}
-      />
-      <ProfileItemAccess
-        icon="basket"
-        title="Meus planos"
-        subtitle="Planos assinados"
-        onPress={() => navigation.navigate('Plan')}
-      />
-      <ProfileItemAccess
-        icon="logout"
-        title="Sair"
-        subtitle="Fazer logout do app"
-        onPress={signOut}
-      />
+      {!user ? (
+        <ProfileItemAccess
+          icon="login"
+          title="Login"
+          subtitle="Fazer login no app"
+          onPress={() => navigation.navigate('SignIn')}
+        />
+      ) : (
+        <>
+          <ProfileItemAccess
+            icon="account"
+            title="Meus dados"
+            subtitle="Alterar meus dados de perfil"
+            onPress={() => navigation.navigate('ProfileInfo')}
+          />
+          <ProfileItemAccess
+            icon="map-marker"
+            title="Meus endereços"
+            subtitle="Meus endereços de entrega"
+            onPress={() => navigation.navigate('AddressForm')}
+          />
+          <ProfileItemAccess
+            icon="basket"
+            title="Meus planos"
+            subtitle="Planos assinados"
+            onPress={() => navigation.navigate('Plan')}
+          />
+          <ProfileItemAccess
+            icon="logout"
+            title="Sair"
+            subtitle="Fazer logout do app"
+            onPress={signOut}
+          />
+        </>
+      )}
     </Container>
   );
 };
