@@ -1,38 +1,33 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import { FlatList } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 
+import { useStores } from '../../hooks/StoresProvider';
+import { Store } from '../../interfaces';
 import Input from '../../components/Input';
 import RACard from '../../components/RACard';
 import StoreCard from '../../components/StoreCard';
+
 import data from './mockCitys';
 
 import { Container, InputContainer, StoresContainer } from './styles';
 
-const storeMock = [
-  {
-    image:
-      'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
-    name: 'Agrostore',
-    city: 'Ceilandia',
-  },
-  {
-    image:
-      'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
-    name: 'Colheita feliz',
-    city: 'Cruzeiro',
-  },
-  {
-    image:
-      'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
-    name: 'Fazendinha',
-    city: 'Asa Norte',
-  },
-];
-
 const Search: React.FC = () => {
+  const navigation = useNavigation();
+  const { stores } = useStores();
+
   const [search, setSearch] = useState('');
+  const [result, setResult] = useState<Store[]>([]);
+
+  useEffect(() => {
+    if (!search) return setResult([]);
+    const foundStores = stores.filter(store =>
+      store.nome.toUpperCase().includes(search.toUpperCase()),
+    );
+
+    return setResult(foundStores);
+  }, [search, stores]);
 
   return (
     <Container>
@@ -46,16 +41,16 @@ const Search: React.FC = () => {
         />
       </InputContainer>
 
-      {search ? (
+      {result.length > 0 && search ? (
         <ScrollView>
           <StoresContainer>
-            {storeMock.map(store => (
+            {result.map(store => (
               <StoreCard
-                key={store.name}
-                name={store.name}
-                city={store.city}
-                image={store.image}
-                onPress={() => console.log(store.name)}
+                key={store.id}
+                name={store.nome}
+                city={store.endereco.bairro}
+                image={store.banner ? store.banner.url : ''}
+                onPress={() => navigation.navigate('StoreDetail', store)}
               />
             ))}
           </StoresContainer>
@@ -70,7 +65,7 @@ const Search: React.FC = () => {
             <RACard
               name={item.city}
               photo={item.urlImage}
-              onPress={() => console.log(item.city)}
+              onPress={() => navigation.navigate('SearchResult', item)}
             />
           )}
           horizontal={false}

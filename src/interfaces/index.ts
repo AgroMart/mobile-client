@@ -1,12 +1,12 @@
 export interface Store {
-  idd: string;
+  id: string;
   nome: string;
   descricao: string;
   banner: Image;
   tipos_de_entrega: 'Entrega' | 'Retirada';
   contato: string;
   cnpj: string;
-  enderecos: Address[];
+  endereco: Address;
   produtos_avulsos: Product[];
   planos: Plan[];
   cestas: Cest[];

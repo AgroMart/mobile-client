@@ -9,3 +9,4 @@ export { default as AddressForm } from './AddressForm';
 export { default as SignIn } from './SignIn';
 export { default as SignUp } from './SignUp';
 export { default as ProductPage } from './ProductPage';
+export { default as SearchResult } from './SearchResult';

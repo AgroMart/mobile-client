@@ -37,7 +37,7 @@ interface Item {
   name: string;
   quantity: number;
   value: number;
-  image: string | null;
+  image: string;
   unity: string;
 }
 
@@ -178,7 +178,7 @@ const StoreDetails: React.FC = () => {
         <SectionList
           ref={selectListRef}
           sections={data}
-          keyExtractor={(item, index) => item.id}
+          keyExtractor={item => String(item.id)}
           renderItem={({ item }) => (
             <ProductCard
               image={item.image}
