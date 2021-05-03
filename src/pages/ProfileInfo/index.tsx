@@ -12,21 +12,24 @@ import Input from '../../components/Input';
 import { Container, Img, Form } from './styles';
 
 const ProfileInfo: React.FC = () => {
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
 
   const [name, setName] = useState(user.username);
   const [email, setEmail] = useState(user.email);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     try {
-      api.put(`user/${user.id}`, {
+      const { data } = await api.put(`users/${user.id}`, {
         ...user,
         username: name,
         email,
       });
+
+      await updateUser(data);
+
+      Alert.alert('Tudo certo :)', 'Dados atualizados com sucesso!');
     } catch (err) {
-      console.log(err);
-      Alert.alert('Ops', 'Não foi possivel atualizar seus dados');
+      Alert.alert('Ops :(', 'Não foi possivel atualizar seus dados');
     }
   };
 

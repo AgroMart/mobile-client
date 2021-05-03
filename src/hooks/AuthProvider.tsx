@@ -37,6 +37,7 @@ interface AuthContextData {
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): Promise<void>;
   signUp(info: SignUpCredentials): Promise<void>;
+  updateUser(updatedUser: User): Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -62,6 +63,14 @@ const AuthProvider: React.FC = ({ children }) => {
     }
 
     loadStorageData();
+  }, []);
+
+  const updateUser = useCallback(async (updatedUser: User) => {
+    await AsyncStorage.multiSet([
+      ['@Agromart:user', JSON.stringify(updatedUser)],
+    ]);
+
+    setData(prevState => ({ token: prevState.token, user: updatedUser }));
   }, []);
 
   const signIn = useCallback(
@@ -123,6 +132,7 @@ const AuthProvider: React.FC = ({ children }) => {
         signUp,
         signIn,
         signOut,
+        updateUser,
       }}
     >
       {children}

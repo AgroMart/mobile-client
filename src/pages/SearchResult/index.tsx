@@ -26,7 +26,7 @@ const SearchResult: React.FC = () => {
   const [result, setResult] = useState<Store[]>([]);
 
   useEffect(() => {
-    const foundStores = stores.filter(store => store.endereco.bairro === key);
+    const foundStores = stores.filter(store => store.endereco?.bairro === key);
     setResult(foundStores);
   }, [key, stores]);
 

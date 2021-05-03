@@ -33,7 +33,7 @@ const Home: React.FC = () => {
             <StoreCard
               key={store.id}
               name={store.nome}
-              city={store.endereco.bairro}
+              city={store.endereco?.bairro}
               image={store.banner ? store.banner.url : ''}
               onPress={() => navigation.navigate('StoreDetail', store)}
             />
