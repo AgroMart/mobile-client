@@ -8,6 +8,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import BackHeader from '../../components/BackHeader';
+import Select from '../../components/Select';
 
 import {
   Container,
@@ -17,7 +18,19 @@ import {
   NumberContainer,
 } from './styles';
 
+const PROCES = [
+  {
+    label: 'Folha de Pagamento',
+    value: 1,
+  },
+  {
+    label: 'Adiantamento',
+    value: 2,
+  },
+];
+
 const AddressForm: React.FC = () => {
+  const [process, setProcess] = useState(null);
   const cityRef = useRef<TextInput | any>();
   const neighborhoodRef = useRef<TextInput | any>();
   const streetRef = useRef<TextInput | any>();
@@ -134,6 +147,16 @@ const AddressForm: React.FC = () => {
             value={formik.values.complement}
             onChangeText={formik.handleChange('complement')}
             error={formik.touched.complement && !!formik.errors.complement}
+          />
+
+          <Select
+            placeholder={{
+              label: 'Selecione',
+              value: null,
+            }}
+            onValueChange={value => setProcess(value)}
+            value={process}
+            items={PROCES}
           />
 
           <Button onPress={formik.submitForm}>
