@@ -1,66 +1,72 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useFocusEffect } from '@react-navigation/native';
+import { View, Text, ActivityIndicator } from 'react-native';
+import HistoryItemCard from '../../components/HistoryItemCard';
 
-import HistoryItemCard, {
-  HistoryCardProps,
-} from '../../components/HistoryItemCard';
+import { Container, Content, Heading, HistoryContainer } from './styles';
+import { useAuth } from '../../hooks/AuthProvider';
+import api from '../../services/api';
 
-import { Container, Heading, HistoryContainer } from './styles';
-
-type History = Omit<HistoryCardProps, 'onPress'>;
-
-const historyMock = [
-  {
-    seller: 'Vendedor 1',
-    date: '14/03/2021',
-    value: 120,
-  },
-  {
-    seller: 'Vendedor 2',
-    date: '14/03/2021',
-    value: 130,
-  },
-  {
-    seller: 'Vendedor 3',
-    date: '14/03/2021',
-    value: 140,
-  },
-  {
-    seller: 'Vendedor 4',
-    date: '14/03/2021',
-    value: 150,
-  },
-  {
-    seller: 'Vendedor 5',
-    date: '14/03/2021',
-    value: 160,
-  },
-];
+interface Register {
+  id: number;
+  valor: number;
+  created_at: string;
+  loja: {
+    nome: string;
+  };
+}
 
 const Info: React.FC = () => {
-  const [history, setHistory] = useState<History[]>([]);
+  const [history, setHistory] = useState<Register[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  useFocusEffect(() => {
-    setHistory(historyMock);
-  });
+  const { user } = useAuth();
+
+  const loadHistory = useCallback(() => {
+    async function load() {
+      setLoading(true);
+
+      try {
+        const { data } = await api.get(`extratoes?user=${user.id}`);
+        setHistory(data);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    user && load();
+    !user && setLoading(false);
+  }, [user]);
+
+  useFocusEffect(loadHistory);
 
   return (
     <Container>
       <Heading>Histórico</Heading>
-      <ScrollView>
-        <HistoryContainer>
-          {history.map((item, idx) => (
-            <HistoryItemCard
-              key={`${item.seller}-${idx}`}
-              date={item.date}
-              seller={item.seller}
-              value={item.value}
-              onPress={() => console.log(item.seller)}
-            />
-          ))}
-        </HistoryContainer>
-      </ScrollView>
+      <Content>
+        {loading && <ActivityIndicator size="large" />}
+        {!user && !loading && (
+          <Text>É preciso estar logado para visualizar o histórico!</Text>
+        )}
+        {user && !loading && (
+          <ScrollView style={{ width: '100%' }}>
+            <HistoryContainer>
+              {history.map(item => (
+                <HistoryItemCard
+                  key={item.id}
+                  date={item.created_at}
+                  seller={item.loja.nome}
+                  value={item.valor}
+                  onPress={() => {}}
+                />
+              ))}
+            </HistoryContainer>
+          </ScrollView>
+        )}
+      </Content>
     </Container>
   );
 };

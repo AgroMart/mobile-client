@@ -37,6 +37,7 @@ export const HistoryInfo = styled.View``;
 export const InfoText = styled.Text`
   font-size: ${fonts.MEDIUM}px;
   font-family: ${fonts.REGULAR};
+  flex: 1;
 `;
 
 export const InfoView = styled.View`

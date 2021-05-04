@@ -8,11 +8,13 @@ import React, {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import api from '../services/api';
+import { Address } from '../interfaces';
 
 interface User {
   id: string;
   username: string;
   email: string;
+  endereco: Address | null;
 }
 
 interface AuthState {
@@ -38,6 +40,7 @@ interface AuthContextData {
   signOut(): Promise<void>;
   signUp(info: SignUpCredentials): Promise<void>;
   updateUser(updatedUser: User): Promise<void>;
+  updateAddress(updatedAddress: Address): Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -72,6 +75,23 @@ const AuthProvider: React.FC = ({ children }) => {
 
     setData(prevState => ({ token: prevState.token, user: updatedUser }));
   }, []);
+
+  const updateAddress = useCallback(
+    async (updatedAddress: Address) => {
+      await AsyncStorage.multiSet([
+        [
+          '@Agromart:user',
+          JSON.stringify({ ...data.user, endereco: updatedAddress }),
+        ],
+      ]);
+
+      setData(prevState => ({
+        token: prevState.token,
+        user: { ...prevState.user, endereco: updatedAddress },
+      }));
+    },
+    [data.user],
+  );
 
   const signIn = useCallback(
     async ({ username, password }: SignInCredentials) => {
@@ -133,6 +153,7 @@ const AuthProvider: React.FC = ({ children }) => {
         signIn,
         signOut,
         updateUser,
+        updateAddress,
       }}
     >
       {children}

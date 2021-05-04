@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { TextInput, Alert } from 'react-native';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -28,7 +28,7 @@ const AddressForm: React.FC = () => {
   const streetRef = useRef<TextInput | any>();
   const numberRef = useRef<TextInput | any>();
   const complementRef = useRef<TextInput | any>();
-  const { user } = useAuth();
+  const { user, updateAddress } = useAuth();
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
 
@@ -47,16 +47,24 @@ const AddressForm: React.FC = () => {
           user: user.id,
         };
 
-        await api.post('/enderecos', body);
+        let response;
 
-        Alert.alert('Endereço criado com sucesso');
+        if (user.endereco) {
+          response = await api.put(`/enderecos/${user.endereco.id}`, body);
+          Alert.alert('Deu tudo certo :)', 'Endereço editado com sucesso');
+        } else {
+          response = await api.post('/enderecos', body);
+          Alert.alert('Endereço criado com sucesso');
+        }
+
+        await updateAddress(response.data);
         navigation.goBack();
       } catch (error) {
         Alert.alert('Erro ao cadastrar usuario');
       }
       setLoading(false);
     },
-    [navigation, user],
+    [navigation, user, updateAddress],
   );
 
   const SCHEMA = Yup.object().shape({
@@ -69,14 +77,23 @@ const AddressForm: React.FC = () => {
   });
 
   const formik = useFormik({
-    initialValues: {
-      cep: '',
-      city: '',
-      neighborhood: '',
-      street: '',
-      number: '',
-      complement: '',
-    },
+    initialValues: user.endereco
+      ? {
+          cep: user.endereco.cep,
+          city: user.endereco.cidade,
+          neighborhood: user.endereco.bairro,
+          street: user.endereco.rua,
+          number: String(user.endereco.numero),
+          complement: user.endereco.complemento,
+        }
+      : {
+          cep: '',
+          city: '',
+          neighborhood: '',
+          street: '',
+          number: '',
+          complement: '',
+        },
     enableReinitialize: true,
     validationSchema: SCHEMA,
     onSubmit: handleSubmit,

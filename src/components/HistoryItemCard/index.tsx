@@ -1,4 +1,5 @@
 import React from 'react';
+import { format } from 'date-fns';
 
 import TextButton from '../TextButton';
 
@@ -33,11 +34,13 @@ const HistoryItemCard: React.FC<HistoryCardProps> = ({
         <HistoryInfo>
           <InfoView>
             <InfoTitle>Vendedor: </InfoTitle>
-            <InfoText>{seller}</InfoText>
+            <InfoText numberOfLines={1}>{seller}</InfoText>
           </InfoView>
           <InfoView>
             <InfoTitle>Data da compra: </InfoTitle>
-            <InfoText>{`${date}`}</InfoText>
+            <InfoText numberOfLines={1}>
+              {format(new Date(date), 'dd/MM/yyyy')}
+            </InfoText>
           </InfoView>
           <InfoView>
             <GreenTitle>Valor: </GreenTitle>

@@ -7,6 +7,12 @@ export const Container = styled.SafeAreaView`
   flex: 1;
 `;
 
+export const Content = styled.View`
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+`;
+
 export const Heading = styled(RegularText)`
   align-self: center;
   font-size: ${fonts.BIG}px;
