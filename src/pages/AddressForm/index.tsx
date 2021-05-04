@@ -11,6 +11,9 @@ import BackHeader from '../../components/BackHeader';
 import Select from '../../components/Select';
 import neighborhoods from '../../utils/mockCitys';
 
+import api from '../../services/api';
+import { useAuth } from '../../hooks/AuthProvider';
+
 import {
   Container,
   AnimationCircule,
@@ -25,6 +28,7 @@ const AddressForm: React.FC = () => {
   const streetRef = useRef<TextInput | any>();
   const numberRef = useRef<TextInput | any>();
   const complementRef = useRef<TextInput | any>();
+  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
 
@@ -33,14 +37,26 @@ const AddressForm: React.FC = () => {
       try {
         setLoading(true);
 
-        console.log(data);
+        const body = {
+          cidade: data.city,
+          numero: data.number,
+          complemento: data.complement,
+          rua: data.street,
+          cep: data.cep,
+          bairro: data.neighborhood,
+          user: user.id,
+        };
+
+        await api.post('/enderecos', body);
+
+        Alert.alert('Endereço criado com sucesso');
         navigation.goBack();
       } catch (error) {
         Alert.alert('Erro ao cadastrar usuario');
       }
       setLoading(false);
     },
-    [navigation],
+    [navigation, user],
   );
 
   const SCHEMA = Yup.object().shape({
