@@ -25,7 +25,7 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
     fontSize: fonts.EXTRA_SMALL,
     color: colors.shadow,
-    paddingVertical: 18,
+    paddingVertical: 10,
     width: '100%',
   },
   inputIOS: {
@@ -33,10 +33,10 @@ export default StyleSheet.create({
     fontSize: fonts.EXTRA_SMALL,
     color: colors.shadow,
     width: '100%',
-    paddingVertical: 18,
+    paddingVertical: 10,
   },
   iconContainer: {
-    top: 18,
+    top: 12,
   },
   placeholder: {
     color: colors.gray,

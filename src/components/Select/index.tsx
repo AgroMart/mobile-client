@@ -1,19 +1,24 @@
 import React from 'react';
-import RNPickerSelect from 'react-native-picker-select';
+import RNPickerSelect, { PickerSelectProps } from 'react-native-picker-select';
 import { Feather } from '@expo/vector-icons';
 
 import { View } from 'react-native';
 import Styles, { Container, LabelText } from './styles';
 import { colors } from '../../styles';
 
-interface SelectButtonProps {
-  style: any;
+interface SelectProps extends PickerSelectProps {
+  style?: any;
   label?: string;
+  placeholder: {
+    label: string;
+    value: null | string;
+  };
 }
 
-const SelectButton: React.FC<SelectButtonProps> = ({
+const Select: React.FC<SelectProps> = ({
   style,
   label,
+  placeholder,
   ...rest
 }) => {
   return (
@@ -26,6 +31,7 @@ const SelectButton: React.FC<SelectButtonProps> = ({
           Icon={() => (
             <Feather name="chevron-down" size={22} color={colors.lightGray} />
           )}
+          placeholder={placeholder}
           {...rest}
         />
       </Container>
@@ -33,4 +39,4 @@ const SelectButton: React.FC<SelectButtonProps> = ({
   );
 };
 
-export default SelectButton;
+export default Select;

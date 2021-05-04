@@ -9,6 +9,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import BackHeader from '../../components/BackHeader';
 import Select from '../../components/Select';
+import neighborhoods from '../../utils/mockCitys';
 
 import {
   Container,
@@ -18,19 +19,7 @@ import {
   NumberContainer,
 } from './styles';
 
-const PROCES = [
-  {
-    label: 'Folha de Pagamento',
-    value: 1,
-  },
-  {
-    label: 'Adiantamento',
-    value: 2,
-  },
-];
-
 const AddressForm: React.FC = () => {
-  const [process, setProcess] = useState(null);
   const cityRef = useRef<TextInput | any>();
   const neighborhoodRef = useRef<TextInput | any>();
   const streetRef = useRef<TextInput | any>();
@@ -101,16 +90,22 @@ const AddressForm: React.FC = () => {
             onChangeText={formik.handleChange('city')}
             error={formik.touched.city && !!formik.errors.city}
           />
-          <Input
-            placeholder="Bairro"
-            ref={neighborhoodRef}
-            autoCorrect={false}
-            returnKeyType="next"
-            onSubmitEditing={() => streetRef.current.focus()}
+
+          <Select
+            placeholder={{
+              label: 'Bairro',
+              value: null,
+            }}
+            onValueChange={(value: string) =>
+              formik.setFieldValue('neighborhood', value)
+            }
             value={formik.values.neighborhood}
-            onChangeText={formik.handleChange('neighborhood')}
-            error={formik.touched.neighborhood && !!formik.errors.neighborhood}
+            items={neighborhoods.map(item => ({
+              label: item.city,
+              value: item.key,
+            }))}
           />
+
           <GroupStreetNumber>
             <StreetContainer>
               <Input
@@ -147,16 +142,6 @@ const AddressForm: React.FC = () => {
             value={formik.values.complement}
             onChangeText={formik.handleChange('complement')}
             error={formik.touched.complement && !!formik.errors.complement}
-          />
-
-          <Select
-            placeholder={{
-              label: 'Selecione',
-              value: null,
-            }}
-            onValueChange={value => setProcess(value)}
-            value={process}
-            items={PROCES}
           />
 
           <Button onPress={formik.submitForm}>

@@ -9,7 +9,7 @@ import Input from '../../components/Input';
 import RACard from '../../components/RACard';
 import StoreCard from '../../components/StoreCard';
 
-import data from './mockCitys';
+import data from '../../utils/mockCitys';
 
 import { Container, InputContainer, StoresContainer } from './styles';
 
