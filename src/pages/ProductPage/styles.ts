@@ -17,3 +17,9 @@ export const RowView = styled.View`
   flex-direction: row;
   justify-content: space-between;
 `;
+
+export const ButtonContainer = styled.View`
+  flex: 1;
+  margin-left: 10px;
+  margin-bottom: 10px;
+`;

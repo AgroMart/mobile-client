@@ -1,6 +1,8 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
+import { baseURL } from '../../services/api';
+
 import {
   Container,
   ProductInfo,
@@ -45,7 +47,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </InfoView>
         </ProductInfo>
         <ImageView>
-          <ProductImage source={{ uri: image }} />
+          <ProductImage source={{ uri: `${baseURL}${image}` }} />
         </ImageView>
       </Container>
     </TouchableOpacity>

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { baseURL } from '../../services/api';
+
 import {
   Container,
   ProductInfo,
@@ -12,7 +14,7 @@ import {
 
 type ProductViewCardProps = {
   description: string;
-  value: string;
+  value: number;
   image: string;
 };
 
@@ -23,7 +25,7 @@ const ProductViewCard: React.FC<ProductViewCardProps> = ({
 }) => {
   return (
     <Container>
-      <ProductImage source={{ uri: image }} />
+      <ProductImage source={{ uri: `${baseURL}${image}` }} />
       <InfoContainer>
         <ProductInfo>
           <ProductDesc>{description}</ProductDesc>

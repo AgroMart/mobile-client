@@ -75,10 +75,11 @@ const StoreDetails: React.FC = () => {
         data: cestas.map(item => ({
           id: item.id,
           name: `Cesta ${item.id}`,
-          image: null,
+          image: item.image ? item.image.url : '',
           quantity: item.quantidade,
           value: item.valor,
           unity: 'unidade',
+          description: item.descricao,
         })),
       },
       {
@@ -87,10 +88,11 @@ const StoreDetails: React.FC = () => {
         data: planos.map(item => ({
           id: item.id,
           name: item.nome,
-          image: null,
+          image: item.image ? item.image.url : '',
           quantity: item.quantidade,
           value: item.valor,
           unity: 'unidade',
+          description: item.descricao,
         })),
       },
       {
@@ -99,10 +101,11 @@ const StoreDetails: React.FC = () => {
         data: produtos_avulsos.map(item => ({
           id: item.id,
           name: item.nome,
-          image: item.imagem,
+          image: item.image ? item.image.url : '',
           quantity: item.quantidade,
           value: item.valor,
           unity: item.unidade_medida,
+          description: item.descricao,
         })),
       },
     ]);
@@ -186,7 +189,7 @@ const StoreDetails: React.FC = () => {
               quantity={item.quantity}
               value={item.value}
               key={item.id}
-              onPress={() => navigation.navigate('ProductPage')}
+              onPress={() => navigation.navigate('ProductPage', item)}
             />
           )}
           stickySectionHeadersEnabled={false}
