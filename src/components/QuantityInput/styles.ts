@@ -9,7 +9,7 @@ export const Container = styled.View`
   border-width: 1px;
   border-radius: 10px;
   border-color: ${colors.gray};
-  height: 40px;
+  height: 50px;
   width: 80px;
 `;
 

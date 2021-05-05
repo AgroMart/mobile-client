@@ -8,6 +8,8 @@ import ProductViewCard from '../../components/ProductViewCard';
 import QuantityInput from '../../components/QuantityInput';
 import Button from '../../components/Button';
 
+import { colors } from '../../styles';
+
 import {
   Container,
   ProductContainer,
@@ -18,6 +20,7 @@ import {
 type ParamList = {
   ProductPage: {
     id: number;
+    type: 'produto' | 'cesta' | 'plano';
     name: string;
     quantity: number;
     value: number;
@@ -27,23 +30,23 @@ type ParamList = {
 };
 
 const Product: React.FC = () => {
-  const [wishQuantity, setWishQuantity] = useState(1);
+  const [wishQuantity, setWishQuantity] = useState(0);
 
-  const { addItemToCart } = useCart();
+  const { cart, addItemToCart, removeItemToCart } = useCart();
   const {
-    params: { id, name, quantity, value, image, description },
+    params: { id, name, type, quantity, value, image, description },
   } = useRoute<RouteProp<ParamList, 'ProductPage'>>();
 
-  const incrementQuantity = () => {
-    if (wishQuantity < 1) return;
+  const hasOnCart = cart.find(item => item.id === id);
 
+  const incrementQuantity = () => {
     if (wishQuantity === quantity) return;
 
     setWishQuantity(prevState => prevState + 1);
   };
 
   const decrementQuantity = () => {
-    if (wishQuantity === 1) return;
+    if (wishQuantity <= 0) return;
 
     setWishQuantity(prevState => prevState - 1);
   };
@@ -55,6 +58,7 @@ const Product: React.FC = () => {
       quantity: wishQuantity,
       image,
       value,
+      type,
     };
 
     addItemToCart(item);
@@ -62,7 +66,7 @@ const Product: React.FC = () => {
 
   return (
     <Container>
-      <BackHeader text="Cesta 1" />
+      <BackHeader text={name} />
       <ProductContainer>
         <ProductViewCard
           description={description}
@@ -78,8 +82,20 @@ const Product: React.FC = () => {
           subFunction={() => decrementQuantity()}
         />
         <ButtonContainer>
-          <Button onPress={handleAddItem}>Adicionar</Button>
+          <Button onPress={handleAddItem}>
+            {hasOnCart ? 'Atualizar' : 'Adicionar'}
+          </Button>
         </ButtonContainer>
+        {hasOnCart && (
+          <ButtonContainer>
+            <Button
+              onPress={() => removeItemToCart(id)}
+              style={{ backgroundColor: `${colors.red}` }}
+            >
+              remover
+            </Button>
+          </ButtonContainer>
+        )}
       </RowView>
     </Container>
   );

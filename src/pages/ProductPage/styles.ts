@@ -21,5 +21,5 @@ export const RowView = styled.View`
 export const ButtonContainer = styled.View`
   flex: 1;
   margin-left: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
