@@ -75,7 +75,7 @@ const StoreDetails: React.FC = () => {
         data: cestas.map(item => ({
           id: item.id,
           name: `Cesta ${item.id}`,
-          image: item.image ? item.image.url : '',
+          image: item.imagem ? item.imagem.url : '',
           quantity: item.quantidade,
           value: item.valor,
           unity: 'unidade',
@@ -88,7 +88,7 @@ const StoreDetails: React.FC = () => {
         data: planos.map(item => ({
           id: item.id,
           name: item.nome,
-          image: item.image ? item.image.url : '',
+          image: item.imagem ? item.imagem.url : '',
           quantity: item.quantidade,
           value: item.valor,
           unity: 'unidade',
@@ -101,7 +101,7 @@ const StoreDetails: React.FC = () => {
         data: produtos_avulsos.map(item => ({
           id: item.id,
           name: item.nome,
-          image: item.image ? item.image.url : '',
+          image: item.imagem ? item.imagem.url : '',
           quantity: item.quantidade,
           value: item.valor,
           unity: item.unidade_medida,

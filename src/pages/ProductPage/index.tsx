@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
 import { RouteProp, useRoute } from '@react-navigation/native';
 
 import { useCart } from '../../hooks/CartProvider';
@@ -30,7 +29,7 @@ type ParamList = {
 const Product: React.FC = () => {
   const [wishQuantity, setWishQuantity] = useState(1);
 
-  const { cart, addItemToCart } = useCart();
+  const { addItemToCart } = useCart();
   const {
     params: { id, name, quantity, value, image, description },
   } = useRoute<RouteProp<ParamList, 'ProductPage'>>();
@@ -59,8 +58,6 @@ const Product: React.FC = () => {
     };
 
     addItemToCart(item);
-
-    console.log(cart);
   };
 
   return (
