@@ -67,6 +67,7 @@ const Product: React.FC = () => {
       id,
       name,
       quantity: wishQuantity,
+      stock: quantity,
       image,
       value,
       type,
@@ -104,7 +105,7 @@ const Product: React.FC = () => {
               onPress={() => removeItemToCart(id, type)}
               style={{ backgroundColor: `${colors.red}` }}
             >
-              remover
+              Remover
             </Button>
           </ButtonContainer>
         )}

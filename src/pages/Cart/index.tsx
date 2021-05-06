@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import { useAuth } from '../../hooks/AuthProvider';
 import { useCart } from '../../hooks/CartProvider';
+import api from '../../services/api';
 import RAs from '../../utils/mockCitys';
 
 import AddressShortView from '../../components/AddressShortView';
@@ -22,11 +24,17 @@ import {
   TotalValue,
 } from './styles';
 
+interface StockParams {
+  id: number;
+  quantity: number;
+  stock: number;
+}
+
 const CartScreen: React.FC = () => {
   const [userRA, setUserRA] = useState('');
 
   const { user } = useAuth();
-  const { cart, removeItemToCart, getTotal } = useCart();
+  const { cart, removeItemToCart, getTotal, cleanUpCart } = useCart();
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -41,6 +49,66 @@ const CartScreen: React.FC = () => {
       navigation.goBack();
     }
   }, [cart, navigation]);
+
+  const updateStockRequestModifier = {
+    produto: async (item: StockParams) => {
+      try {
+        const body = {
+          quantidade: item.stock - item.quantity,
+        };
+        await api.put(`/produtos-avulsos/${item.id}`, body);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    cesta: async (item: StockParams) => {
+      try {
+        const body = {
+          quantidade: item.stock - item.quantity,
+        };
+        await api.put(`/cestas/${item.id}`, body);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    plano: async (item: StockParams) => {
+      try {
+        const body = {
+          quantidade: item.stock - item.quantity,
+        };
+        await api.put(`/planos/${item.id}`, body);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  };
+
+  const handleFinish = async () => {
+    const extractBody = {
+      valor: getTotal(),
+      user: user.id,
+      loja: 21,
+      itens: {},
+    };
+    cart.forEach(item => {
+      updateStockRequestModifier[item.type](item);
+
+      extractBody.itens = {
+        ...extractBody.itens,
+        quantidade: item.quantity,
+        valor: item.value,
+      };
+    });
+
+    try {
+      await api.post('/extratoes', extractBody);
+      cleanUpCart();
+      Alert.alert('Deu tudo certo :)', 'Pedido realizado com sucesso');
+      navigation.navigate('Home');
+    } catch {
+      Alert.alert('Ops', 'Não foi possível realizar o seu pedido');
+    }
+  };
 
   return (
     <Container>
@@ -80,13 +148,7 @@ const CartScreen: React.FC = () => {
             <TotalValue>{`R$ ${getTotal()}`}</TotalValue>
           </TotalContainer>
           <ButtonContainer>
-            <Button
-              onPress={() => {
-                console.log('opa');
-              }}
-            >
-              Finalizar Pedido
-            </Button>
+            <Button onPress={handleFinish}>Finalizar Pedido</Button>
           </ButtonContainer>
         </Footer>
       </Content>

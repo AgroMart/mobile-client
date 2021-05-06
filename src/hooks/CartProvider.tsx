@@ -5,6 +5,7 @@ interface CartItem {
   type: 'produto' | 'cesta' | 'plano';
   name: string;
   quantity: number;
+  stock: number;
   image: string;
   value: number;
 }
