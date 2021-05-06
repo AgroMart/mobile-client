@@ -104,7 +104,7 @@ const CartScreen: React.FC = () => {
       await api.post('/extratoes', extractBody);
       cleanUpCart();
       Alert.alert('Deu tudo certo :)', 'Pedido realizado com sucesso');
-      navigation.navigate('Home');
+      navigation.navigate('History');
     } catch {
       Alert.alert('Ops', 'Não foi possível realizar o seu pedido');
     }

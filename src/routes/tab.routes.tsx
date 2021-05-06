@@ -46,7 +46,7 @@ const TabRoutes: React.FC = () => (
       }}
     />
     <Tab.Screen
-      name="Info"
+      name="History"
       component={History}
       options={{
         tabBarIcon: ({ color, size }) => (
