@@ -45,7 +45,11 @@ const CartProvider: React.FC = ({ children }) => {
       }
 
       return setCart(prevState =>
-        prevState.map(cartItem => (cartItem.id === item.id ? item : cartItem)),
+        prevState.map(cartItem =>
+          cartItem.id === item.id && cartItem.type === item.type
+            ? item
+            : cartItem,
+        ),
       );
     },
     [cart, removeItemToCart],
