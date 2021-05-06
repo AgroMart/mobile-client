@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
-import { ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useEffect, useCallback } from 'react';
+import { ScrollView, Alert } from 'react-native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 import { useAuth } from '../../hooks/AuthProvider';
 import { useStores } from '../../hooks/StoresProvider';
+
+import api from '../../services/api';
 
 import UserHeader from '../../components/UserHeader';
 import Carousel from '../../components/Carousel';
@@ -15,11 +17,26 @@ const Home: React.FC = () => {
   const navigation = useNavigation();
 
   const { user } = useAuth();
-  const { stores, loadStores } = useStores();
+  const { stores, updateStores } = useStores();
+
+  const loadStores = useCallback(() => {
+    async function load() {
+      try {
+        const response = await api.get('lojas');
+        updateStores(response.data);
+      } catch (err) {
+        Alert.alert('Ops', 'Não foi possivel carregar as lojas');
+      }
+    }
+
+    load();
+  }, [updateStores]);
 
   useEffect(() => {
     loadStores();
   }, [loadStores]);
+
+  useFocusEffect(loadStores);
 
   return (
     <Container>

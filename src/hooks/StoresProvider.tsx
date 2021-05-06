@@ -1,13 +1,10 @@
 import React, { createContext, useState, useContext, useCallback } from 'react';
-import { Alert } from 'react-native';
 
 import { Store } from '../interfaces';
 
-import api from '../services/api';
-
 interface StoresContextData {
   stores: Store[];
-  loadStores(): void;
+  updateStores(newStores: Store[]): void;
 }
 
 const StoresContext = createContext<StoresContextData>({} as StoresContextData);
@@ -15,18 +12,12 @@ const StoresContext = createContext<StoresContextData>({} as StoresContextData);
 const StoresProvider: React.FC = ({ children }) => {
   const [stores, setStores] = useState<Store[]>([]);
 
-  const loadStores = useCallback(async () => {
-    try {
-      const response = await api.get('lojas');
-      setStores(response.data);
-    } catch (err) {
-      console.log(err);
-      Alert.alert('Ops', 'Não foi possivel carregar as lojas');
-    }
+  const updateStores = useCallback((newStores: Store[]) => {
+    setStores(newStores);
   }, []);
 
   return (
-    <StoresContext.Provider value={{ stores, loadStores }}>
+    <StoresContext.Provider value={{ stores, updateStores }}>
       {children}
     </StoresContext.Provider>
   );

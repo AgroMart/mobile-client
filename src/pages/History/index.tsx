@@ -1,7 +1,8 @@
+/* eslint-disable camelcase */
 import React, { useCallback, useState } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useFocusEffect } from '@react-navigation/native';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { Text, ActivityIndicator, Alert } from 'react-native';
 import HistoryItemCard from '../../components/HistoryItemCard';
 
 import { Container, Content, Heading, HistoryContainer } from './styles';
@@ -31,7 +32,7 @@ const Info: React.FC = () => {
         const { data } = await api.get(`extratoes?user=${user.id}`);
         setHistory(data);
       } catch (err) {
-        console.log(err);
+        Alert.alert('Ops', 'Não foi possivel carregar seu histórico');
       } finally {
         setLoading(false);
       }
