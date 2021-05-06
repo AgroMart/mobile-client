@@ -49,7 +49,7 @@ const CartScreen: React.FC = () => {
         RA={userRA}
         address={user.endereco ? user.endereco?.rua : ''}
         onPress={() => {
-          navigation.goBack();
+          navigation.navigate('AddressForm');
         }}
       />
       <Content>
