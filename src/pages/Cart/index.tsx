@@ -60,8 +60,8 @@ const CartScreen: React.FC = () => {
               photo={item.image}
               price={item.value * item.quantity}
               quantity={item.quantity}
-              key={item.id}
-              handleDelete={() => removeItemToCart(item.id)}
+              key={`${item.id}-${item.type}`}
+              handleDelete={() => removeItemToCart(item.id, item.type)}
             />
           ))}
         </ItemList>

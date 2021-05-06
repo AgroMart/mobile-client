@@ -40,7 +40,7 @@ const Product: React.FC = () => {
   } = useRoute<RouteProp<ParamList, 'ProductPage'>>();
 
   useEffect(() => {
-    const foundItem = cart.find(item => item.id === id);
+    const foundItem = cart.find(item => item.id === id && item.type === type);
 
     if (foundItem) {
       setHasOnCart(true);
@@ -48,7 +48,7 @@ const Product: React.FC = () => {
     } else {
       setHasOnCart(false);
     }
-  }, [cart, id]);
+  }, [cart, id, type]);
 
   const incrementQuantity = () => {
     if (wishQuantity === quantity) return;
@@ -101,7 +101,7 @@ const Product: React.FC = () => {
         {hasOnCart && (
           <ButtonContainer>
             <Button
-              onPress={() => removeItemToCart(id)}
+              onPress={() => removeItemToCart(id, type)}
               style={{ backgroundColor: `${colors.red}` }}
             >
               remover

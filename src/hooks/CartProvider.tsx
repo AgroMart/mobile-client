@@ -12,7 +12,7 @@ interface CartItem {
 interface CartContextData {
   cart: CartItem[];
   addItemToCart(item: CartItem): void;
-  removeItemToCart(id: number): void;
+  removeItemToCart(id: number, type: string): void;
   cleanUpCart(): void;
   getTotal(): number;
 }
@@ -22,17 +22,25 @@ const CartContext = createContext<CartContextData>({} as CartContextData);
 const CartProvider: React.FC = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
 
-  const removeItemToCart = useCallback((id: number) => {
-    setCart(prevState => prevState.filter(cartItem => cartItem.id !== id));
+  const removeItemToCart = useCallback((id: number, type: string) => {
+    setCart(prevState =>
+      prevState.filter(cartItem =>
+        cartItem.type === type ? cartItem.id !== id : cartItem,
+      ),
+    );
   }, []);
 
   const addItemToCart = useCallback(
     (item: CartItem) => {
       if (item.quantity === 0) {
-        return removeItemToCart(item.id);
+        return removeItemToCart(item.id, item.type);
       }
 
-      if (!cart.some(cartItem => cartItem.id === item.id)) {
+      if (
+        !cart.some(
+          cartItem => cartItem.id === item.id && cartItem.type === item.type,
+        )
+      ) {
         return setCart(prevState => [...prevState, item]);
       }
 

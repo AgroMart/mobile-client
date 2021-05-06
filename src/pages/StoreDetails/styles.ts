@@ -11,6 +11,7 @@ interface MenuItemProps {
 export const Container = styled.View`
   flex: 1;
   background: ${colors.white};
+  padding-bottom: 20px;
 `;
 
 export const Header = styled.View`
