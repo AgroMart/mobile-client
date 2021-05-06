@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 
 import { useCart } from '../../hooks/CartProvider';
@@ -31,13 +31,24 @@ type ParamList = {
 
 const Product: React.FC = () => {
   const { cart, addItemToCart, removeItemToCart } = useCart();
-  const hasOnCart = cart.find(item => item.id === id);
-  const [wishQuantity, setWishQuantity] = useState(hasOnCart?.quantity || 0);
+  const [hasOnCart, setHasOnCart] = useState(false);
+  const [wishQuantity, setWishQuantity] = useState(0);
 
   const navigation = useNavigation();
   const {
     params: { id, name, type, quantity, value, image, description },
   } = useRoute<RouteProp<ParamList, 'ProductPage'>>();
+
+  useEffect(() => {
+    const foundItem = cart.find(item => item.id === id);
+
+    if (foundItem) {
+      setHasOnCart(true);
+      setWishQuantity(foundItem.quantity);
+    } else {
+      setHasOnCart(false);
+    }
+  }, [cart, id]);
 
   const incrementQuantity = () => {
     if (wishQuantity === quantity) return;
