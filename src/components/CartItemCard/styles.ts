@@ -18,6 +18,7 @@ export const Container = styled.View.attrs({
   height: 111px;
   width: 100%;
   border: 1px;
+  margin: 5px 0;
   border-color: #ddd;
   background: ${colors.white};
   padding: 15px;
