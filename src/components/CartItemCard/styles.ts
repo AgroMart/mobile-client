@@ -2,12 +2,22 @@ import styled from 'styled-components/native';
 
 import { colors, fonts } from '../../styles';
 
-export const Container = styled.View`
+export const Container = styled.View.attrs({
+  shadowColor: `${colors.shadow}`,
+  shadowOffset: {
+    width: 0,
+    height: 1,
+  },
+  shadowOpacity: 0.22,
+  shadowRadius: 2.22,
+
+  elevation: 3,
+})`
   flex-direction: row;
   justify-content: space-between;
   height: 111px;
   width: 100%;
-  border: 2px;
+  border: 1px;
   border-color: #ddd;
   background: ${colors.white};
   padding: 15px;

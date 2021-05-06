@@ -14,6 +14,7 @@ interface CartContextData {
   addItemToCart(item: CartItem): void;
   removeItemToCart(id: number): void;
   cleanUpCart(): void;
+  getTotal(): number;
 }
 
 const CartContext = createContext<CartContextData>({} as CartContextData);
@@ -44,9 +45,17 @@ const CartProvider: React.FC = ({ children }) => {
 
   const cleanUpCart = useCallback(() => setCart([]), []);
 
+  const getTotal = useCallback(() => {
+    let total = 0;
+    cart.forEach(item => {
+      total = item.value * item.quantity + total;
+    });
+    return total;
+  }, [cart]);
+
   return (
     <CartContext.Provider
-      value={{ cart, addItemToCart, removeItemToCart, cleanUpCart }}
+      value={{ cart, addItemToCart, removeItemToCart, cleanUpCart, getTotal }}
     >
       {children}
     </CartContext.Provider>

@@ -16,6 +16,8 @@ export const Container = styled.View.attrs({
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  border: 1px;
+  border-color: #ddd;
   margin: 5px 0;
   width: 100%;
   border-radius: 4px;

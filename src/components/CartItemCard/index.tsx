@@ -1,6 +1,7 @@
 import React from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 
+import { baseURL } from '../../services/api';
 import { colors } from '../../styles';
 
 import {
@@ -18,8 +19,8 @@ import {
 interface CartItemCardProps {
   photo: string;
   name: string;
-  quantity: string;
-  price: string;
+  quantity: number;
+  price: number;
   handleDelete(): void;
 }
 
@@ -45,7 +46,7 @@ const CartItemCard: React.FC<CartItemCardProps> = ({
         </RemoveItemButton>
       </IternalContainerLeft>
       <IternalContainerRight>
-        <Img source={{ uri: photo }} />
+        <Img source={{ uri: `${baseURL}${photo}` }} />
         <PriceText>R$ {price}</PriceText>
       </IternalContainerRight>
     </Container>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { RouteProp, useRoute } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 
 import { useCart } from '../../hooks/CartProvider';
 
@@ -30,14 +30,14 @@ type ParamList = {
 };
 
 const Product: React.FC = () => {
-  const [wishQuantity, setWishQuantity] = useState(0);
-
   const { cart, addItemToCart, removeItemToCart } = useCart();
+  const hasOnCart = cart.find(item => item.id === id);
+  const [wishQuantity, setWishQuantity] = useState(hasOnCart?.quantity || 0);
+
+  const navigation = useNavigation();
   const {
     params: { id, name, type, quantity, value, image, description },
   } = useRoute<RouteProp<ParamList, 'ProductPage'>>();
-
-  const hasOnCart = cart.find(item => item.id === id);
 
   const incrementQuantity = () => {
     if (wishQuantity === quantity) return;
@@ -62,6 +62,7 @@ const Product: React.FC = () => {
     };
 
     addItemToCart(item);
+    item.quantity !== 0 && navigation.navigate('Cart');
   };
 
   return (

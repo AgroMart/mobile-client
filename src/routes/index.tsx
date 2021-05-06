@@ -11,6 +11,7 @@ import {
   AddressForm,
   ProductPage,
   SearchResult,
+  Cart,
 } from '../pages';
 
 const App = createStackNavigator();
@@ -32,6 +33,7 @@ const routes: React.FC = () => {
       <App.Screen name="SignUp" component={SignUp} />
       <App.Screen name="ProductPage" component={ProductPage} />
       <App.Screen name="SearchResult" component={SearchResult} />
+      <App.Screen name="Cart" component={Cart} />
     </App.Navigator>
   );
 };
