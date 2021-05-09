@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 
-import { useCart } from '../../hooks/CartProvider';
+import { useCart, TypeItem } from '../../hooks/CartProvider';
 
 import BackHeader from '../../components/BackHeader';
 import ProductViewCard from '../../components/ProductViewCard';
@@ -20,7 +20,7 @@ import {
 type ParamList = {
   ProductPage: {
     id: number;
-    type: 'produto' | 'cesta' | 'plano';
+    type: TypeItem;
     name: string;
     quantity: number;
     value: number;

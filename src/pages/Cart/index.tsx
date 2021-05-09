@@ -45,8 +45,7 @@ const CartScreen: React.FC = () => {
 
   useEffect(() => {
     if (!cart.length) {
-      navigation.goBack();
-      navigation.goBack();
+      navigation.navigate('StoreDetail');
     }
   }, [cart, navigation]);
 
@@ -88,15 +87,22 @@ const CartScreen: React.FC = () => {
       valor: getTotal(),
       user: user.id,
       loja: 21,
-      itens: {},
+      itens: {
+        produtos: [] as any,
+      },
     };
     cart.forEach(item => {
       updateStockRequestModifier[item.type](item);
 
       extractBody.itens = {
-        ...extractBody.itens,
-        quantidade: item.quantity,
-        valor: item.value,
+        produtos: [
+          ...extractBody.itens.produtos,
+          {
+            produto: item.name,
+            quantidade: item.quantity,
+            valor: item.value,
+          },
+        ],
       };
     });
 
@@ -135,8 +141,7 @@ const CartScreen: React.FC = () => {
         </ItemList>
         <TextButton
           onPress={() => {
-            navigation.goBack();
-            navigation.goBack();
+            navigation.navigate('StoreDetail');
           }}
         >
           Adicionar mais itens

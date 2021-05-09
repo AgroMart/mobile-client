@@ -1,8 +1,10 @@
 import React, { createContext, useState, useContext, useCallback } from 'react';
 
+export type TypeItem = 'produto' | 'cesta' | 'plano';
+
 interface CartItem {
   id: number;
-  type: 'produto' | 'cesta' | 'plano';
+  type: TypeItem;
   name: string;
   quantity: number;
   stock: number;

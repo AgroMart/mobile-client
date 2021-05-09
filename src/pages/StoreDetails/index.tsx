@@ -4,6 +4,7 @@ import { SectionList, View, FlatList } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 
 import { baseURL } from '../../services/api';
+import { useCart, TypeItem } from '../../hooks/CartProvider';
 
 import BackHeader from '../../components/BackHeader';
 import ProductCard from '../../components/ProductCard';
@@ -34,6 +35,7 @@ interface Category {
 
 interface Item {
   id: number;
+  type: string;
   name: string;
   quantity: number;
   value: number;
@@ -62,6 +64,7 @@ const StoreDetails: React.FC = () => {
   const navigation = useNavigation();
 
   const [data, setData] = useState<Category[]>([]);
+  const { addItemToCart } = useCart();
 
   const {
     params: { id, nome, descricao, banner, produtos_avulsos, cestas, planos },
@@ -192,7 +195,24 @@ const StoreDetails: React.FC = () => {
               quantity={item.quantity}
               value={item.value}
               key={item.id}
-              onPress={() => navigation.navigate('ProductPage', item)}
+              onPress={() => {
+                if (item.type !== 'plano') {
+                  navigation.navigate('ProductPage', item);
+                } else {
+                  const plan = {
+                    id: item.id,
+                    name: item.name,
+                    quantity: 1,
+                    stock: item.quantity,
+                    image: item.image,
+                    value: item.value,
+                    type: 'plano' as TypeItem,
+                  };
+
+                  addItemToCart(plan);
+                  item.quantity !== 0 && navigation.navigate('Cart');
+                }
+              }}
             />
           )}
           stickySectionHeadersEnabled={false}
