@@ -16,10 +16,13 @@ const StoresProvider: React.FC = ({ children }) => {
 
   const { cleanUpCart } = useCart();
 
-  const updateStores = useCallback((newStores: Store[]) => {
-    setStores(newStores);
-    cleanUpCart();
-  }, []);
+  const updateStores = useCallback(
+    (newStores: Store[]) => {
+      setStores(newStores);
+      cleanUpCart();
+    },
+    [cleanUpCart],
+  );
 
   return (
     <StoresContext.Provider value={{ stores, updateStores }}>

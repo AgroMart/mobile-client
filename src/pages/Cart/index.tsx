@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -75,7 +76,18 @@ const CartScreen: React.FC = () => {
         const body = {
           quantidade: item.stock - item.quantity,
         };
-        await api.put(`/planos/${item.id}`, body);
+        const response = await api.put(`/planos/${item.id}`, body);
+
+        const { id, quantidade_de_cestas } = response.data;
+
+        const subscriberBody = {
+          nome: user.username,
+          cestas_disponiveis: quantidade_de_cestas,
+          plano: id,
+          usuario: user.id,
+        };
+
+        await api.post('/assinantes', subscriberBody);
       } catch (err) {
         console.log(err);
       }
