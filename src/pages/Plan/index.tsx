@@ -76,6 +76,7 @@ const Plan: React.FC = () => {
                 <PlanCard
                   key={item.id}
                   id={item.id}
+                  switchInitialValue={item.pular_cesta}
                   acquisitionDate={item.created_at}
                   avaliableBasket={item.cestas_disponiveis}
                   recievedBasket={

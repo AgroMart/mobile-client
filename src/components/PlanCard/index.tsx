@@ -27,6 +27,7 @@ interface StoreCardProps {
   avaliableBasket: number;
   recievedBasket: number;
   image: string;
+  switchInitialValue: boolean;
 }
 
 const PlanCard: React.FC<StoreCardProps> = ({
@@ -37,8 +38,9 @@ const PlanCard: React.FC<StoreCardProps> = ({
   acquisitionDate,
   avaliableBasket,
   recievedBasket,
+  switchInitialValue,
 }) => {
-  const [switchValue, setSwitchValue] = useState(false);
+  const [switchValue, setSwitchValue] = useState(switchInitialValue);
   const [loading, setLoading] = useState(false);
   // const [radioValue, setRadioValue] = useState(false);
 
@@ -46,7 +48,7 @@ const PlanCard: React.FC<StoreCardProps> = ({
   //   setRadioValue(state => !state);
   // }, []);
 
-  const handleEnable = useCallback(async () => {
+  const handleEnable = async () => {
     setSwitchValue(state => !state);
     setLoading(true);
 
@@ -59,7 +61,7 @@ const PlanCard: React.FC<StoreCardProps> = ({
     } finally {
       setLoading(false);
     }
-  }, [id, switchValue]);
+  };
 
   return (
     <Card>
@@ -93,7 +95,7 @@ const PlanCard: React.FC<StoreCardProps> = ({
             </InfoView>
             <InfoView>
               <InfoTitle>Pular cesta da semana </InfoTitle>
-              <SwitchButton value={switchValue} enable={handleEnable} />
+              <SwitchButton value={switchValue} enable={() => handleEnable()} />
             </InfoView>
             {/* <TouchableOpacity onPress={changeRadioValue} disabled={!radioValue}>
           <InfoView>
