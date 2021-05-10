@@ -1,18 +1,20 @@
 /* eslint-disable camelcase */
 import React, { useEffect, useState } from 'react';
-import { Alert } from 'react-native';
+import { ActivityIndicator, Alert, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { useAuth } from '../../hooks/AuthProvider';
-import { useCart } from '../../hooks/CartProvider';
 import api from '../../services/api';
 import RAs from '../../utils/mockCitys';
+import { useAuth } from '../../hooks/AuthProvider';
+import { useCart } from '../../hooks/CartProvider';
 
 import AddressShortView from '../../components/AddressShortView';
 import BackHeader from '../../components/BackHeader';
 import CartItemCard from '../../components/CartItemCard';
 import TextButton from '../../components/TextButton';
 import Button from '../../components/Button';
+
+import { colors } from '../../styles';
 
 import {
   Container,
@@ -33,6 +35,7 @@ interface StockParams {
 
 const CartScreen: React.FC = () => {
   const [userRA, setUserRA] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const { user } = useAuth();
   const { cart, removeItemToCart, getTotal, cleanUpCart } = useCart();
@@ -95,6 +98,7 @@ const CartScreen: React.FC = () => {
   };
 
   const handleFinish = async () => {
+    setLoading(true);
     const extractBody = {
       valor: getTotal(),
       user: user.id,
@@ -126,50 +130,61 @@ const CartScreen: React.FC = () => {
     } catch {
       Alert.alert('Ops', 'Não foi possível realizar o seu pedido');
     }
+    setLoading(false);
   };
 
   return (
-    <Container>
-      <BackHeader text="Pedidos" />
-      <AddressShortView
-        RA={userRA}
-        address={user.endereco ? user.endereco?.rua : ''}
-        onPress={() => {
-          navigation.navigate('AddressForm');
-        }}
-      />
-      <Content>
-        <ItemList>
-          {cart.map(item => (
-            <CartItemCard
-              name={item.name}
-              photo={item.image}
-              price={item.value * item.quantity}
-              quantity={item.quantity}
-              key={`${item.id}-${item.type}`}
-              handleDelete={() => removeItemToCart(item.id, item.type)}
+    <>
+      <BackHeader text="Pedidos" disabled={loading} />
+      {loading ? (
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <ActivityIndicator size="large" color={`${colors.secondary}`} />
+        </View>
+      ) : (
+        <>
+          <Container>
+            <AddressShortView
+              RA={userRA}
+              address={user.endereco ? user.endereco?.rua : ''}
+              onPress={() => {
+                navigation.navigate('AddressForm');
+              }}
             />
-          ))}
-        </ItemList>
-        <TextButton
-          onPress={() => {
-            navigation.navigate('StoreDetail');
-          }}
-        >
-          Adicionar mais itens
-        </TextButton>
+            <Content>
+              <ItemList>
+                {cart.map(item => (
+                  <CartItemCard
+                    name={item.name}
+                    photo={item.image}
+                    price={item.value * item.quantity}
+                    quantity={item.quantity}
+                    key={`${item.id}-${item.type}`}
+                    handleDelete={() => removeItemToCart(item.id, item.type)}
+                  />
+                ))}
+              </ItemList>
+              <TextButton
+                onPress={() => {
+                  navigation.navigate('StoreDetail');
+                }}
+              >
+                Adicionar mais itens
+              </TextButton>
 
-        <Footer>
-          <TotalContainer>
-            <TotalText>Total</TotalText>
-            <TotalValue>{`R$ ${getTotal()}`}</TotalValue>
-          </TotalContainer>
-          <ButtonContainer>
-            <Button onPress={handleFinish}>Finalizar Pedido</Button>
-          </ButtonContainer>
-        </Footer>
-      </Content>
-    </Container>
+              <Footer>
+                <TotalContainer>
+                  <TotalText>Total</TotalText>
+                  <TotalValue>{`R$ ${getTotal()}`}</TotalValue>
+                </TotalContainer>
+                <ButtonContainer>
+                  <Button onPress={handleFinish}>Finalizar Pedido</Button>
+                </ButtonContainer>
+              </Footer>
+            </Content>
+          </Container>
+        </>
+      )}
+    </>
   );
 };
 
