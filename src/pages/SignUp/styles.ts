@@ -22,7 +22,7 @@ export const AppName = styled.Text`
 
 export const AnimationCircule = styled.ActivityIndicator.attrs({
   size: 'small',
-  color: 'white',
+  color: `${colors.secondary}`,
 })`
   align-self: center;
 `;

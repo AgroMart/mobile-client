@@ -7,14 +7,14 @@ export const Card = styled.View.attrs({
   shadowRadius: 2.22,
   elevation: 3,
 })`
-  height: 85%;
+  height: 400px;
   max-height: 441px;
   flex-direction: column;
   border-bottom-width: 0px;
   background-color: ${colors.white};
   border-radius: 4px;
   border-width: 0px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 
 export const Image = styled.Image`

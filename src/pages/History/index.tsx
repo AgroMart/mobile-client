@@ -3,11 +3,15 @@ import React, { useCallback, useState } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useFocusEffect } from '@react-navigation/native';
 import { Text, ActivityIndicator, Alert } from 'react-native';
+
+import api from '../../services/api';
+import { useAuth } from '../../hooks/AuthProvider';
+
 import HistoryItemCard from '../../components/HistoryItemCard';
 
+import { colors } from '../../styles';
+
 import { Container, Content, Heading, HistoryContainer } from './styles';
-import { useAuth } from '../../hooks/AuthProvider';
-import api from '../../services/api';
 
 interface Register {
   id: number;
@@ -18,7 +22,7 @@ interface Register {
   };
 }
 
-const Info: React.FC = () => {
+const History: React.FC = () => {
   const [history, setHistory] = useState<Register[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -48,7 +52,9 @@ const Info: React.FC = () => {
     <Container>
       <Heading>Histórico</Heading>
       <Content>
-        {loading && <ActivityIndicator size="large" />}
+        {loading && (
+          <ActivityIndicator size="large" color={`${colors.secondary}`} />
+        )}
         {!user && !loading && (
           <Text>É preciso estar logado para visualizar o histórico!</Text>
         )}
@@ -72,4 +78,4 @@ const Info: React.FC = () => {
   );
 };
 
-export default Info;
+export default History;

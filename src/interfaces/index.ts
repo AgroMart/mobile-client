@@ -1,5 +1,6 @@
+/* eslint-disable camelcase */
 export interface Store {
-  id: string;
+  id: number;
   nome: string;
   descricao: string;
   banner: Image;

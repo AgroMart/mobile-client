@@ -7,5 +7,11 @@ export const Container = styled.SafeAreaView`
 export const PlanContainer = styled.View`
   width: 90%;
   align-self: center;
-  margin-top: 30px;
+  margin-top: 20px;
+`;
+
+export const Content = styled.View`
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 `;

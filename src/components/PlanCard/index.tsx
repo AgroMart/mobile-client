@@ -1,8 +1,14 @@
 import React, { useState, useCallback } from 'react';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { ActivityIndicator, Alert, View } from 'react-native';
+// import { TouchableOpacity } from 'react-native-gesture-handler';
+import { format } from 'date-fns';
+
+import api, { baseURL } from '../../services/api';
 
 import SwitchButton from '../SwitchButton';
-import RadioButton from '../RadioButton';
+// import RadioButton from '../RadioButton';
+
+import { colors } from '../../styles';
 
 import {
   Card,
@@ -14,15 +20,17 @@ import {
 } from './styles';
 
 interface StoreCardProps {
+  id: number;
   store: string;
   contact: string;
   acquisitionDate: string;
-  avaliableBasket: string;
-  recievedBasket: string;
+  avaliableBasket: number;
+  recievedBasket: number;
   image: string;
 }
 
 const PlanCard: React.FC<StoreCardProps> = ({
+  id,
   image,
   store,
   contact,
@@ -31,50 +39,63 @@ const PlanCard: React.FC<StoreCardProps> = ({
   recievedBasket,
 }) => {
   const [switchValue, setSwitchValue] = useState(false);
-  const [radioValue, setRadioValue] = useState(false);
+  const [loading, setLoading] = useState(false);
+  // const [radioValue, setRadioValue] = useState(false);
 
-  const changeRadioValue = useCallback(() => {
-    setRadioValue(state => !state);
-  }, []);
+  // const changeRadioValue = useCallback(() => {
+  //   setRadioValue(state => !state);
+  // }, []);
+
+  const handleEnable = useCallback(async () => {
+    setSwitchValue(state => !state);
+    setLoading(true);
+
+    try {
+      await api.put(`/assinantes/${id}`, {
+        pular_cesta: !switchValue,
+      });
+    } catch (error) {
+      Alert.alert('Ops', 'Não foi possivel atualizar as informações');
+    } finally {
+      setLoading(false);
+    }
+  }, [id, switchValue]);
 
   return (
     <Card>
-      <Image
-        source={{
-          uri: image,
-        }}
-      />
-      <InfoContainer>
-        <InfoView>
-          <InfoTitle>Loja: </InfoTitle>
-          <Info>{store}</Info>
-        </InfoView>
-        <InfoView>
-          <InfoTitle>Contato: </InfoTitle>
-          <Info>{contact}</Info>
-        </InfoView>
-        <InfoView>
-          <InfoTitle>Data de aquisição: </InfoTitle>
-          <Info>{acquisitionDate}</Info>
-        </InfoView>
-        <InfoView>
-          <InfoTitle>Cesta(s) disponíveis: </InfoTitle>
-          <Info>{avaliableBasket}</Info>
-        </InfoView>
-        <InfoView>
-          <InfoTitle>Cesta(s) recebidas: </InfoTitle>
-          <Info>{recievedBasket}</Info>
-        </InfoView>
-        <InfoView>
-          <InfoTitle>Pular cesta da semana </InfoTitle>
-          <SwitchButton
-            value={switchValue}
-            enable={() => {
-              setSwitchValue(state => !state);
-            }}
-          />
-        </InfoView>
-        <TouchableOpacity onPress={changeRadioValue} disabled={!radioValue}>
+      {loading ? (
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <ActivityIndicator size="large" color={`${colors.secondary}`} />
+        </View>
+      ) : (
+        <>
+          <Image source={{ uri: `${baseURL}${image}` }} />
+          <InfoContainer>
+            <InfoView>
+              <InfoTitle>Loja: </InfoTitle>
+              <Info>{store}</Info>
+            </InfoView>
+            <InfoView>
+              <InfoTitle>Contato: </InfoTitle>
+              <Info>{contact}</Info>
+            </InfoView>
+            <InfoView>
+              <InfoTitle>Data de aquisição: </InfoTitle>
+              <Info>{format(new Date(acquisitionDate), 'dd/MM/yyyy')}</Info>
+            </InfoView>
+            <InfoView>
+              <InfoTitle>Cesta(s) disponíveis: </InfoTitle>
+              <Info>{avaliableBasket}</Info>
+            </InfoView>
+            <InfoView>
+              <InfoTitle>Cesta(s) recebidas: </InfoTitle>
+              <Info>{recievedBasket}</Info>
+            </InfoView>
+            <InfoView>
+              <InfoTitle>Pular cesta da semana </InfoTitle>
+              <SwitchButton value={switchValue} enable={handleEnable} />
+            </InfoView>
+            {/* <TouchableOpacity onPress={changeRadioValue} disabled={!radioValue}>
           <InfoView>
             <InfoTitle>Receber cesta </InfoTitle>
             <RadioButton value={!radioValue} />
@@ -85,8 +106,10 @@ const PlanCard: React.FC<StoreCardProps> = ({
             <InfoTitle>Buscar </InfoTitle>
             <RadioButton value={radioValue} />
           </InfoView>
-        </TouchableOpacity>
-      </InfoContainer>
+        </TouchableOpacity> */}
+          </InfoContainer>
+        </>
+      )}
     </Card>
   );
 };
