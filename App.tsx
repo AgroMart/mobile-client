@@ -1,8 +1,9 @@
 /* eslint-disable camelcase */
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import { NavigationContainer } from '@react-navigation/native';
+import * as Updates from 'expo-updates';
 import {
   useFonts,
   Montserrat_400Regular,
@@ -15,6 +16,21 @@ import AppProvider from './src/hooks';
 import Routes from './src/routes';
 
 const App: React.FC = () => {
+  const updateApp = async () => {
+    if (!__DEV__) {
+      const { isAvailable } = await Updates.checkForUpdateAsync();
+
+      if (isAvailable) {
+        await Updates.fetchUpdateAsync();
+        await Updates.reloadAsync();
+      }
+    }
+  };
+
+  useEffect(() => {
+    updateApp();
+  }, []);
+
   const [fontsLoaded] = useFonts({
     Montserrat_400Regular,
     Montserrat_300Light,
