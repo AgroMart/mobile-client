@@ -22,7 +22,8 @@ const StoreCard: React.FC<StoreCardProps> = ({
       <Card>
         <Image
           source={{
-            uri: `${baseURL}${image}`,
+            // uri: `${baseURL}${image}`,
+            uri: `${image}`,
           }}
         />
         <Title>{name}</Title>

@@ -47,7 +47,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </InfoView>
         </ProductInfo>
         <ImageView>
-          <ProductImage source={{ uri: `${baseURL}${image}` }} />
+          {/* <ProductImage source={{ uri: `${baseURL}${image}` }} /> */}
+          <ProductImage source={{ uri: `${image}` }} />
         </ImageView>
       </Container>
     </TouchableOpacity>

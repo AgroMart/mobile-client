@@ -46,7 +46,8 @@ const CartItemCard: React.FC<CartItemCardProps> = ({
         </RemoveItemButton>
       </IternalContainerLeft>
       <IternalContainerRight>
-        <Img source={{ uri: `${baseURL}${photo}` }} />
+        {/* <Img source={{ uri: `${baseURL}${photo}` }} /> */}
+        <Img source={{ uri: `${photo}` }} />
         <PriceText>R$ {price}</PriceText>
       </IternalContainerRight>
     </Container>

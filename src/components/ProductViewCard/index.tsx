@@ -25,7 +25,8 @@ const ProductViewCard: React.FC<ProductViewCardProps> = ({
 }) => {
   return (
     <Container>
-      <ProductImage source={{ uri: `${baseURL}${image}` }} />
+      {/* <ProductImage source={{ uri: `${baseURL}${image}` }} /> */}
+      <ProductImage source={{ uri: `${image}` }} />
       <InfoContainer>
         <ProductInfo>
           <ProductDesc>{description}</ProductDesc>

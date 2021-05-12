@@ -147,7 +147,8 @@ const StoreDetails: React.FC = () => {
         {banner && (
           <StoreBanner
             source={{
-              uri: `${baseURL}${banner.url}`,
+              // uri: `${baseURL}${banner.url}`,
+              uri: `${banner.url}`,
             }}
           />
         )}

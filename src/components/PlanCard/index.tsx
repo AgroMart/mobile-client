@@ -71,7 +71,8 @@ const PlanCard: React.FC<StoreCardProps> = ({
         </View>
       ) : (
         <>
-          <Image source={{ uri: `${baseURL}${image}` }} />
+          {/* <Image source={{ uri: `${baseURL}${image}` }} /> */}
+          <Image source={{ uri: `${image}` }} />
           <InfoContainer>
             <InfoView>
               <InfoTitle>Loja: </InfoTitle>
