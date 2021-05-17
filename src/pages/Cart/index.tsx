@@ -26,6 +26,7 @@ import {
   TotalText,
   TotalValue,
 } from './styles';
+import { priceFormat } from '../../utils';
 
 interface StockParams {
   id: number;
@@ -38,7 +39,7 @@ const CartScreen: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   const { user } = useAuth();
-  const { cart, removeItemToCart, getTotal, cleanUpCart } = useCart();
+  const { cart, removeItemToCart, getTotal, cleanUpCart, storeId } = useCart();
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -102,7 +103,7 @@ const CartScreen: React.FC = () => {
     const extractBody = {
       valor: getTotal(),
       user: user.id,
-      loja: 21,
+      loja: storeId,
       itens: {
         produtos: [] as any,
       },
@@ -174,7 +175,9 @@ const CartScreen: React.FC = () => {
               <Footer>
                 <TotalContainer>
                   <TotalText>Total</TotalText>
-                  <TotalValue>{`R$ ${getTotal()}`}</TotalValue>
+                  <TotalValue>
+                    {getTotal().toLocaleString('pt-BR', priceFormat)}
+                  </TotalValue>
                 </TotalContainer>
                 <ButtonContainer>
                   <Button onPress={handleFinish}>Finalizar Pedido</Button>

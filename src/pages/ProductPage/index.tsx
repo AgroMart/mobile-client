@@ -26,6 +26,7 @@ type ParamList = {
     value: number;
     image: string;
     description: string;
+    storeId: number;
   };
 };
 
@@ -36,7 +37,7 @@ const Product: React.FC = () => {
 
   const navigation = useNavigation();
   const {
-    params: { id, name, type, quantity, value, image, description },
+    params: { id, name, type, quantity, value, image, description, storeId },
   } = useRoute<RouteProp<ParamList, 'ProductPage'>>();
 
   useEffect(() => {
@@ -73,7 +74,7 @@ const Product: React.FC = () => {
       type,
     };
 
-    addItemToCart(item);
+    addItemToCart(item, storeId);
     item.quantity !== 0 && navigation.navigate('Cart');
   };
 

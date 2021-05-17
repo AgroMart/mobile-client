@@ -14,7 +14,8 @@ interface CartItem {
 
 interface CartContextData {
   cart: CartItem[];
-  addItemToCart(item: CartItem): void;
+  storeId: number | undefined;
+  addItemToCart(item: CartItem, storeId?: number): void;
   removeItemToCart(id: number, type: string): void;
   cleanUpCart(): void;
   getTotal(): number;
@@ -24,6 +25,7 @@ const CartContext = createContext<CartContextData>({} as CartContextData);
 
 const CartProvider: React.FC = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const [storeId, setStoreId] = useState<number>();
 
   const removeItemToCart = useCallback((id: number, type: string) => {
     setCart(prevState =>
@@ -34,7 +36,11 @@ const CartProvider: React.FC = ({ children }) => {
   }, []);
 
   const addItemToCart = useCallback(
-    (item: CartItem) => {
+    (item: CartItem, idStore?: number) => {
+      if (idStore) {
+        setStoreId(idStore);
+      }
+
       if (item.quantity === 0) {
         return removeItemToCart(item.id, item.type);
       }
@@ -70,7 +76,14 @@ const CartProvider: React.FC = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{ cart, addItemToCart, removeItemToCart, cleanUpCart, getTotal }}
+      value={{
+        cart,
+        addItemToCart,
+        removeItemToCart,
+        cleanUpCart,
+        getTotal,
+        storeId,
+      }}
     >
       {children}
     </CartContext.Provider>

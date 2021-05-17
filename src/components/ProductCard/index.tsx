@@ -2,6 +2,7 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 import { baseURL } from '../../services/api';
+import { priceFormat } from '../../utils';
 
 import {
   Container,
@@ -43,7 +44,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </InfoView>
           <InfoView>
             <InfoTitle>{`Valor por ${unity.slice(0, 3)} :`}</InfoTitle>
-            <GreenText>{` R$ ${value}`}</GreenText>
+            <GreenText>{value.toLocaleString('pt-BR', priceFormat)}</GreenText>
           </InfoView>
         </ProductInfo>
         <ImageView>

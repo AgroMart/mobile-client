@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { baseURL } from '../../services/api';
+import { priceFormat } from '../../utils';
 
 import {
   Container,
@@ -31,7 +32,9 @@ const ProductViewCard: React.FC<ProductViewCardProps> = ({
         <ProductInfo>
           <ProductDesc>{description}</ProductDesc>
           <InfoView>
-            <ProductPrice>{`Valor: R$ ${value}`}</ProductPrice>
+            <ProductPrice>
+              {value.toLocaleString('pt-BR', priceFormat)}
+            </ProductPrice>
           </InfoView>
         </ProductInfo>
       </InfoContainer>

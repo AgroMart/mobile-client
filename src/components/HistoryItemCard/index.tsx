@@ -14,6 +14,7 @@ import {
   GreenTitle,
   GreenInfo,
 } from './styles';
+import { priceFormat } from '../../utils';
 
 export type HistoryCardProps = {
   seller: string;
@@ -44,7 +45,7 @@ const HistoryItemCard: React.FC<HistoryCardProps> = ({
           </InfoView>
           <InfoView>
             <GreenTitle>Valor: </GreenTitle>
-            <GreenInfo>{` R$ ${value}`}</GreenInfo>
+            <GreenInfo>{value.toLocaleString('pt-BR', priceFormat)}</GreenInfo>
           </InfoView>
         </HistoryInfo>
         <TextButtonView>

@@ -1,7 +1,8 @@
 /* eslint-disable camelcase */
 import React, { useRef, useState, useCallback, useEffect } from 'react';
-import { SectionList, View, FlatList } from 'react-native';
+import { SectionList, View, FlatList, Linking } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { baseURL } from '../../services/api';
 import { useCart, TypeItem } from '../../hooks/CartProvider';
@@ -25,6 +26,7 @@ import {
   MenuItem,
   TitleContainer,
   TitleMenu,
+  IconView,
 } from './styles';
 
 interface Category {
@@ -47,6 +49,7 @@ type ParamList = {
   StoreDetails: {
     id: number;
     nome: string;
+    contato: string;
     descricao: string;
     banner: {
       url: string;
@@ -54,6 +57,9 @@ type ParamList = {
     produtos_avulsos: any[];
     cestas: any[];
     planos: any[];
+    endereco: {
+      bairro: string;
+    };
   };
 };
 
@@ -64,10 +70,20 @@ const StoreDetails: React.FC = () => {
   const navigation = useNavigation();
 
   const [data, setData] = useState<Category[]>([]);
-  const { addItemToCart } = useCart();
+  const { addItemToCart, cart } = useCart();
 
   const {
-    params: { id, nome, descricao, banner, produtos_avulsos, cestas, planos },
+    params: {
+      id,
+      nome,
+      contato,
+      descricao,
+      banner,
+      produtos_avulsos,
+      cestas,
+      planos,
+      endereco,
+    },
   } = useRoute<RouteProp<ParamList, 'StoreDetails'>>();
 
   useEffect(() => {
@@ -84,6 +100,7 @@ const StoreDetails: React.FC = () => {
           value: item.valor,
           unity: 'unidade',
           description: item.descricao,
+          storeId: id,
         })),
       },
       {
@@ -98,6 +115,7 @@ const StoreDetails: React.FC = () => {
           value: item.valor,
           unity: 'unidade',
           description: item.descricao,
+          storeId: id,
         })),
       },
       {
@@ -112,10 +130,20 @@ const StoreDetails: React.FC = () => {
           value: item.valor,
           unity: item.unidade_medida,
           description: item.descricao,
+          storeId: id,
         })),
       },
     ]);
-  }, [cestas, planos, produtos_avulsos]);
+  }, [cestas, planos, produtos_avulsos, id]);
+
+  const handleWhatsAppMessage = useCallback(
+    async (phoneNumber: string): Promise<void> => {
+      await Linking.openURL(`https://wa.me/55${phoneNumber}`).catch(err =>
+        console.log(err),
+      );
+    },
+    [],
+  );
 
   const selectMenu = useCallback(index => {
     setSelectedMenu(index);
@@ -153,8 +181,31 @@ const StoreDetails: React.FC = () => {
           />
         )}
         <HeaderContent>
-          <Title>{nome}</Title>
-          <StoreRA>Brazlandia</StoreRA>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              width: '100%',
+            }}
+          >
+            <View>
+              <Title>{nome}</Title>
+              <StoreRA>{endereco.bairro}</StoreRA>
+            </View>
+
+            <View style={{ flexDirection: 'row' }}>
+              <IconView onPress={() => navigation.navigate('Cart')}>
+                <MaterialCommunityIcons name="cart" size={23} color="#fff" />
+              </IconView>
+              <IconView onPress={() => handleWhatsAppMessage(contato)}>
+                <MaterialCommunityIcons
+                  name="whatsapp"
+                  size={23}
+                  color="#fff"
+                />
+              </IconView>
+            </View>
+          </View>
 
           <Separator />
 
@@ -210,7 +261,7 @@ const StoreDetails: React.FC = () => {
                     type: 'plano' as TypeItem,
                   };
 
-                  addItemToCart(plan);
+                  addItemToCart(plan, id);
                   item.quantity !== 0 && navigation.navigate('Cart');
                 }
               }}

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "mobile-client",
-    "slug": "mobile-client",
+    "name": "AgroMart",
+    "slug": "agromart",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

@@ -15,6 +15,7 @@ import {
   InfoLabel,
   ButtonText,
 } from './styles';
+import { priceFormat } from '../../utils';
 
 interface CartItemCardProps {
   photo: string;
@@ -48,7 +49,7 @@ const CartItemCard: React.FC<CartItemCardProps> = ({
       <IternalContainerRight>
         {/* <Img source={{ uri: `${baseURL}${photo}` }} /> */}
         <Img source={{ uri: `${photo}` }} />
-        <PriceText>R$ {price}</PriceText>
+        <PriceText>{price.toLocaleString('pt-BR', priceFormat)}</PriceText>
       </IternalContainerRight>
     </Container>
   );

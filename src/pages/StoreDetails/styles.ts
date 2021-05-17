@@ -89,3 +89,13 @@ export const TitleMenu = styled.Text`
   font-family: Montserrat-SemiBold;
   margin: 20px 0px;
 `;
+
+export const IconView = styled.TouchableOpacity`
+  height: 38px;
+  width: 38px;
+  border-radius: 19px;
+  background-color: ${colors.primary};
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
+`;
