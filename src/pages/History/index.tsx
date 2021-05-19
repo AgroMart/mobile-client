@@ -14,12 +14,49 @@ import { colors } from '../../styles';
 import { Container, Content, Heading, HistoryContainer } from './styles';
 
 interface Register {
-  id: number;
+  id: string;
+  itens: string;
   valor: number;
-  created_at: string;
+  entregue: false;
+  tipo_de_entrega: string;
   loja: {
+    id: string;
     nome: string;
+    descricao: string;
+    banner: string;
+    tipos_de_entrega: string;
+    contato: string;
+    cnpj: string;
+    usuario: string;
+    extratos: [string];
+    endereco: string;
+    produtos_avulsos: [string];
+    planos: [string];
+    cestas: [string];
+    published_at: string;
+    created_by: string;
+    updated_by: string;
   };
+  user: {
+    id: string;
+    username: string;
+    email: string;
+    provider: string;
+    password: string;
+    resetPasswordToken: string;
+    confirmationToken: string;
+    confirmed: true;
+    blocked: true;
+    role: string;
+    loja: string;
+    extratos: [string];
+    endereco: string;
+    assinantes: [string];
+    created_by: string;
+    updated_by: string;
+  };
+  pagamento_realizado: false;
+  created_at: string;
 }
 
 const History: React.FC = () => {
@@ -67,6 +104,7 @@ const History: React.FC = () => {
                   date={item.created_at}
                   seller={item.loja.nome}
                   value={item.valor}
+                  extract={item}
                   onPress={() => {}}
                 />
               ))}

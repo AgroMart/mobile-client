@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { format } from 'date-fns';
 
 import TextButton from '../TextButton';
+import ExtractModal from '../ExtractModal';
 
 import {
   Container,
@@ -20,6 +21,7 @@ export type HistoryCardProps = {
   seller: string;
   date: string;
   value: number;
+  extract: object;
   onPress(): void;
 };
 
@@ -27,10 +29,17 @@ const HistoryItemCard: React.FC<HistoryCardProps> = ({
   seller,
   date,
   value,
+  extract,
   onPress,
 }) => {
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
+
+  const handleModal = useCallback(() => {
+    setIsVisibleModal(!isVisibleModal);
+  }, [isVisibleModal]);
+
   return (
-    <Container onPress={onPress}>
+    <Container onPress={handleModal}>
       <Content>
         <HistoryInfo>
           <InfoView>
@@ -49,9 +58,14 @@ const HistoryItemCard: React.FC<HistoryCardProps> = ({
           </InfoView>
         </HistoryInfo>
         <TextButtonView>
-          <TextButton>Ver Detalhes</TextButton>
+          <TextButton onPress={handleModal}>Ver Detalhes</TextButton>
         </TextButtonView>
       </Content>
+      <ExtractModal
+        extract={extract}
+        handleModal={handleModal}
+        isVisibleModal={isVisibleModal}
+      />
     </Container>
   );
 };
