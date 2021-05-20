@@ -1,6 +1,9 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { View, Dimensions, Image } from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
+import Img1 from '../../assets/carrousel1.png';
+import Img2 from '../../assets/carrousel2.png';
+import Img3 from '../../assets/carrousel3.png';
 
 import { colors } from '../../styles';
 
@@ -10,16 +13,13 @@ type ItemProps = {
 
 const imagesUrl = [
   {
-    image:
-      'https://media-cdn.tripadvisor.com/media/photo-s/12/51/e0/0b/vista-da-chegada-na-pousada.jpg',
+    image: Img1,
   },
   {
-    image:
-      'https://comps.canstockphoto.com.br/fazenda-alface-filas-banco-de-fotos_csp5956244.jpg',
+    image: Img2,
   },
   {
-    image:
-      'https://media-cdn.tripadvisor.com/media/photo-s/12/51/e0/0b/vista-da-chegada-na-pousada.jpg',
+    image: Img3,
   },
 ];
 
@@ -31,7 +31,13 @@ const CustomCarousel: React.FC = () => {
   const windowWidth = Dimensions.get('window').width;
 
   const renderItem = useCallback(({ item }) => {
-    return <Image source={{ uri: item.image as string }} style={{ flex: 1 }} />;
+    return (
+      <Image
+        source={item.image}
+        style={{ width: '100%', flex: 1 }}
+        resizeMode="contain"
+      />
+    );
   }, []);
 
   return (

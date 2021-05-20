@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { Feather } from '@expo/vector-icons';
 
 import { format } from 'date-fns';
+import { ScrollView, TouchableWithoutFeedback } from 'react-native';
 import {
   Modal,
   ContainerClose,
@@ -99,54 +100,62 @@ const ExtractModal: React.FC<ExtractModalProps> = ({
       </ContainerClose>
 
       <Container>
-        <InfoTitle style={{ marginBottom: 10 }}>Informações gerais </InfoTitle>
-        <InfoView>
-          <InfoTitle>Vendedor: </InfoTitle>
-          <InfoText numberOfLines={1}>{extract.loja.nome}</InfoText>
-        </InfoView>
-        <InfoView>
-          <InfoTitle>Data da compra: </InfoTitle>
-          <InfoText numberOfLines={1}>
-            {format(new Date(extract.created_at), 'dd/MM/yyyy')}
-          </InfoText>
-        </InfoView>
-        <InfoView>
-          <GreenTitle>Valor: </GreenTitle>
-          <GreenInfo>
-            {extract.valor.toLocaleString('pt-BR', priceFormat)}
-          </GreenInfo>
-        </InfoView>
-        <InfoView>
-          <InfoTitle>Pagamento realizado: </InfoTitle>
-          <InfoText numberOfLines={1}>
-            {extract.pagamento_realizado ? 'sim' : 'não'}
-          </InfoText>
-        </InfoView>
-        <InfoView>
-          <InfoTitle>Produto entregue: </InfoTitle>
-          <InfoText numberOfLines={1}>
-            {extract.pagamento_realizado ? 'sim' : 'não'}
-          </InfoText>
-        </InfoView>
-        <InfoTitle style={{ marginVertical: 10 }}>Items</InfoTitle>
-        {products.map(item => (
-          <>
-            <InfoView>
-              <InfoTitle>Produto: </InfoTitle>
-              <InfoText numberOfLines={1}>{item.produto}</InfoText>
-            </InfoView>
-            <InfoView>
-              <InfoTitle>Quantidade: </InfoTitle>
-              <InfoText numberOfLines={1}>{item.quantidade}</InfoText>
-            </InfoView>
-            <InfoView>
-              <GreenTitle>Valor: </GreenTitle>
-              <GreenInfo>
-                {item.valor.toLocaleString('pt-BR', priceFormat)}
-              </GreenInfo>
-            </InfoView>
-          </>
-        ))}
+        <ScrollView style={{ width: '100%' }}>
+          <TouchableWithoutFeedback>
+            <>
+              <InfoTitle style={{ marginBottom: 10 }}>
+                Informações gerais
+              </InfoTitle>
+              <InfoView>
+                <InfoTitle>Vendedor: </InfoTitle>
+                <InfoText numberOfLines={1}>{extract.loja.nome}</InfoText>
+              </InfoView>
+              <InfoView>
+                <InfoTitle>Data da compra: </InfoTitle>
+                <InfoText numberOfLines={1}>
+                  {format(new Date(extract.created_at), 'dd/MM/yyyy')}
+                </InfoText>
+              </InfoView>
+              <InfoView>
+                <GreenTitle>Valor: </GreenTitle>
+                <GreenInfo>
+                  {extract.valor.toLocaleString('pt-BR', priceFormat)}
+                </GreenInfo>
+              </InfoView>
+              <InfoView>
+                <InfoTitle>Pagamento realizado: </InfoTitle>
+                <InfoText numberOfLines={1}>
+                  {extract.pagamento_realizado ? 'sim' : 'não'}
+                </InfoText>
+              </InfoView>
+              <InfoView>
+                <InfoTitle>Produto entregue: </InfoTitle>
+                <InfoText numberOfLines={1}>
+                  {extract.pagamento_realizado ? 'sim' : 'não'}
+                </InfoText>
+              </InfoView>
+              <InfoTitle style={{ marginVertical: 10 }}>Items</InfoTitle>
+              {products.map(item => (
+                <>
+                  <InfoView>
+                    <InfoTitle>Produto: </InfoTitle>
+                    <InfoText numberOfLines={1}>{item.produto}</InfoText>
+                  </InfoView>
+                  <InfoView>
+                    <InfoTitle>Quantidade: </InfoTitle>
+                    <InfoText numberOfLines={1}>{item.quantidade}</InfoText>
+                  </InfoView>
+                  <InfoView>
+                    <GreenTitle>Valor: </GreenTitle>
+                    <GreenInfo>
+                      {item.valor.toLocaleString('pt-BR', priceFormat)}
+                    </GreenInfo>
+                  </InfoView>
+                </>
+              ))}
+            </>
+          </TouchableWithoutFeedback>
+        </ScrollView>
       </Container>
     </Modal>
   );
