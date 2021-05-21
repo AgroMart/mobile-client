@@ -135,7 +135,7 @@ const CartScreen: React.FC = () => {
   };
 
   return (
-    <>
+    <Container>
       <BackHeader text="Pedidos" disabled={loading} />
       {loading ? (
         <View style={{ flex: 1, justifyContent: 'center' }}>
@@ -143,51 +143,49 @@ const CartScreen: React.FC = () => {
         </View>
       ) : (
         <>
-          <Container>
-            <AddressShortView
-              RA={userRA}
-              address={user.endereco ? user.endereco?.rua : ''}
+          <AddressShortView
+            RA={userRA}
+            address={user.endereco ? user.endereco?.rua : ''}
+            onPress={() => {
+              navigation.navigate('AddressForm');
+            }}
+          />
+          <Content>
+            <ItemList>
+              {cart.map(item => (
+                <CartItemCard
+                  name={item.name}
+                  photo={item.image}
+                  price={item.value * item.quantity}
+                  quantity={item.quantity}
+                  key={`${item.id}-${item.type}`}
+                  handleDelete={() => removeItemToCart(item.id, item.type)}
+                />
+              ))}
+            </ItemList>
+            <TextButton
               onPress={() => {
-                navigation.navigate('AddressForm');
+                navigation.navigate('StoreDetail');
               }}
-            />
-            <Content>
-              <ItemList>
-                {cart.map(item => (
-                  <CartItemCard
-                    name={item.name}
-                    photo={item.image}
-                    price={item.value * item.quantity}
-                    quantity={item.quantity}
-                    key={`${item.id}-${item.type}`}
-                    handleDelete={() => removeItemToCart(item.id, item.type)}
-                  />
-                ))}
-              </ItemList>
-              <TextButton
-                onPress={() => {
-                  navigation.navigate('StoreDetail');
-                }}
-              >
-                Adicionar mais itens
-              </TextButton>
+            >
+              Adicionar mais itens
+            </TextButton>
 
-              <Footer>
-                <TotalContainer>
-                  <TotalText>Total</TotalText>
-                  <TotalValue>
-                    {getTotal().toLocaleString('pt-BR', priceFormat)}
-                  </TotalValue>
-                </TotalContainer>
-                <ButtonContainer>
-                  <Button onPress={handleFinish}>Finalizar Pedido</Button>
-                </ButtonContainer>
-              </Footer>
-            </Content>
-          </Container>
+            <Footer>
+              <TotalContainer>
+                <TotalText>Total</TotalText>
+                <TotalValue>
+                  {getTotal().toLocaleString('pt-BR', priceFormat)}
+                </TotalValue>
+              </TotalContainer>
+              <ButtonContainer>
+                <Button onPress={handleFinish}>Finalizar Pedido</Button>
+              </ButtonContainer>
+            </Footer>
+          </Content>
         </>
       )}
-    </>
+    </Container>
   );
 };
 

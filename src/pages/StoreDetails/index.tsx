@@ -4,7 +4,6 @@ import { SectionList, View, FlatList, Linking } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { baseURL } from '../../services/api';
 import { useCart, TypeItem } from '../../hooks/CartProvider';
 
 import BackHeader from '../../components/BackHeader';

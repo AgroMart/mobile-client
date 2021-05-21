@@ -20,7 +20,7 @@ export const Header = styled.View`
 
 export const StoreBanner = styled.Image`
   width: 100%;
-  height: 100px;
+  height: 150px;
 `;
 
 export const HeaderContent = styled.View`
@@ -55,7 +55,7 @@ export const Content = styled.View`
 
 export const BackHeaderContainer = styled.View`
   position: absolute;
-  top: 0;
+  top: ${iPhoneHelper.getStatusBarHeight(false)}px;
   z-index: 10;
 `;
 

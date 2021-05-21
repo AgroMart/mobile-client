@@ -1,9 +1,11 @@
 import styled from 'styled-components/native';
 
 import { fonts, colors } from '../../styles';
+import { iPhoneHelper } from '../../utils';
 
 export const Container = styled.ScrollView`
   flex: 1;
+  padding-top: ${iPhoneHelper.getStatusBarHeight(true)}px;
 `;
 
 export const Content = styled.View`
