@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 
+import { Alert } from 'react-native';
 import { useCart, TypeItem } from '../../hooks/CartProvider';
+import { useAuth } from '../../hooks/AuthProvider';
 
 import BackHeader from '../../components/BackHeader';
 import ProductViewCard from '../../components/ProductViewCard';
@@ -32,6 +34,7 @@ type ParamList = {
 
 const Product: React.FC = () => {
   const { cart, addItemToCart, removeItemToCart } = useCart();
+  const { user } = useAuth();
   const [hasOnCart, setHasOnCart] = useState(false);
   const [wishQuantity, setWishQuantity] = useState(0);
 
@@ -64,6 +67,10 @@ const Product: React.FC = () => {
   };
 
   const handleAddItem = () => {
+    if (!user) {
+      return Alert.alert('Ops..', 'Você deve estar logado para fazer pedidos');
+    }
+
     const item = {
       id,
       name,
@@ -75,7 +82,7 @@ const Product: React.FC = () => {
     };
 
     addItemToCart(item, storeId);
-    item.quantity !== 0 && navigation.navigate('Cart');
+    return item.quantity !== 0 && navigation.navigate('Cart');
   };
 
   return (

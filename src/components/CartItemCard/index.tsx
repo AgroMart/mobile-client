@@ -1,7 +1,9 @@
 import React from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import { baseURL } from '../../services/api';
+import { priceFormat } from '../../utils';
+// import { baseURL } from '../../services/api';
+
 import { colors } from '../../styles';
 
 import {
@@ -15,7 +17,6 @@ import {
   InfoLabel,
   ButtonText,
 } from './styles';
-import { priceFormat } from '../../utils';
 
 interface CartItemCardProps {
   photo: string;

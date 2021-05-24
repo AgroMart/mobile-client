@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import React, { useRef, useState, useCallback, useEffect } from 'react';
-import { SectionList, View, FlatList, Linking } from 'react-native';
+import { SectionList, View, FlatList, Linking, Alert } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
@@ -193,7 +193,14 @@ const StoreDetails: React.FC = () => {
             </View>
 
             <View style={{ flexDirection: 'row' }}>
-              <IconView onPress={() => navigation.navigate('Cart')}>
+              <IconView
+                onPress={() => {
+                  if (!cart.length) {
+                    return Alert.alert('Ops...', 'Seu carrinho está vazio');
+                  }
+                  return navigation.navigate('Cart');
+                }}
+              >
                 <MaterialCommunityIcons name="cart" size={23} color="#fff" />
               </IconView>
               <IconView onPress={() => handleWhatsAppMessage(contato)}>
