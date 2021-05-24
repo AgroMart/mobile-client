@@ -32,9 +32,7 @@ const ProductViewCard: React.FC<ProductViewCardProps> = ({
         <ProductInfo>
           <ProductDesc>{description}</ProductDesc>
           <InfoView>
-            <ProductPrice>
-              {value.toLocaleString('pt-BR', priceFormat)}
-            </ProductPrice>
+            <ProductPrice>{priceFormat(value)}</ProductPrice>
           </InfoView>
         </ProductInfo>
       </InfoContainer>

@@ -44,7 +44,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </InfoView>
           <InfoView>
             <InfoTitle>{`Valor por ${unity.slice(0, 3)} :`}</InfoTitle>
-            <GreenText>{value.toLocaleString('pt-BR', priceFormat)}</GreenText>
+            <GreenText>{priceFormat(value)}</GreenText>
           </InfoView>
         </ProductInfo>
         <ImageView>

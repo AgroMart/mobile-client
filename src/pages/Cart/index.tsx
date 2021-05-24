@@ -174,9 +174,7 @@ const CartScreen: React.FC = () => {
             <Footer>
               <TotalContainer>
                 <TotalText>Total</TotalText>
-                <TotalValue>
-                  {getTotal().toLocaleString('pt-BR', priceFormat)}
-                </TotalValue>
+                <TotalValue>{priceFormat(getTotal())}</TotalValue>
               </TotalContainer>
               <ButtonContainer>
                 <Button onPress={handleFinish}>Finalizar Pedido</Button>

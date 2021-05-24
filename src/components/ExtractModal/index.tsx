@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import React, { useMemo } from 'react';
 import { Feather } from '@expo/vector-icons';
 
@@ -118,9 +119,7 @@ const ExtractModal: React.FC<ExtractModalProps> = ({
               </InfoView>
               <InfoView>
                 <GreenTitle>Valor: </GreenTitle>
-                <GreenInfo>
-                  {extract.valor.toLocaleString('pt-BR', priceFormat)}
-                </GreenInfo>
+                <GreenInfo>{priceFormat(extract.valor)}</GreenInfo>
               </InfoView>
               <InfoView>
                 <InfoTitle>Pagamento realizado: </InfoTitle>
@@ -147,9 +146,7 @@ const ExtractModal: React.FC<ExtractModalProps> = ({
                   </InfoView>
                   <InfoView>
                     <GreenTitle>Valor: </GreenTitle>
-                    <GreenInfo>
-                      {item.valor.toLocaleString('pt-BR', priceFormat)}
-                    </GreenInfo>
+                    <GreenInfo>{priceFormat(item.valor)}</GreenInfo>
                   </InfoView>
                 </>
               ))}

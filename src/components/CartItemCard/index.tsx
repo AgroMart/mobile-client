@@ -50,7 +50,7 @@ const CartItemCard: React.FC<CartItemCardProps> = ({
       <IternalContainerRight>
         {/* <Img source={{ uri: `${baseURL}${photo}` }} /> */}
         <Img source={{ uri: `${photo}` }} />
-        <PriceText>{price.toLocaleString('pt-BR', priceFormat)}</PriceText>
+        <PriceText>{priceFormat(price)}</PriceText>
       </IternalContainerRight>
     </Container>
   );

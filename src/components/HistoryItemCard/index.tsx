@@ -21,8 +21,7 @@ export type HistoryCardProps = {
   seller: string;
   date: string;
   value: number;
-  extract: object;
-  onPress(): void;
+  extract: any;
 };
 
 const HistoryItemCard: React.FC<HistoryCardProps> = ({
@@ -30,7 +29,6 @@ const HistoryItemCard: React.FC<HistoryCardProps> = ({
   date,
   value,
   extract,
-  onPress,
 }) => {
   const [isVisibleModal, setIsVisibleModal] = useState(false);
 
@@ -54,7 +52,7 @@ const HistoryItemCard: React.FC<HistoryCardProps> = ({
           </InfoView>
           <InfoView>
             <GreenTitle>Valor: </GreenTitle>
-            <GreenInfo>{value.toLocaleString('pt-BR', priceFormat)}</GreenInfo>
+            <GreenInfo>{priceFormat(value)}</GreenInfo>
           </InfoView>
         </HistoryInfo>
         <TextButtonView>
