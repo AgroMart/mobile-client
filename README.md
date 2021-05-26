@@ -38,7 +38,7 @@ Clone o repositorio:
 
 Acesse a pasta:
 
-> \$ cd Desafio-3-Grupo-6-mobile
+> \$ cd mobile-client
 
 - É necessário ter yarn e expo instalado.
 
