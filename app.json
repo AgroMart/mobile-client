@@ -26,6 +26,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.agromart",
+      "googleServicesFile": "./google-services.json",
       "versionCode": 1
     },
     "web": {
