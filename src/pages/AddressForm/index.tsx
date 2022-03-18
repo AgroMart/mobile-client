@@ -51,7 +51,7 @@ const AddressForm: React.FC = () => {
 
         if (user.endereco) {
           response = await api.put(`/enderecos/${user.endereco.id}`, body);
-          Alert.alert('Deu tudo certo :)', 'Endereço editado com sucesso');
+          Alert.alert('Deu tudo certo:', 'Endereço editado com sucesso');
         } else {
           response = await api.post('/enderecos', body);
           Alert.alert('Endereço criado com sucesso');
