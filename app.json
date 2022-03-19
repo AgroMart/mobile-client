@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "AgroMart",
+    "owner": "agromart",
     "slug": "agromart",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -25,6 +26,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.agromart",
+      "googleServicesFile": "./google-services.json",
       "versionCode": 1
     },
     "web": {
