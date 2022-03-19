@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
-import React, { useEffect, useState } from 'react';
-import { StatusBar } from 'react-native';
+import React, { useEffect } from 'react';
+import { StatusBar, Platform } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import * as Notifications from 'expo-notifications';
 import * as Permissions from 'expo-permissions';
@@ -50,11 +50,9 @@ const App: React.FC = () => {
 
     const token = (await Notifications.getExpoPushTokenAsync()).data;
 
-    console.log(token);
-
     const pushToken = token;
 
-    await AsyncStorage.setItem('@Agromart:push_token', pushToken)
+    await AsyncStorage.setItem('@Agromart:push_token', pushToken);
   };
 
   const [fontsLoaded] = useFonts({

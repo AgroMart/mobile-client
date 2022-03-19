@@ -5,6 +5,7 @@ import React, {
   useContext,
   useEffect,
 } from 'react';
+import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Device from 'expo-device';
 
@@ -135,6 +136,8 @@ const AuthProvider: React.FC = ({ children }) => {
       ]);
 
       setData({ token, user });
+
+      await registerDeviceInfo(user.id);
     },
     [],
   );
@@ -151,7 +154,7 @@ const AuthProvider: React.FC = ({ children }) => {
     const pushToken = await AsyncStorage.getItem('@Agromart:push_token');
 
     const body = {
-      platform: Device.osName,
+      platform: Platform.OS,
       model: Device.modelName,
       platform_version: Device.osVersion,
       expo_push_token: pushToken,
@@ -161,7 +164,7 @@ const AuthProvider: React.FC = ({ children }) => {
     try {
       const userHasDeviceRes = await api.get(`/devices/user/${userId}`);
 
-      if (userHasDeviceRes.data.status === 200) {
+      if (userHasDeviceRes.status === 200) {
         const deviceId = userHasDeviceRes.data.device_id;
 
         return await api.put(`/devices/${deviceId}`, body);
@@ -171,7 +174,6 @@ const AuthProvider: React.FC = ({ children }) => {
     } catch (err: any) {
       console.log(
         'Erro ao enviar informações do device',
-        err.status,
         err.message,
       );
     }
