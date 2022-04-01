@@ -45,6 +45,12 @@ const Profile: React.FC = () => {
             onPress={() => navigation.navigate('Plan')}
           />
           <ProfileItemAccess
+            icon="message-text-outline"
+            title="Notificações"
+            subtitle="Informações úteis sobe sua CSA"
+            onPress={() => navigation.navigate('Notifications')}
+          />
+          <ProfileItemAccess
             icon="logout"
             title="Sair"
             subtitle="Fazer logout do app"

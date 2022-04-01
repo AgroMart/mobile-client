@@ -12,6 +12,7 @@ import {
   ProductPage,
   SearchResult,
   Cart,
+  Notifications
 } from '../pages';
 
 const App = createStackNavigator();
@@ -34,6 +35,7 @@ const routes: React.FC = () => {
       <App.Screen name="ProductPage" component={ProductPage} />
       <App.Screen name="SearchResult" component={SearchResult} />
       <App.Screen name="Cart" component={Cart} />
+      <App.Screen name="Notifications" component={Notifications} />
     </App.Navigator>
   );
 };

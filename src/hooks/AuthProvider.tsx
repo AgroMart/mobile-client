@@ -105,7 +105,6 @@ const AuthProvider: React.FC = ({ children }) => {
       const { jwt: token, user } = response.data;
 
       api.defaults.headers.authorization = `Bearer ${token}`;
-
       await AsyncStorage.multiSet([
         ['@Agromart:token', token],
         ['@Agromart:user', JSON.stringify(user)],
@@ -158,24 +157,20 @@ const AuthProvider: React.FC = ({ children }) => {
       model: Device.modelName,
       platform_version: Device.osVersion,
       expo_push_token: pushToken,
-      user_fk: userId,
+      user_id: userId,
     };
 
     try {
       const userHasDeviceRes = await api.get(`/devices/user/${userId}`);
-
-      if (userHasDeviceRes.status === 200) {
+      if (userHasDeviceRes.data.status === 200) {
         const deviceId = userHasDeviceRes.data.device_id;
 
         return await api.put(`/devices/${deviceId}`, body);
       }
 
-      await api.post('/devices', body);
+      return await api.post('/devices', body);
     } catch (err: any) {
-      console.log(
-        'Erro ao enviar informações do device',
-        err.message,
-      );
+      console.log('Erro ao enviar informações do device', err.message);
     }
   };
 
