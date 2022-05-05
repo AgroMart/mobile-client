@@ -14,7 +14,7 @@ interface NotificationProps {
   body_text: string;
 }
 
-const Home: React.FC = () => {
+const Notifications: React.FC = () => {
   const { user } = useAuth();
 
   const [notifications, setNotifications] = useState([] as NotificationProps[]);
@@ -61,4 +61,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Notifications;

@@ -5,6 +5,7 @@ import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { useCart, TypeItem } from '../../hooks/CartProvider';
+import { useAuth } from '../../hooks/AuthProvider';
 
 import BackHeader from '../../components/BackHeader';
 import ProductCard from '../../components/ProductCard';
@@ -70,6 +71,7 @@ const StoreDetails: React.FC = () => {
 
   const [data, setData] = useState<Category[]>([]);
   const { addItemToCart, cart } = useCart();
+  const { user } = useAuth();
 
   const {
     params: {
@@ -196,6 +198,9 @@ const StoreDetails: React.FC = () => {
               <IconView
                 onPress={() => {
                   if (!cart.length) {
+                    if (!user) {
+                      return Alert.alert('Ops...', 'Você deve estar logado para acessar o carrinho.');
+                    }
                     return Alert.alert('Ops...', 'Seu carrinho está vazio');
                   }
                   return navigation.navigate('Cart');
@@ -257,6 +262,9 @@ const StoreDetails: React.FC = () => {
                 if (item.type !== 'plano') {
                   navigation.navigate('ProductPage', item);
                 } else {
+                  if (!user) {
+                    return Alert.alert('Ops...', 'Você deve estar logado para adicionar um plano ao carrinho.');
+                  }
                   const plan = {
                     id: item.id,
                     name: item.name,

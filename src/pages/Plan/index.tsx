@@ -48,7 +48,7 @@ const Plan: React.FC = () => {
   useEffect(() => {
     async function load() {
       try {
-        const { data } = await api.get(`/assinantes?usuario=${user.id}`);
+        const { data } = await api.get(`assinantes?usuario=${user.id}`);
 
         setPlans(data);
       } catch (err) {
