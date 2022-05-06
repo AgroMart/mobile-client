@@ -161,14 +161,14 @@ const AuthProvider: React.FC = ({ children }) => {
     };
 
     try {
-      const userHasDeviceRes = await api.get(`/devices/user/${userId}`);
+      const userHasDeviceRes = await api.get(`devices/user/${userId}`);
       if (userHasDeviceRes.data.status === 200) {
         const deviceId = userHasDeviceRes.data.device_id;
 
-        return await api.put(`/devices/${deviceId}`, body);
+        return await api.put(`devices/${deviceId}`, body);
       }
 
-      return await api.post('/devices', body);
+      return await api.post('devices', body);
     } catch (err: any) {
       console.log('Erro ao enviar informações do device', err.message);
     }

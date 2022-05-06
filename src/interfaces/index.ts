@@ -57,3 +57,20 @@ export interface Cest {
   descricao: string;
   item_da_cesta: Product[];
 }
+
+export interface BillingAddress {
+  street: string;
+  number: number;
+  complement: string;
+  neighborhood: string;
+  city: string;
+  state: string;
+  postCode: string;
+}
+
+export interface ICreditCard {
+  holderName: string;
+  cardNumber: string;
+  expiration: string;
+  cvv: string;
+}

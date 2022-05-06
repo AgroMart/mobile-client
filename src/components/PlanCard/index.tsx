@@ -53,7 +53,7 @@ const PlanCard: React.FC<StoreCardProps> = ({
     setLoading(true);
 
     try {
-      await api.put(`/assinantes/${id}`, {
+      await api.put(`assinantes/${id}`, {
         pular_cesta: !switchValue,
       });
     } catch (error) {

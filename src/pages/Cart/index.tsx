@@ -2,20 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Alert, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
-import api from '../../services/api';
 import RAs from '../../utils/mockCitys';
-import { useAuth } from '../../hooks/AuthProvider';
-import { useCart } from '../../hooks/CartProvider';
-
-import AddressShortView from '../../components/AddressShortView';
-import BackHeader from '../../components/BackHeader';
-import CartItemCard from '../../components/CartItemCard';
-import TextButton from '../../components/TextButton';
-import Button from '../../components/Button';
-
 import { colors } from '../../styles';
-
 import {
   Container,
   Content,
@@ -28,18 +16,24 @@ import {
 } from './styles';
 import { priceFormat } from '../../utils';
 
-interface StockParams {
-  id: number;
-  quantity: number;
-  stock: number;
-}
+// Components imports
+import AddressShortView from '../../components/AddressShortView';
+import BackHeader from '../../components/BackHeader';
+import CartItemCard from '../../components/CartItemCard';
+import TextButton from '../../components/TextButton';
+import Button from '../../components/Button';
+
+// Context imports
+import { useAuth } from '../../hooks/AuthProvider';
+import { useCart } from '../../hooks/CartProvider';
 
 const CartScreen: React.FC = () => {
   const [userRA, setUserRA] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // Context
   const { user } = useAuth();
-  const { cart, removeItemToCart, getTotal, cleanUpCart, storeId } = useCart();
+  const { cart, removeItemToCart, getTotal } = useCart();
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -54,82 +48,12 @@ const CartScreen: React.FC = () => {
     }
   }, [cart, navigation]);
 
-  const updateStockRequestModifier = {
-    produto: async (item: StockParams) => {
-      try {
-        const body = {
-          quantidade: item.stock - item.quantity,
-        };
-        await api.put(`/produtos-avulsos/${item.id}`, body);
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    cesta: async (item: StockParams) => {
-      try {
-        const body = {
-          quantidade: item.stock - item.quantity,
-        };
-        await api.put(`/cestas/${item.id}`, body);
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    plano: async (item: StockParams) => {
-      try {
-        const body = {
-          quantidade: item.stock - item.quantity,
-        };
-        const response = await api.put(`/planos/${item.id}`, body);
-
-        const { id, quantidade_de_cestas } = response.data;
-
-        const subscriberBody = {
-          nome: user.username,
-          cestas_disponiveis: quantidade_de_cestas,
-          plano: id,
-          usuario: user.id,
-        };
-
-        await api.post('/assinantes', subscriberBody);
-      } catch (err) {
-        console.log(err);
-      }
-    },
-  };
-
   const handleFinish = async () => {
     setLoading(true);
-    const extractBody = {
-      valor: getTotal(),
-      user: user.id,
-      loja: storeId,
-      itens: {
-        produtos: [] as any,
-      },
-    };
-    cart.forEach(item => {
-      updateStockRequestModifier[item.type](item);
-
-      extractBody.itens = {
-        produtos: [
-          ...extractBody.itens.produtos,
-          {
-            produto: item.name,
-            quantidade: item.quantity,
-            valor: item.value,
-          },
-        ],
-      };
-    });
-
     try {
-      await api.post('/extratoes', extractBody);
-      cleanUpCart();
-      Alert.alert('Deu tudo certo :)', 'Pedido realizado com sucesso');
-      navigation.navigate('History');
+      navigation.navigate('BillingAddress');
     } catch {
-      Alert.alert('Ops', 'Não foi possível realizar o seu pedido');
+      Alert.alert('Ops...', 'Não foi possível prosseguir para o pagamento.');
     }
     setLoading(false);
   };
@@ -177,7 +101,7 @@ const CartScreen: React.FC = () => {
                 <TotalValue>{priceFormat(getTotal())}</TotalValue>
               </TotalContainer>
               <ButtonContainer>
-                <Button onPress={handleFinish}>Finalizar Pedido</Button>
+                <Button onPress={handleFinish}>Realizar Pagamento</Button>
               </ButtonContainer>
             </Footer>
           </Content>
