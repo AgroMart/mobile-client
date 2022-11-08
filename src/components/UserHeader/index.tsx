@@ -3,6 +3,8 @@ import { useNavigation } from '@react-navigation/native';
 
 import DefaultProfile from '../../assets/defaultAvatar.png';
 
+import DropdownComponent from '../DropdownComponent';
+
 import { Container, Img, Text } from './styles';
 
 interface UserHeaderProps {
@@ -20,6 +22,7 @@ const UserHeader: React.FC<UserHeaderProps> = ({ photo, name, disabled }) => {
       disabled={disabled}
     >
       <Img source={photo ? { uri: photo } : DefaultProfile} />
+      <DropdownComponent />
       <Text>
         Olá,{' '}
         {name ? (
