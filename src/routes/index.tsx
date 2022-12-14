@@ -28,8 +28,8 @@ const routes: React.FC = () => {
         cardStyle: { backgroundColor: '#fff' },
       }}
     >
-      <App.Screen name="SelectCSA" component={SelectCSA} />
       <App.Screen name="Home" component={TabRoutes} />
+      <App.Screen name="SelectCSA" component={SelectCSA} />
       <App.Screen name="StoreDetail" component={StoreDetails} />
       <App.Screen name="Plan" component={Plan} />
       <App.Screen name="ProfileInfo" component={ProfileInfo} />

@@ -18,11 +18,11 @@ const UserHeader: React.FC<UserHeaderProps> = ({ photo, name, disabled }) => {
 
   return (
     <Container
-      onPress={() => navigation.navigate('SignIn')}
+    style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"space-between"}}
+      onPress={() => navigation.navigate('SelectCSA')}
       disabled={disabled}
     >
       <Img source={photo ? { uri: photo } : DefaultProfile} />
-      <DropdownComponent />
       <Text>
         Olá,{' '}
         {name ? (
@@ -31,6 +31,8 @@ const UserHeader: React.FC<UserHeaderProps> = ({ photo, name, disabled }) => {
           'faça login ou cadastro.'
         )}
       </Text>
+      <DropdownComponent />
+      
     </Container>
   );
 };

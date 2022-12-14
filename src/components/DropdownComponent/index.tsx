@@ -1,6 +1,9 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { AsyncStorage, StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
+import Button from '../../components/Button';
+
 import { baseURL } from '../../services/api-dicionario';
 
 const data = [
@@ -14,19 +17,17 @@ const data = [
   { label: 'Item 8', value: '8' },
 ];
 
-
-const DropdownComponent = ({rows}) => {
-
-  const setUrl = async (url:string)=>{
+const DropdownComponent = ({ rows }) => {
+  const setUrl = async (url: string) => {
     await AsyncStorage.setItem('@Agromart:urlBASE', url);
-  }
+  };
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
-
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Text>Selecione sua CSA</Text>
-      <Dropdown
+      {/* <Text>Selecione sua CSA</Text> */}
+      {/* <Dropdown
         style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
@@ -48,7 +49,10 @@ const DropdownComponent = ({rows}) => {
           setValue(item.value);
           setIsFocus(false);
         }}
-      />
+      /> */}
+      <Button children={null} onPress={() => navigation.navigate('SelectCSA')}>
+        Escolha sua CSA
+      </Button>
     </View>
   );
 };
