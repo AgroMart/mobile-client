@@ -31,7 +31,12 @@ const UserHeader: React.FC<UserHeaderProps> = ({ photo, name, disabled }) => {
           'faça login ou cadastro.'
         )}
       </Text>
-      <DropdownComponent />
+      {name ? (
+          <Text logged={!!name}>{""}.</Text>
+        ) : (
+          <DropdownComponent logged={name?.length>1?true:false}/>
+        )}
+      
       
     </Container>
   );

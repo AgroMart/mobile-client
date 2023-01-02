@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import LogoAgromart from '../../assets/logo.png';
 import * as Yup from 'yup';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import DropdownComponent from '../../components/DropdownComponent';
 import BackHeader from '../../components/BackHeader';
@@ -24,6 +25,10 @@ const SelectCSA: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [chosenCsa, setChosenCsa] = useState<CSAObj | null>(null);
 
+  useEffect(()=>{
+     AsyncStorage.removeItem('@BaseUrlChosen');
+     AsyncStorage.removeItem('@csaChosen');
+  })
   const SCHEMA = Yup.object().shape({
     CsaCode: Yup.string().required(),
   });
@@ -46,8 +51,9 @@ const SelectCSA: React.FC = () => {
     }
   }, []);
  const navigation = useNavigation();
- const setAssyncCSA =()=>{
-   
+ const setAssyncCSA =async()=>{
+  await AsyncStorage.setItem('@BaseUrlChosen', `${chosenCsa?.urlBase}`);
+  await AsyncStorage.setItem('@csaChosen', JSON.stringify(chosenCsa));
   navigation.navigate('SignIn');
  }
   const formik = useFormik({

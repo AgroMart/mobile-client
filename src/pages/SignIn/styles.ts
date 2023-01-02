@@ -21,6 +21,12 @@ export const AppName = styled.Text`
   font-family: ${fonts.REGULAR};
 `;
 
+export const CSAChosen = styled.Text`
+  font-size: ${fonts.EXTRA_SMALL}px;
+  margin-bottom: ${metrics.PADDING_SCREEN * 2}px;
+  font-family: ${fonts.REGULAR};
+`;
+
 export const AnimationCircule = styled.ActivityIndicator.attrs({
   size: 'small',
   color: `${colors.secondary}`,
