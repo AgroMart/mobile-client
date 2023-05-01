@@ -32,4 +32,5 @@ export const Text = styled.Text<TextProps>`
   font-family: ${fonts.REGULAR};
   color: ${({ logged }) =>
     logged ? `${colors.secondary}` : `${colors.shadow}`};
+  margin-top: 10px
 `;

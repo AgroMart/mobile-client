@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "react-native start",
+    "start": "expo start --dev-client",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "web": "expo start --web",
@@ -13,6 +13,8 @@
     "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-native-community/clipboard": "^1.5.1",
     "@react-native-community/masked-view": "0.1.10",
+    "@react-native-community/picker": "^1.8.1",
+    "@react-native-picker/picker": "2.2.1",
     "@react-navigation/bottom-tabs": "^5.11.8",
     "@react-navigation/native": "^5.9.3",
     "@react-navigation/stack": "^5.14.3",
@@ -37,6 +39,7 @@
     "react-dom": "17.0.1",
     "react-hook-form": "^7.30.0",
     "react-native": "0.64.3",
+    "react-native-element-dropdown": "^2.3.1",
     "react-native-gesture-handler": "~2.1.0",
     "react-native-juno-rn-card-hash": "^1.2.0",
     "react-native-linear-gradient": "^2.5.6",

@@ -11,6 +11,7 @@ import * as Device from 'expo-device';
 
 import api from '../services/api';
 import { Address } from '../interfaces';
+import axios from 'axios';
 
 interface User {
   id: string;
@@ -38,6 +39,7 @@ interface SignUpCredentials {
 interface AuthContextData {
   user: User;
   loading: boolean;
+  baseUrl: String;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): Promise<void>;
   signUp(info: SignUpCredentials): Promise<void>;
@@ -58,6 +60,12 @@ const AuthProvider: React.FC = ({ children }) => {
         '@Agromart:user',
       ]);
 
+      const url = await AsyncStorage.getItem('@BaseUrlChosen');
+      // console.log(url, 'Antes');
+
+      if (url) {
+        api.defaults.baseURL = url;
+      }
       if (token[1] && user[1]) {
         api.defaults.headers.authorization = `Bearer ${token[1]}`;
 
@@ -97,7 +105,9 @@ const AuthProvider: React.FC = ({ children }) => {
 
   const signIn = useCallback(
     async ({ username, password }: SignInCredentials) => {
-      const response = await api.post('auth/local', {
+      const url = await AsyncStorage.getItem('@BaseUrlChosen');
+      console.log('LOGANDO DENTRO', url);
+      const response = await axios.post(`${url}auth/local`, {
         identifier: username,
         password,
       });
@@ -119,7 +129,9 @@ const AuthProvider: React.FC = ({ children }) => {
 
   const signUp = useCallback(
     async ({ username, password, email }: SignUpCredentials) => {
-      const response = await api.post('auth/local/register', {
+      const url = await AsyncStorage.getItem('@BaseUrlChosen');
+      console.log('CRIANDO DENTRO FODAC', url);
+      const response = await axios.post(`${url}auth/local/register`, {
         username,
         password,
         email,

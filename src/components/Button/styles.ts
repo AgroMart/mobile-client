@@ -12,6 +12,7 @@ export const LinearGradientButton = styled(LinearGradient).attrs({
   width: 100%;
   border-radius: 10px;
   margin-top: ${metrics.PADDING_SCREEN}px;
+  padding:10px;
 `;
 
 export const Container = styled(RectButton)`

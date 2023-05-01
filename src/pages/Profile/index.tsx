@@ -44,17 +44,17 @@ const Profile: React.FC = () => {
             subtitle="Planos assinados"
             onPress={() => navigation.navigate('Plan')}
           />
+            <ProfileItemAccess
+              icon="logout"
+              title="Sair"
+              subtitle="Fazer logout do app"
+              onPress={signOut}
+            />
           <ProfileItemAccess
             icon="message-text-outline"
             title="Notificações"
             subtitle="Informações úteis sobe sua CSA"
             onPress={() => navigation.navigate('Notifications')}
-          />
-          <ProfileItemAccess
-            icon="logout"
-            title="Sair"
-            subtitle="Fazer logout do app"
-            onPress={signOut}
           />
         </>
       )}
