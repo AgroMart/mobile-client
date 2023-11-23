@@ -168,9 +168,12 @@ const AuthProvider: React.FC = ({ children }) => {
       platform: Platform.OS,
       model: Device.modelName,
       platform_version: Device.osVersion,
-      expo_push_token: pushToken,
+      // expo_push_token: pushToken,
+      expo_push_token: "pushTokenTeste123",
       user_id: userId,
     };
+
+    console.log("registerDeviceInfo - body =======> ", body);
 
     try {
       const userHasDeviceRes = await api.get(`devices/user/${userId}`);
@@ -183,6 +186,7 @@ const AuthProvider: React.FC = ({ children }) => {
       return await api.post('devices', body);
     } catch (err: any) {
       console.log('Erro ao enviar informações do device', err.message);
+      console.log('ERRO ========> ', err);
     }
   };
 

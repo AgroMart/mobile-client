@@ -23,6 +23,7 @@ const Home: React.FC = () => {
     async function load() {
       try {
         const response = await api.get('lojas');
+        console.log('response =====> ', response.data);
         updateStores(response.data);
       } catch (err) {
         Alert.alert('Ops', 'Não foi possivel carregar as lojas');

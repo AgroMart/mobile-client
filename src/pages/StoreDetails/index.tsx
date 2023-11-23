@@ -54,7 +54,7 @@ type ParamList = {
     banner: {
       url: string;
     };
-    produtos_avulsos: any[];
+    produto_avulsos: any[];
     cestas: any[];
     planos: any[];
     endereco: {
@@ -80,7 +80,7 @@ const StoreDetails: React.FC = () => {
       contato,
       descricao,
       banner,
-      produtos_avulsos,
+      produto_avulsos,
       cestas,
       planos,
       endereco,
@@ -122,7 +122,7 @@ const StoreDetails: React.FC = () => {
       {
         id: 3,
         title: 'Produtos',
-        data: produtos_avulsos.map(item => ({
+        data: produto_avulsos.map(item => ({
           id: item.id,
           type: 'produto',
           name: item.nome,
@@ -135,7 +135,7 @@ const StoreDetails: React.FC = () => {
         })),
       },
     ]);
-  }, [cestas, planos, produtos_avulsos, id]);
+  }, [cestas, planos, produto_avulsos, id]);
 
   const handleWhatsAppMessage = useCallback(
     async (phoneNumber: string): Promise<void> => {
