@@ -37,8 +37,7 @@ const SelectCSA: React.FC = () => {
     setLoading(true);
 
     try {
-      console.log('logante');
-      const resp = await apiDicionario.get(`csas/${parseInt(data.CsaCode)}`);
+      const resp = await apiDicionario.get(`csas/${data.CsaCode}`);
       console.log(resp.data);
       if (resp.data) {
         setChosenCsa(resp.data);
