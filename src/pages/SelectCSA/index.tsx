@@ -38,7 +38,7 @@ const SelectCSA: React.FC = () => {
 
     try {
       console.log('logante');
-      const resp = await apiDicionario.get(`csa/${parseInt(data.CsaCode)}`);
+      const resp = await apiDicionario.get(`csas/${parseInt(data.CsaCode)}`);
       console.log(resp.data);
       if (resp.data) {
         setChosenCsa(resp.data);
@@ -95,7 +95,6 @@ const SelectCSA: React.FC = () => {
             <AppName>AgroMart</AppName>
             <Input
               placeholder="Código CSA"
-              keyboardType="numeric"
               autoCorrect={false}
               value={formik.values.CsaCode}
               returnKeyType="send"
