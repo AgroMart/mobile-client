@@ -1,10 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import {StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import Button from '../../components/Button';
-
-import { baseURL } from '../../services/api-dicionario';
 
 const data = [
   { label: 'Item 1', value: '1' },
@@ -17,7 +15,7 @@ const data = [
   { label: 'Item 8', value: '8' },
 ];
 
-const DropdownComponent = (logged:boolean) => {
+const DropdownComponent = (logged: boolean) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
   const navigation = useNavigation();
@@ -47,11 +45,13 @@ const DropdownComponent = (logged:boolean) => {
           setIsFocus(false);
         }}
       /> */}
-      {logged &&(
-
-      <Button children={null} onPress={() => navigation.navigate('SelectCSA')}>
-        Escolha sua CSA
-      </Button>
+      {logged && (
+        <Button
+          children={null}
+          onPress={() => navigation.navigate('SelectCSA')}
+        >
+          Escolha sua CSA
+        </Button>
       )}
     </View>
   );

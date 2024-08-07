@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { useFocusEffect } from '@react-navigation/native';
 import { Text, ActivityIndicator, Alert } from 'react-native';
 
-import api from '../../services/api';
+import initializeApi from '../../services/api';
 import { useAuth } from '../../hooks/AuthProvider';
 
 import HistoryItemCard from '../../components/HistoryItemCard';
@@ -70,6 +70,8 @@ const History: React.FC = () => {
       setLoading(true);
 
       try {
+        const api = await initializeApi();
+
         const { data } = await api.get(`extratoes?user=${user.id}`);
         setHistory(data);
       } catch (err) {

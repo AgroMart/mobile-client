@@ -5,7 +5,7 @@ import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { useAuth } from '../../hooks/AuthProvider';
 import { useStores } from '../../hooks/StoresProvider';
 
-import api from '../../services/api';
+import initializeApi from '../../services/api';
 
 import UserHeader from '../../components/UserHeader';
 import Carousel from '../../components/Carousel';
@@ -22,10 +22,13 @@ const Home: React.FC = () => {
   const loadStores = useCallback(() => {
     async function load() {
       try {
+        const api = await initializeApi();
+
         const response = await api.get('lojas');
         console.log('response =====> ', response.data);
         updateStores(response.data);
       } catch (err) {
+        console.log({ err });
         Alert.alert('Ops', 'Não foi possivel carregar as lojas');
       }
     }

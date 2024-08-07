@@ -22,7 +22,7 @@ import {
   CreateAccountButtonText,
 } from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import api from '../../services/api';
+
 type CSAObj = {
   urlBase: string;
   nomeCSA: string;
@@ -33,19 +33,18 @@ const SignIn: React.FC = () => {
   const passwordRef = useRef<TextInput | any>();
   const navigation = useNavigation();
 
-  const [csa, setcsa] = useState<CSAObj|null>(null);
-  const [urlcsa, seturl] = useState<string|null>("");
-
+  const [csa, setcsa] = useState<CSAObj | null>(null);
+  const [urlcsa, seturl] = useState<string | null>('');
 
   const getCSA = async () => {
     const url = await AsyncStorage.getItem('@csaChosen');
     const urls = await AsyncStorage.getItem('@BaseUrlChosen');
     seturl(urls);
-    if(url){
-      const jsonparsed = JSON.parse(url ? url : '')
+    if (url) {
+      const jsonparsed = JSON.parse(url ? url : '');
       setcsa(jsonparsed as unknown as CSAObj);
-    }else{
-      navigation.navigate("SelectCSA")
+    } else {
+      navigation.navigate('SelectCSA');
     }
   };
   useEffect(() => {
@@ -93,8 +92,8 @@ const SignIn: React.FC = () => {
       <Container>
         <Logo source={LogoAgromart} />
         <AppName>AgroMart</AppName>
-         <CSAChosen>{`utilizando CSA: "${csa?.nomeCSA}"`}</CSAChosen>
-         <CSAChosen>{`utilizando CSA: "${urlcsa}"`}</CSAChosen>
+        <CSAChosen>{`utilizando CSA: "${csa?.nomeCSA}"`}</CSAChosen>
+        <CSAChosen>{`utilizando CSA: "${urlcsa}"`}</CSAChosen>
         <Input
           placeholder="E-mail"
           autoCorrect={false}

@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import {
-  Alert,
-  ScrollView,
-  Text
-} from 'react-native';
-import { Container, ViewSpacer, AnimationCircule } from "./styles";
+import { Alert, ScrollView, Text } from 'react-native';
+import { Container, ViewSpacer, AnimationCircule } from './styles';
 import LottieView from 'lottie-react-native';
 import CreditCardForm, { FormModel } from 'rn-credit-card';
 import '@expo/browser-polyfill';
@@ -13,7 +9,7 @@ import JunoCardHash from 'react-native-juno-rn-card-hash';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { ICreditCard } from '../../interfaces';
 
-import api from '../../services/api';
+import initializeApi from '../../services/api';
 
 // Components imports
 import Button from '../../components/Button';
@@ -24,7 +20,8 @@ import { useAuth } from '../../hooks/AuthProvider';
 import { useCart } from '../../hooks/CartProvider';
 
 const PUBLIC_TOKEN = process.env.PUBLIC_TOKEN_JUNO;
-const JUNO_ENV = process.env.NODE_ENV === 'development' ? 'sandbox' : 'production';
+const JUNO_ENV =
+  process.env.NODE_ENV === 'development' ? 'sandbox' : 'production';
 
 interface StockParams {
   id: number;
@@ -45,7 +42,7 @@ const CreditCardPayment: React.FC = () => {
   const [document, setDocument] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const { handleSubmit, formState } = formMethods;
-  const [ loading, setLoading ] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { user } = useAuth();
   const { storeId, getTotal } = useCart();
@@ -54,12 +51,8 @@ const CreditCardPayment: React.FC = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-
   const getCardHash = async (creditCardData: ICreditCard) => {
-    const juno = new JunoCardHash(
-      PUBLIC_TOKEN as string,
-      JUNO_ENV
-    );
+    const juno = new JunoCardHash(PUBLIC_TOKEN as string, JUNO_ENV);
 
     const cardData = {
       holderName: creditCardData.holderName,
@@ -69,63 +62,69 @@ const CreditCardPayment: React.FC = () => {
       expirationYear: '20' + creditCardData.expiration.split('/')[1],
     };
 
-    console.log("Cartao de credito", cardData);
+    console.log('Cartao de credito', cardData);
 
-    try{
+    try {
       const response = await juno.getCardHash(cardData);
-      console.log("Hash do cartão\n"+response+"\n");
+      console.log('Hash do cartão\n' + response + '\n');
 
-      return response
-    }catch(e: any){
-      console.log("Erro ao gerar hash do cartão", e);
+      return response;
+    } catch (e: any) {
+      console.log('Erro ao gerar hash do cartão', e);
     }
-  }
+  };
 
   const sendSubscriberData = async () => {
-      const updateStockRequestModifier = {
-    produto: async (item: StockParams) => {
-      try {
-        const body = {
-          quantidade: item.stock - item.quantity,
-        };
-        await api.put(`produtos-avulsos/${item.id}`, body);
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    cesta: async (item: StockParams) => {
-      try {
-        const body = {
-          quantidade: item.stock - item.quantity,
-        };
-        await api.put(`cestas/${item.id}`, body);
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    plano: async (item: StockParams) => {
-      try {
-        const body = {
-          quantidade: item.stock - item.quantity,
-        };
-        const response = await api.put(`planos/${item.id}`, body);
+    const updateStockRequestModifier = {
+      produto: async (item: StockParams) => {
+        try {
+          const api = await initializeApi();
 
-        const { id, quantidade_de_cestas } = response.data;
+          const body = {
+            quantidade: item.stock - item.quantity,
+          };
+          await api.put(`produtos-avulsos/${item.id}`, body);
+        } catch (err) {
+          console.log(err);
+        }
+      },
+      cesta: async (item: StockParams) => {
+        try {
+          const body = {
+            quantidade: item.stock - item.quantity,
+          };
+          const api = await initializeApi();
 
-        const subscriberBody = {
-          nome: user.username,
-          cestas_disponiveis: quantidade_de_cestas,
-          plano: id,
-          usuario: user.id,
-          loja: storeId
-        };
+          await api.put(`cestas/${item.id}`, body);
+        } catch (err) {
+          console.log(err);
+        }
+      },
+      plano: async (item: StockParams) => {
+        try {
+          const body = {
+            quantidade: item.stock - item.quantity,
+          };
+          const api = await initializeApi();
 
-        await api.post('assinantes', subscriberBody);
-      } catch (err) {
-        console.log(err);
-      }
-    },
-  };
+          const response = await api.put(`planos/${item.id}`, body);
+
+          const { id, quantidade_de_cestas } = response.data;
+
+          const subscriberBody = {
+            nome: user.username,
+            cestas_disponiveis: quantidade_de_cestas,
+            plano: id,
+            usuario: user.id,
+            loja: storeId,
+          };
+
+          await api.post('assinantes', subscriberBody);
+        } catch (err) {
+          console.log(err);
+        }
+      },
+    };
     const extractBody = {
       valor: getTotal(),
       user: user.id,
@@ -151,12 +150,14 @@ const CreditCardPayment: React.FC = () => {
     });
 
     try {
+      const api = await initializeApi();
+
       await api.post('extratoes', extractBody);
       cleanUpCart();
-    } catch(error) {
-      console.log("Erro", error)
+    } catch (error) {
+      console.log('Erro', error);
     }
-  }
+  };
 
   const onSubmit = async (model: FormModel) => {
     setLoading(true);
@@ -166,7 +167,7 @@ const CreditCardPayment: React.FC = () => {
     const birthDateSplited = birthDate.split('/');
 
     const currentDate = new Date();
-    const currentMonth = Number(currentDate.getMonth())
+    const currentMonth = Number(currentDate.getMonth());
     const month = currentMonth > 9 ? currentMonth : `0${currentMonth}`;
     const currentDay = Number(currentDate.getDate());
     const day = currentDay > 9 ? currentDay : `0${currentDay}`;
@@ -188,27 +189,28 @@ const CreditCardPayment: React.FC = () => {
         document,
         email: user.email,
         birthDate: `${birthDateSplited[2]}-${birthDateSplited[1]}-${birthDateSplited[0]}`,
-        ...billingAddress
+        ...billingAddress,
       },
     };
 
-    try{
+    try {
+      const api = await initializeApi();
+
       const payment = await api.post('payment/credit-card', paymentData);
       await sendSubscriberData();
 
-      if (payment.status === 200){
+      if (payment.status === 200) {
         navigation.navigate('History');
       }
-    }catch(error){
-      console.log("Erro ao processar pagamento", error)
+    } catch (error) {
+      console.log('Erro ao processar pagamento', error);
       Alert.alert('Ops... ', 'Não foi possível prosseguir para o pagamento.');
-
     } finally {
       setLoading(false);
     }
-  }
+  };
 
-    const creditCardTranlations = {
+  const creditCardTranlations = {
     cardNumber: 'Número do cartão',
     cardHolderName: 'Nome do Titular',
     mmYY: 'MM/AA',
@@ -228,48 +230,47 @@ const CreditCardPayment: React.FC = () => {
   return (
     <Container>
       <ScrollView>
-          <FormProvider {...formMethods}>
-            <CreditCardForm
-              LottieView={LottieView}
-              horizontalStart
-              inputColors={{
-                focused: 'green',
-              }}
-              overrides={{
-                input: {
-                  height: 60,
-                  paddingVertical: 5,
-                },
-              }}
-              translations={creditCardTranlations}
-            />
-
-          </FormProvider>
-
-          <Text>CPF do Titular</Text>
-          <Input
-            placeholder="CPF"
-            autoCorrect={false}
-            value={document}
-            type='numeric'
-            onChangeText={e => setDocument(e)}
+        <FormProvider {...formMethods}>
+          <CreditCardForm
+            LottieView={LottieView}
+            horizontalStart
+            inputColors={{
+              focused: 'green',
+            }}
+            overrides={{
+              input: {
+                height: 60,
+                paddingVertical: 5,
+              },
+            }}
+            translations={creditCardTranlations}
           />
+        </FormProvider>
 
-          <Text>Data de Nasciemnto do Titular</Text>
-          <Input
-            placeholder="Data"
-            autoCorrect={false}
-            value={birthDate}
-            type='default'
-            onChangeText={e => setBirthDate(e)}
-          />
-          <Button onPress={handleSubmit(onSubmit)}>
-            {loading? <AnimationCircule /> : 'Realizar Pagamento'}
-          </Button>
+        <Text>CPF do Titular</Text>
+        <Input
+          placeholder="CPF"
+          autoCorrect={false}
+          value={document}
+          type="numeric"
+          onChangeText={e => setDocument(e)}
+        />
 
-          <ViewSpacer />
+        <Text>Data de Nasciemnto do Titular</Text>
+        <Input
+          placeholder="Data"
+          autoCorrect={false}
+          value={birthDate}
+          type="default"
+          onChangeText={e => setBirthDate(e)}
+        />
+        <Button onPress={handleSubmit(onSubmit)}>
+          {loading ? <AnimationCircule /> : 'Realizar Pagamento'}
+        </Button>
+
+        <ViewSpacer />
       </ScrollView>
-      </Container>
+    </Container>
   );
 };
 

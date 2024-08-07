@@ -3,7 +3,7 @@ import { ActivityIndicator, Alert, View } from 'react-native';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 import { format } from 'date-fns';
 
-import api, { baseURL } from '../../services/api';
+import initializeApi from '../../services/api';
 
 import SwitchButton from '../SwitchButton';
 // import RadioButton from '../RadioButton';
@@ -52,6 +52,7 @@ const PlanCard: React.FC<StoreCardProps> = ({
     setSwitchValue(state => !state);
     setLoading(true);
 
+    const api = await initializeApi();
     try {
       await api.put(`assinantes/${id}`, {
         pular_cesta: !switchValue,
