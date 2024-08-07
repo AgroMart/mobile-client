@@ -25,10 +25,10 @@ const SelectCSA: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [chosenCsa, setChosenCsa] = useState<CSAObj | null>(null);
 
-  useEffect(()=>{
-     AsyncStorage.removeItem('@BaseUrlChosen');
-     AsyncStorage.removeItem('@csaChosen');
-  })
+  useEffect(() => {
+    AsyncStorage.removeItem('@BaseUrlChosen');
+    AsyncStorage.removeItem('@csaChosen');
+  });
   const SCHEMA = Yup.object().shape({
     CsaCode: Yup.string().required(),
   });
@@ -37,7 +37,7 @@ const SelectCSA: React.FC = () => {
     setLoading(true);
 
     try {
-      const resp = await apiDicionario.get(`csas/${data.CsaCode}`);
+      const resp = await apiDicionario.get(`csa/${data.CsaCode}`);
       console.log(resp.data);
       if (resp.data) {
         setChosenCsa(resp.data);
@@ -49,12 +49,12 @@ const SelectCSA: React.FC = () => {
       setLoading(false);
     }
   }, []);
- const navigation = useNavigation();
- const setAssyncCSA =async()=>{
-  await AsyncStorage.setItem('@BaseUrlChosen', `${chosenCsa?.urlBase}`);
-  await AsyncStorage.setItem('@csaChosen', JSON.stringify(chosenCsa));
-  navigation.navigate('SignIn');
- }
+  const navigation = useNavigation();
+  const setAssyncCSA = async () => {
+    await AsyncStorage.setItem('@BaseUrlChosen', `${chosenCsa?.urlBase}`);
+    await AsyncStorage.setItem('@csaChosen', JSON.stringify(chosenCsa));
+    navigation.navigate('SignIn');
+  };
   const formik = useFormik({
     initialValues: {
       CsaCode: '',
@@ -81,7 +81,12 @@ const SelectCSA: React.FC = () => {
             <AppName>{chosenCsa.nomeCSA}</AppName>
             <Text>Responsável</Text>
             <AppName>{chosenCsa.responsavelCSA}</AppName>
-            <Button onPress={()=>{setAssyncCSA()}} underlayColor="red">
+            <Button
+              onPress={() => {
+                setAssyncCSA();
+              }}
+              underlayColor="red"
+            >
               <ButtonText>Utilizar esta CSA</ButtonText>
             </Button>
             <Button onPress={() => setChosenCsa(null)}>
