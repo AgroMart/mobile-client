@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { ScrollView, Alert } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
-
+import util from 'util';
 import { useAuth } from '../../hooks/AuthProvider';
 import { useStores } from '../../hooks/StoresProvider';
 
@@ -28,7 +28,9 @@ const Home: React.FC = () => {
         console.log('response =====> ', response.data);
         updateStores(response.data);
       } catch (err) {
-        console.log({ err });
+        console.dir('AQUI ERRO LOJA' + err, { depth: null });
+        console.log('ERROLOJA');
+        // console.log(util.inspect(err, { depth: null, colors: true }));
         Alert.alert('Ops', 'Não foi possivel carregar as lojas');
       }
     }

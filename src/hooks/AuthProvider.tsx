@@ -59,11 +59,7 @@ const AuthProvider: React.FC = ({ children }: any) => {
         '@Agromart:user',
       ]);
 
-      const api = await initializeApi();
-
       if (token[1] && user[1]) {
-        api.defaults.headers.authorization = `Bearer ${token[1]}`;
-
         setData({ token: token[1], user: JSON.parse(user[1]) });
       }
 
@@ -109,9 +105,8 @@ const AuthProvider: React.FC = ({ children }: any) => {
 
       const { jwt: token, user } = response.data;
 
-      const api = await initializeApi();
+      console.log('TOKEN', token);
 
-      api.defaults.headers.authorization = `Bearer ${token}`;
       await AsyncStorage.multiSet([
         ['@Agromart:token', token],
         ['@Agromart:user', JSON.stringify(user)],
