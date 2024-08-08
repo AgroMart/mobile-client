@@ -15,6 +15,7 @@ import {
   Notifications,
   CreditCardRegister,
   BillingAddress,
+  SelectCSA
 } from '../pages';
 
 const App = createStackNavigator();
@@ -28,6 +29,7 @@ const routes: React.FC = () => {
       }}
     >
       <App.Screen name="Home" component={TabRoutes} />
+      <App.Screen name="SelectCSA" component={SelectCSA} />
       <App.Screen name="StoreDetail" component={StoreDetails} />
       <App.Screen name="Plan" component={Plan} />
       <App.Screen name="ProfileInfo" component={ProfileInfo} />

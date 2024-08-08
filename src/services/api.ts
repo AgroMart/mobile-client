@@ -1,10 +1,21 @@
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage'; // or wherever your AsyncStorage is from
 
-export const baseURL =  process.env.NODE_ENV === 'development' ? `http://${process.env.LOCAL_IP}:1337/` : 'https://api-agromart.herokuapp.com/';
+const initializeApi = async (): Promise<AxiosInstance> => {
+  const baseUrl = await AsyncStorage.getItem('@BaseUrlChosen');
+  const token = await AsyncStorage.getItem('@Agromart:token');
 
-const api = axios.create({
-  baseURL,
-  timeout: 5000,
-});
+  const apiBaseURL = baseUrl ?? '';
 
-export default api;
+  const api = axios.create({
+    baseURL: apiBaseURL,
+    timeout: 5000,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return api;
+};
+
+export default initializeApi;

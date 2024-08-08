@@ -3,6 +3,8 @@ import { useNavigation } from '@react-navigation/native';
 
 import DefaultProfile from '../../assets/defaultAvatar.png';
 
+import DropdownComponent from '../DropdownComponent';
+
 import { Container, Img, Text } from './styles';
 
 interface UserHeaderProps {
@@ -16,7 +18,8 @@ const UserHeader: React.FC<UserHeaderProps> = ({ photo, name, disabled }) => {
 
   return (
     <Container
-      onPress={() => navigation.navigate('SignIn')}
+    style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"space-between"}}
+      onPress={() => navigation.navigate('SelectCSA')}
       disabled={disabled}
     >
       <Img source={photo ? { uri: photo } : DefaultProfile} />
@@ -28,6 +31,13 @@ const UserHeader: React.FC<UserHeaderProps> = ({ photo, name, disabled }) => {
           'faça login ou cadastro.'
         )}
       </Text>
+      {name ? (
+          <Text logged={!!name}>{""}.</Text>
+        ) : (
+          <DropdownComponent logged={name?.length>1?true:false}/>
+        )}
+      
+      
     </Container>
   );
 };
