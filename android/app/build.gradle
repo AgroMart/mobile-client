@@ -132,7 +132,7 @@ android {
     }
 
     defaultConfig {
-        applicationId 'com.agromart'
+        applicationId 'com.ct.tcc.acromart'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

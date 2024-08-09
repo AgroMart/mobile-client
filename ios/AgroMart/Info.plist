@@ -25,7 +25,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>com.agromart</string>
+          <string>com.ct.tcc.acromart</string>
         </array>
       </dict>
     </array>
