@@ -54,7 +54,7 @@ const CartScreen: React.FC = () => {
 
   useEffect(() => {
     if (!cart.length) {
-      navigation.navigate('StoreDetail');
+      // navigation.navigate('StoreDetail');
     }
   }, [cart, navigation]);
 
@@ -191,7 +191,7 @@ const CartScreen: React.FC = () => {
             </ItemList>
             <TextButton
               onPress={() => {
-                navigation.navigate('StoreDetail');
+                // navigation.navigate('StoreDetail');
               }}
             >
               Adicionar mais itens
