@@ -15,7 +15,7 @@ import { Container, Content, Heading, HistoryContainer } from './styles';
 
 interface Register {
   id: string;
-  itens: string;
+  itens: any;
   valor: number;
   entregue: false;
   tipo_de_entrega: string;
@@ -87,7 +87,7 @@ const History: React.FC = () => {
   }, [user]);
 
   useFocusEffect(loadHistory);
-
+  console.log('HISTORY', history)
   return (
     <Container>
       <Heading>Histórico</Heading>
@@ -106,7 +106,14 @@ const History: React.FC = () => {
                   key={item.id}
                   date={item.created_at}
                   seller={item.loja.nome}
-                  value={item.valor}
+                  value={(() => {
+
+                    const itemsArray:Array<any> = Object.values(item.itens);
+
+                    return itemsArray.reduce((accumulator, item) => {
+                      return accumulator + (item.valor * item.quantidade);
+                    }, 0)
+                  })()}
                   extract={item}
                   onPress={() => {}}
                 />

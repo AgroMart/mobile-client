@@ -80,14 +80,16 @@ const ExtractModal: React.FC<ExtractModalProps> = ({
   isVisibleModal,
   extract,
 }) => {
+  const itemsArray:Array<any> = Object.values(extract.itens);
+
   const products = useMemo((): Product[] => {
     const parsed = JSON.parse(JSON.stringify(extract.itens));
 
     return parsed.produtos;
   }, [extract])  || [];
 
-  console.log('AAAAAAAAAAAAAA')
-  console.log({extract})
+  console.log('EXTRACTMODAL', extract)
+
   return (
     <Modal
       animationIn="zoomIn"
@@ -121,7 +123,9 @@ const ExtractModal: React.FC<ExtractModalProps> = ({
               </InfoView>
               <InfoView>
                 <GreenTitle>Valor: </GreenTitle>
-                <GreenInfo>{priceFormat(extract.valor)}</GreenInfo>
+                <GreenInfo>{priceFormat(itemsArray.reduce((accumulator, item) => {
+  return accumulator + (item.valor * item.quantidade);
+}, 0))}</GreenInfo>
               </InfoView>
               <InfoView>
                 <InfoTitle>Pagamento realizado: </InfoTitle>
@@ -135,7 +139,7 @@ const ExtractModal: React.FC<ExtractModalProps> = ({
                   {extract.pagamento_realizado ? 'sim' : 'não'}
                 </InfoText>
               </InfoView>
-              <InfoTitle style={{ marginVertical: 10 }}>Items</InfoTitle>
+               <InfoTitle style={{ marginVertical: 10 }}>{products?.length ? 'Items': ''}</InfoTitle>
               {products.map(item => (
                 <>
                   <InfoView>
