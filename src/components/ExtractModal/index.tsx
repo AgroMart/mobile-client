@@ -84,8 +84,10 @@ const ExtractModal: React.FC<ExtractModalProps> = ({
     const parsed = JSON.parse(JSON.stringify(extract.itens));
 
     return parsed.produtos;
-  }, [extract]);
+  }, [extract])  || [];
 
+  console.log('AAAAAAAAAAAAAA')
+  console.log({extract})
   return (
     <Modal
       animationIn="zoomIn"
