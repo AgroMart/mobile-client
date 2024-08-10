@@ -73,6 +73,7 @@ const History: React.FC = () => {
         const api = await initializeApi();
 
         const { data } = await api.get(`extratoes?user=${user.id}`);
+        console.log('historydata', data)
         setHistory(data);
       } catch (err) {
         Alert.alert('Ops', 'Não foi possivel carregar seu histórico');

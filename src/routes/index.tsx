@@ -17,6 +17,7 @@ import {
   BillingAddress,
   SelectCSA
 } from '../pages';
+import History from '../pages/History';
 
 const App = createStackNavigator();
 
@@ -42,6 +43,8 @@ const routes: React.FC = () => {
       <App.Screen name="Notifications" component={Notifications} />
       <App.Screen name="CreditCardRegister" component={CreditCardRegister} />
       <App.Screen name="BillingAddress" component={BillingAddress} />
+      <App.Screen name="History" component={History} />
+
     </App.Navigator>
   );
 };
