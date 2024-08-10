@@ -1,41 +1,35 @@
 {
   "expo": {
-    "name": "AgroMart",
-    "owner": "tccagromart",
+    "name": "agromart",
     "slug": "agromart",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.ct.tcc.acromart"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#ffffff"
       },
-      "package": "com.ct.tcc.acromart",
-      "googleServicesFile": "./google-services.json",
-      "versionCode": 1
+      "package": "com.ct.agromart"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "6e0ef326-d429-42be-8bc0-7f43a8dc2dd4"
+        "projectId": "023c11d3-842b-4dc6-8cb8-6b0519e1f516"
       }
     }
   }
