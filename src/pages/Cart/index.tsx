@@ -116,7 +116,7 @@ const CartScreen: React.FC = () => {
       itens: {
         produtos: [] as any,
       },
-      pagamento_realizado: true,
+      pagamento_realizado: false,
     };
     cart.forEach(item => {
       updateStockRequestModifier[item.type](item);
