@@ -70,6 +70,7 @@ const StoreDetails: React.FC = () => {
   const navigation = useNavigation();
 
   const [data, setData] = useState<Category[]>([]);
+  console.log({data})
   const { addItemToCart, cart } = useCart();
   const { user } = useAuth();
 
