@@ -12,6 +12,7 @@ import Carousel from '../../components/Carousel';
 import StoreCard from '../../components/StoreCard';
 
 import { Container, CarouselContainer, StoresContainer } from './styles';
+import AsyncStorage from '@react-native-async-storage/async-storage'; 
 
 const Home: React.FC = () => {
   const navigation = useNavigation();
@@ -21,12 +22,22 @@ const Home: React.FC = () => {
 
   const loadStores = useCallback(() => {
     async function load() {
-      try {
-        const api = await initializeApi();
+      const baseUrl = await AsyncStorage.getItem('@BaseUrlChosen');
 
-        const response = await api.get('lojas');
-        console.log('response =====> ', response.data);
-        updateStores(response.data);
+      try {
+
+        // Only try to load stores at home if Url has been chosen.
+        // The api should be a singleton with an public attribute that tells if its Url is already defined
+        // Do this in a future refactor
+        if(baseUrl?.length) {
+          const api = await initializeApi();
+
+          const response = await api.get('lojas');
+          console.log('response =====> ', response.data);
+          updateStores(response.data);
+        }
+
+
       } catch (err) {
         console.dir('AQUI ERRO LOJA' + err, { depth: null });
         console.log('ERROLOJA');
