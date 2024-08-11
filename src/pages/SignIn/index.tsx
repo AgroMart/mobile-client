@@ -60,7 +60,7 @@ const SignIn: React.FC = () => {
 
       try {
         await signIn({ username: data.email, password: data.password });
-        navigation.goBack();
+        navigation.navigate('Home');
       } catch (error) {
         Alert.alert('Erro ao fazer login');
         console.log(error);
