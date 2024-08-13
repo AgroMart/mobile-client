@@ -73,8 +73,12 @@ const History: React.FC = () => {
         const api = await initializeApi();
 
         const { data } = await api.get(`extratoes?user=${user.id}`);
-        console.log('historydata', data)
-        setHistory(data);
+
+        // This is just a terible workaround because the userId filter is not working and I don't have time to fix it
+        // whoever implemented it didn't test it
+        const filteredData = data.filter((record:any) => record?.user?.id === user.id)
+        
+        setHistory(filteredData);
       } catch (err) {
         Alert.alert('Ops', 'Não foi possivel carregar seu histórico');
       } finally {
