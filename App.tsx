@@ -3,7 +3,7 @@ import { StatusBar, View } from 'react-native';
 // import * as Notifications from 'expo-notifications';
 // import * as Permissions from 'expo-permissions';
 import { NavigationContainer } from '@react-navigation/native';
-import * as Updates from 'expo-updates';
+// import * as Updates from 'expo-updates';
 import * as SplashScreen from 'expo-splash-screen';
 
 import {
@@ -19,21 +19,21 @@ import Routes from './src/routes';
 SplashScreen.preventAutoHideAsync(); // Prevent auto-hiding the splash screen
 
 const App: React.FC = () => {
-  const updateApp = async () => {
-    if (!__DEV__) {
-      const { isAvailable } = await Updates.checkForUpdateAsync();
+  // const updateApp = async () => {
+  //   if (!__DEV__) {
+  //     const { isAvailable } = await Updates.checkForUpdateAsync();
 
-      if (isAvailable) {
-        await Updates.fetchUpdateAsync();
-        await Updates.reloadAsync();
-      }
-    }
-  };
+  //     if (isAvailable) {
+  //       await Updates.fetchUpdateAsync();
+  //       await Updates.reloadAsync();
+  //     }
+  //   }
+  // };
 
-  useEffect(() => {
-    // registerForPushNotifications();
-    updateApp();
-  }, []);
+  // useEffect(() => {
+  //   // registerForPushNotifications();
+  //   updateApp();
+  // }, []);
 
   // const registerForPushNotifications = async () => {
   //   const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
