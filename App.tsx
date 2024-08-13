@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { StatusBar, View } from 'react-native';
-import * as Notifications from 'expo-notifications';
-import * as Permissions from 'expo-permissions';
+// import * as Notifications from 'expo-notifications';
+// import * as Permissions from 'expo-permissions';
 import { NavigationContainer } from '@react-navigation/native';
 import * as Updates from 'expo-updates';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as SplashScreen from 'expo-splash-screen';
 
 import {
@@ -32,27 +31,27 @@ const App: React.FC = () => {
   };
 
   useEffect(() => {
-    registerForPushNotifications();
+    // registerForPushNotifications();
     updateApp();
   }, []);
 
-  const registerForPushNotifications = async () => {
-    const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+  // const registerForPushNotifications = async () => {
+  //   const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
 
-    if (status !== 'granted') {
-      await Permissions.getAsync(Permissions.NOTIFICATIONS);
-    }
+  //   if (status !== 'granted') {
+  //     await Permissions.getAsync(Permissions.NOTIFICATIONS);
+  //   }
 
-    if (status !== 'granted') {
-      console.log('Permission denied for push notification');
-      return;
-    }
+  //   if (status !== 'granted') {
+  //     console.log('Permission denied for push notification');
+  //     return;
+  //   }
 
-    const token = (await Notifications.getExpoPushTokenAsync()).data;
-    const pushToken = token;
+  //   const token = (await Notifications.getExpoPushTokenAsync()).data;
+  //   const pushToken = token;
 
-    await AsyncStorage.setItem('@Agromart:push_token', pushToken);
-  };
+  //   await AsyncStorage.setItem('@Agromart:push_token', pushToken);
+  // };
 
   const [fontsLoaded] = useFonts({
     Montserrat_400Regular,
@@ -74,7 +73,7 @@ const App: React.FC = () => {
   );
 
   if (!fontsLoaded) {
-    return null; // Don't render anything while fonts are loading
+    return null;
   }
 
   return (
