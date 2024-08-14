@@ -15,7 +15,7 @@ import { Container, Content, Heading, HistoryContainer } from './styles';
 
 interface Register {
   id: string;
-  itens: string;
+  itens: any;
   valor: number;
   entregue: false;
   tipo_de_entrega: string;
@@ -73,7 +73,12 @@ const History: React.FC = () => {
         const api = await initializeApi();
 
         const { data } = await api.get(`extratoes?user=${user.id}`);
-        setHistory(data);
+
+        // This is just a terible workaround because the userId filter is not working and I don't have time to fix it
+        // whoever implemented it didn't test it
+        const filteredData = data.filter((record:any) => record?.user?.id === user.id)
+        
+        setHistory(filteredData);
       } catch (err) {
         Alert.alert('Ops', 'Não foi possivel carregar seu histórico');
       } finally {
@@ -86,7 +91,7 @@ const History: React.FC = () => {
   }, [user]);
 
   useFocusEffect(loadHistory);
-
+  console.log('HISTORY', history)
   return (
     <Container>
       <Heading>Histórico</Heading>
@@ -105,7 +110,14 @@ const History: React.FC = () => {
                   key={item.id}
                   date={item.created_at}
                   seller={item.loja.nome}
-                  value={item.valor}
+                  value={(() => {
+
+                    const itemsArray:Array<any> = Object.values(item.itens);
+
+                    return itemsArray.reduce((accumulator, item) => {
+                      return accumulator + (item.valor * item.quantidade);
+                    }, 0)
+                  })()}
                   extract={item}
                   onPress={() => {}}
                 />

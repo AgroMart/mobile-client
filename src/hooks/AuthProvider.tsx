@@ -121,19 +121,15 @@ const AuthProvider: React.FC = ({ children }: any) => {
 
   const signUp = useCallback(
     async ({ username, password, email }: SignUpCredentials) => {
-      const url = await AsyncStorage.getItem('@BaseUrlChosen');
-      console.log('CRIANDO DENTRO FODAC', url);
-      const api = await initializeApi();
+      const baseUrl = await AsyncStorage.getItem('@BaseUrlChosen');
 
-      const response = await api.post(`auth/local/register`, {
+      const response = await axios.post(`${baseUrl}auth/local/register`, {
         username,
         password,
         email,
       });
 
       const { jwt: token, user } = response.data;
-
-      api.defaults.headers.authorization = `Bearer ${token}`;
 
       await AsyncStorage.multiSet([
         ['@Agromart:token', token],

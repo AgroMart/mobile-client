@@ -4,8 +4,8 @@ import { Alert, ScrollView, Text } from 'react-native';
 import { Container, ViewSpacer, AnimationCircule } from './styles';
 import LottieView from 'lottie-react-native';
 import CreditCardForm, { FormModel } from 'rn-credit-card';
-import '@expo/browser-polyfill';
-import JunoCardHash from 'react-native-juno-rn-card-hash';
+// import '@expo/browser-polyfill';
+// import JunoCardHash from 'react-native-juno-rn-card-hash';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { ICreditCard } from '../../interfaces';
 
@@ -52,7 +52,7 @@ const CreditCardPayment: React.FC = () => {
   const route = useRoute();
 
   const getCardHash = async (creditCardData: ICreditCard) => {
-    const juno = new JunoCardHash(PUBLIC_TOKEN as string, JUNO_ENV);
+    // const juno = new JunoCardHash(PUBLIC_TOKEN as string, JUNO_ENV);
 
     const cardData = {
       holderName: creditCardData.holderName,
@@ -65,10 +65,10 @@ const CreditCardPayment: React.FC = () => {
     console.log('Cartao de credito', cardData);
 
     try {
-      const response = await juno.getCardHash(cardData);
-      console.log('Hash do cartão\n' + response + '\n');
+      // const response = await juno.getCardHash(cardData);
+      // console.log('Hash do cartão\n' + response + '\n');
 
-      return response;
+      // return response;
     } catch (e: any) {
       console.log('Erro ao gerar hash do cartão', e);
     }

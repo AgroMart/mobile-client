@@ -70,6 +70,7 @@ const StoreDetails: React.FC = () => {
   const navigation = useNavigation();
 
   const [data, setData] = useState<Category[]>([]);
+  console.log({ data });
   const { addItemToCart, cart } = useCart();
   const { user } = useAuth();
 
@@ -96,7 +97,7 @@ const StoreDetails: React.FC = () => {
           id: item.id,
           name: `Cesta ${item.id}`,
           type: 'cesta',
-          image: item.imagem ? item.imagem.url : '',
+          image: item.url ?? '',
           quantity: item.quantidade,
           value: item.valor,
           unity: 'unidade',
@@ -111,7 +112,7 @@ const StoreDetails: React.FC = () => {
           id: item.id,
           type: 'plano',
           name: item.nome,
-          image: item.imagem ? item.imagem.url : '',
+          image: item.url ?? '',
           quantity: item.quantidade,
           value: item.valor,
           unity: 'unidade',
@@ -126,7 +127,7 @@ const StoreDetails: React.FC = () => {
           id: item.id,
           type: 'produto',
           name: item.nome,
-          image: item.imagem ? item.imagem.url : '',
+          image: item.url ?? '',
           quantity: item.quantidade,
           value: item.valor,
           unity: item.unidade_medida,
@@ -199,7 +200,10 @@ const StoreDetails: React.FC = () => {
                 onPress={() => {
                   if (!cart.length) {
                     if (!user) {
-                      return Alert.alert('Ops...', 'Você deve estar logado para acessar o carrinho.');
+                      return Alert.alert(
+                        'Ops...',
+                        'Você deve estar logado para acessar o carrinho.',
+                      );
                     }
                     return Alert.alert('Ops...', 'Seu carrinho está vazio');
                   }
@@ -263,7 +267,10 @@ const StoreDetails: React.FC = () => {
                   navigation.navigate('ProductPage', item);
                 } else {
                   if (!user) {
-                    return Alert.alert('Ops...', 'Você deve estar logado para adicionar um plano ao carrinho.');
+                    return Alert.alert(
+                      'Ops...',
+                      'Você deve estar logado para adicionar um plano ao carrinho.',
+                    );
                   }
                   const plan = {
                     id: item.id,

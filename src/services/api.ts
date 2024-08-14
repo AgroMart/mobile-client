@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage'; // or wherever your AsyncStorage is from
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const initializeApi = async (): Promise<AxiosInstance> => {
   const baseUrl = await AsyncStorage.getItem('@BaseUrlChosen');
