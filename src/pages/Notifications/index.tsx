@@ -5,9 +5,14 @@ import { ScrollView, Alert } from 'react-native';
 import { useAuth } from '../../hooks/AuthProvider';
 import NotificationCard from '../../components/NotificationCard';
 import BackHeader from '../../components/BackHeader';
-import { Container, NotificationsContainer, NoNotificationText, Spacing } from './styles';
+import {
+  Container,
+  NotificationsContainer,
+  NoNotificationText,
+  Spacing,
+} from './styles';
 
-import api from '../../services/api';
+import initializeApi from '../../services/api';
 
 interface NotificationProps {
   title: string;
@@ -21,19 +26,18 @@ const Notifications: React.FC = () => {
 
   const getData = async () => {
     try {
+      const api = await initializeApi();
       const response = await api.get('notificacoes');
       const notifications: NotificationProps[] = await response.data;
 
-      if(notifications.length > 0) setNotifications(notifications)
-    } catch(err){
-
+      if (notifications.length > 0) setNotifications(notifications);
+    } catch (err) {
       Alert.alert('Ops', 'Não foi possivel carregar suas notificações');
-
     }
   };
 
   useEffect(() => {
-    getData()
+    getData();
   }, []);
 
   // useFocusEffect();
@@ -52,8 +56,10 @@ const Notifications: React.FC = () => {
                 text={notification.body_text}
               />
             ))
-          ):(
-            <NoNotificationText>Não há notificações para serem exibidas!</NoNotificationText>
+          ) : (
+            <NoNotificationText>
+              Não há notificações para serem exibidas!
+            </NoNotificationText>
           )}
         </NotificationsContainer>
       </ScrollView>
