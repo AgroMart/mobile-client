@@ -28,7 +28,6 @@ import { useAuth } from '../../hooks/AuthProvider';
 import { useCart } from '../../hooks/CartProvider';
 import initializeApi from '../../services/api';
 
-
 interface StockParams {
   id: number;
   quantity: number;
@@ -41,10 +40,8 @@ const CartScreen: React.FC = () => {
 
   // Context
   const { user } = useAuth();
-  const { cart, removeItemToCart, getTotal,storeId,cleanUpCart } = useCart();
+  const { cart, removeItemToCart, getTotal, storeId, cleanUpCart } = useCart();
   const navigation = useNavigation();
-
-
 
   useEffect(() => {
     const foundRA = RAs.find(RA => RA.key === user.endereco?.bairro);
@@ -89,6 +86,7 @@ const CartScreen: React.FC = () => {
           const body = {
             quantidade: item.stock - item.quantity,
           };
+
           const api = await initializeApi();
 
           const response = await api.put(`planos/${item.id}`, body);
@@ -98,7 +96,7 @@ const CartScreen: React.FC = () => {
           const subscriberBody = {
             nome: user.username,
             cestas_disponiveis: quantidade_de_cestas,
-            plano: id,
+            planos: item.id,
             usuario: user.id,
             loja: storeId,
           };
@@ -119,6 +117,7 @@ const CartScreen: React.FC = () => {
       pagamento_realizado: false,
     };
     cart.forEach(item => {
+      console.log('type', item.type);
       updateStockRequestModifier[item.type](item);
 
       extractBody.itens = {
@@ -143,12 +142,9 @@ const CartScreen: React.FC = () => {
     }
   };
 
-
   const handleFinish = async () => {
     setLoading(true);
     try {
-      
-   
       await sendSubscriberData();
       navigation.navigate('History');
 
@@ -203,7 +199,7 @@ const CartScreen: React.FC = () => {
                 <TotalValue>{priceFormat(getTotal())}</TotalValue>
               </TotalContainer>
               <ButtonContainer>
-                <Button onPress={handleFinish}>Realizar Pagamento</Button>
+                <Button onPress={handleFinish}>Realizar Pedido</Button>
               </ButtonContainer>
             </Footer>
           </Content>
