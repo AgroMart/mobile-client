@@ -121,7 +121,10 @@ const AuthProvider: React.FC = ({ children }: any) => {
 
   const signUp = useCallback(
     async ({ username, password, email }: SignUpCredentials) => {
-      const baseUrl = await AsyncStorage.getItem('@BaseUrlChosen');
+      // TODO REMOVE THIS HARD CODED URL THIS IS JUST FOR TESTING
+      const baseUrl =
+        (await AsyncStorage.getItem('@BaseUrlChosen')) ||
+        'https://agromarttcc.shop/api/';
 
       const response = await axios.post(`${baseUrl}auth/local/register`, {
         username,
