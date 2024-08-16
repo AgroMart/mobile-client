@@ -33,8 +33,9 @@ interface StoreCardProps {
 const PlanCard: React.FC<StoreCardProps> = ({
   id,
   image,
-  store,
-  contact,
+  name,
+  // store,
+  // contact,
   acquisitionDate,
   avaliableBasket,
   recievedBasket,
@@ -76,12 +77,14 @@ const PlanCard: React.FC<StoreCardProps> = ({
           <Image source={{ uri: `${image}` }} />
           <InfoContainer>
             <InfoView>
-              <InfoTitle>Loja: </InfoTitle>
+              <InfoTitle>Nome: </InfoTitle>
+              <Info>{name}</Info>
+              {/* <InfoTitle>Loja: </InfoTitle>
               <Info>{store}</Info>
             </InfoView>
             <InfoView>
               <InfoTitle>Contato: </InfoTitle>
-              <Info>{contact}</Info>
+              <Info>{contact}</Info> */}
             </InfoView>
             <InfoView>
               <InfoTitle>Data de aquisição: </InfoTitle>
