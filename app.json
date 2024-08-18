@@ -20,15 +20,10 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.ct.agromart"
+      "package": "com.agromart"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "023c11d3-842b-4dc6-8cb8-6b0519e1f516"
-      }
     }
   }
 }
