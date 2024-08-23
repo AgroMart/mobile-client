@@ -33,7 +33,14 @@
 - Editar perfil;
 
 ## Download do Agromart:
-![playstore](https://github.com/user-attachments/assets/df5925d4-2593-4728-ae54-97edd0440e35)
+O aplicativo do Agromart está disponível para ser baixado para Android na PlayStore.
+
+<p align="center">
+  <a href="https://play.google.com/store/apps/details?id=com.ct.agromart">
+    <img src="https://github.com/user-attachments/assets/df5925d4-2593-4728-ae54-97edd0440e35" alt="playstore" width="180"/>
+  </a>
+</p>
+  
 
 ## Principais Tecnologias Utilizadas:
 
