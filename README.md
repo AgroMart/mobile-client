@@ -32,6 +32,9 @@
 - Cadastrar e editar endereço;
 - Editar perfil;
 
+## Download do Agromart:
+![playstore](https://github.com/user-attachments/assets/df5925d4-2593-4728-ae54-97edd0440e35)
+
 ## Principais Tecnologias Utilizadas:
 
 - [React Native](https://reactnative.dev/) com [TypeScript](https://www.typescriptlang.org/)
