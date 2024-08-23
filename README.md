@@ -4,15 +4,15 @@
 
 ## Imagens
 
-![print9](https://github.com/user-attachments/assets/220a78cb-a22e-466a-b300-da64028ae8ab)
-![print8](https://github.com/user-attachments/assets/9c682736-b79c-47ae-8703-7bd4bf16a8fd)
-![print7](https://github.com/user-attachments/assets/eaacd0e4-964f-4a6b-b537-8b8b8b3e14ad)
-![print6](https://github.com/user-attachments/assets/db20af10-2934-45a2-84d4-e8cf36960aa1)
-![print5](https://github.com/user-attachments/assets/ae5b1965-10c6-4af9-bc2e-64845493d630)
-![print4](https://github.com/user-attachments/assets/dbed868f-8265-4438-a6ed-7992fea7e80c)
-![print3](https://github.com/user-attachments/assets/ddda62b3-1ec1-4a24-af7c-302cf9819820)
-![print2](https://github.com/user-attachments/assets/6b9358da-52a2-45f6-a43b-d1782c714c51)
-![print1](https://github.com/user-attachments/assets/5bba49ff-9f85-4392-ba0b-bf4c24d04b66)
+<img src="https://github.com/user-attachments/assets/220a78cb-a22e-466a-b300-da64028ae8ab" alt="print9" width="300"/>
+<img src="https://github.com/user-attachments/assets/9c682736-b79c-47ae-8703-7bd4bf16a8fd" alt="print8" width="300"/>
+<img src="https://github.com/user-attachments/assets/eaacd0e4-964f-4a6b-b537-8b8b8b3e14ad" alt="print7" width="300"/>
+<img src="https://github.com/user-attachments/assets/db20af10-2934-45a2-84d4-e8cf36960aa1" alt="print6" width="300"/>
+<img src="https://github.com/user-attachments/assets/ae5b1965-10c6-4af9-bc2e-64845493d630" alt="print5" width="300"/>
+<img src="https://github.com/user-attachments/assets/dbed868f-8265-4438-a6ed-7992fea7e80c" alt="print4" width="300"/>
+<img src="https://github.com/user-attachments/assets/ddda62b3-1ec1-4a24-af7c-302cf9819820" alt="print3" width="300"/>
+<img src="https://github.com/user-attachments/assets/6b9358da-52a2-45f6-a43b-d1782c714c51" alt="print2" width="300"/>
+<img src="https://github.com/user-attachments/assets/5bba49ff-9f85-4392-ba0b-bf4c24d04b66" alt="print1" width="300"/>
 
 ## Funcionalidades
 
