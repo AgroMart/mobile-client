@@ -22,6 +22,7 @@ import {
   CreateAccountButtonText,
 } from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 type CSAObj = {
   urlBase: string;
@@ -29,9 +30,16 @@ type CSAObj = {
   responsavelCSA: string;
   emailCSA: string;
 };
+
+type NavigationProps = {
+  SelectCSA: undefined
+  Home: undefined
+  SignUp: undefined
+}
+
 const SignIn: React.FC = () => {
   const passwordRef = useRef<TextInput | any>();
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<NavigationProps>>();
 
   const [csa, setcsa] = useState<CSAObj | null>(null);
   const [urlcsa, seturl] = useState<string | null>('');
