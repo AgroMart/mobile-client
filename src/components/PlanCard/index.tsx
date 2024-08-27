@@ -28,6 +28,7 @@ interface StoreCardProps {
   recievedBasket: number;
   image: string;
   switchInitialValue: boolean;
+  name: string;
 }
 
 const PlanCard: React.FC<StoreCardProps> = ({
