@@ -65,7 +65,7 @@ type ParamList = {
 };
 
 type NavigationProps = {
-  ProductPage: undefined, 
+  ProductPage: Item, 
   Cart: undefined
 }
 
