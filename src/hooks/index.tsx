@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { ReactNode } from 'react'; // Importar ReactNode para tipar children
 
 import { AuthProvider } from './AuthProvider';
 import { CartProvider } from './CartProvider';
 import { StoresProvider } from './StoresProvider';
 
-const AppProvider: React.FC = ({ children }) => (
+interface AppProviderProps {
+  children: ReactNode;
+}
+
+const AppProvider: React.FC<AppProviderProps> = ({ children }) => (
   <CartProvider>
     <StoresProvider>
       <AuthProvider>{children}</AuthProvider>
