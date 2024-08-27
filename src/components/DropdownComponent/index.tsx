@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import Button from '../../components/Button';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 const data = [
   { label: 'Item 1', value: '1' },
@@ -15,10 +16,14 @@ const data = [
   { label: 'Item 8', value: '8' },
 ];
 
+type NavigationProps = {
+  SelectCSA: undefined, 
+}
+
 const DropdownComponent = (logged: boolean) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<NavigationProps>>();
   return (
     <View style={styles.container}>
       {/* <Text>Selecione sua CSA</Text> */}
@@ -47,8 +52,7 @@ const DropdownComponent = (logged: boolean) => {
       /> */}
       {logged && (
         <Button
-          children={null}
-          onPress={() => navigation.navigate('SelectCSA')}
+          children={null} onPress={() => navigation.navigate('SelectCSA')}
         >
           Escolha sua CSA
         </Button>
