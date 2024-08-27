@@ -19,8 +19,8 @@ import Input from '../../components/Input';
 import { useAuth } from '../../hooks/AuthProvider';
 import { useCart } from '../../hooks/CartProvider';
 
-const PUBLIC_TOKEN = process.env.PUBLIC_TOKEN_JUNO;
-const JUNO_ENV =
+// const PUBLIC_TOKEN = process.env.PUBLIC_TOKEN_JUNO;
+// const JUNO_ENV =
   process.env.NODE_ENV === 'development' ? 'sandbox' : 'production';
 
 interface StockParams {
@@ -41,7 +41,7 @@ const CreditCardPayment: React.FC = () => {
   });
   const [document, setDocument] = useState('');
   const [birthDate, setBirthDate] = useState('');
-  const { handleSubmit, formState } = formMethods;
+  const { handleSubmit } = formMethods;
   const [loading, setLoading] = useState(false);
 
   const { user } = useAuth();
