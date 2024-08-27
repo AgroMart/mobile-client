@@ -28,6 +28,7 @@ import {
   TitleMenu,
   IconView,
 } from './styles';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 interface Category {
   id: number;
@@ -63,11 +64,16 @@ type ParamList = {
   };
 };
 
+type NavigationProps = {
+  ProductPage: undefined, 
+  Cart: undefined
+}
+
 const StoreDetails: React.FC = () => {
   const flatListRef = useRef<any>(null);
   const selectListRef = useRef<any>(null);
   const [selecedMenu, setSelectedMenu] = useState(0);
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<NavigationProps>>();
 
   const [data, setData] = useState<Category[]>([]);
   console.log({ data });
