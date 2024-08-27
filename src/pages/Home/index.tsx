@@ -13,6 +13,12 @@ import StoreCard from '../../components/StoreCard';
 
 import { Container, CarouselContainer, StoresContainer } from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Store } from '../../interfaces';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type NavigationProps = {
+  StoreDetail: Store
+}
 
 function appendBaseUrlToImageUrls(data: any, baseUrl: string) {
   data.forEach((loja: any) => {
@@ -58,7 +64,7 @@ function appendBaseUrlToImageUrls(data: any, baseUrl: string) {
 }
 
 const Home: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<NavigationProps>>();
 
   const { user } = useAuth();
   const { stores, updateStores } = useStores();
