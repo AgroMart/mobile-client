@@ -29,7 +29,7 @@ const BillingAddress: React.FC = () => {
   const navigation = useNavigation();
 
   const handleSubmit = useCallback(
-    async data => {
+    async (data: { street: string; number: string; complement: string; neighborhood: string; city: string; state: string; cep: string; }) => {
       try {
         setLoading(true);
 

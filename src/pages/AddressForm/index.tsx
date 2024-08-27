@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { TextInput, Alert } from 'react-native';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -33,7 +33,7 @@ const AddressForm: React.FC = () => {
   const navigation = useNavigation();
 
   const handleSubmit = useCallback(
-    async data => {
+    async (data: { city: string; number: string; complement: string; street: string; cep: string; neighborhood: string; }) => {
       try {
         const api = await initializeApi()
 
