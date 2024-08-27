@@ -33,7 +33,7 @@ const SelectCSA: React.FC = () => {
     CsaCode: Yup.string().required(),
   });
 
-  const handleSubmit = useCallback(async data => {
+  const handleSubmit = useCallback(async (data: { CsaCode: string; }) => {
     setLoading(true);
 
     try {
