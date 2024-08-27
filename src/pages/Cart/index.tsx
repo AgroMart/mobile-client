@@ -27,11 +27,18 @@ import Button from '../../components/Button';
 import { useAuth } from '../../hooks/AuthProvider';
 import { useCart } from '../../hooks/CartProvider';
 import initializeApi from '../../services/api';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 interface StockParams {
   id: number;
   quantity: number;
   stock: number;
+}
+
+
+type NavigationProps = {
+  History: undefined, 
+  AddressForm: undefined
 }
 
 const CartScreen: React.FC = () => {
@@ -41,7 +48,7 @@ const CartScreen: React.FC = () => {
   // Context
   const { user } = useAuth();
   const { cart, removeItemToCart, getTotal, storeId, cleanUpCart } = useCart();
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<NavigationProps>>();
 
   useEffect(() => {
     const foundRA = RAs.find(RA => RA.key === user.endereco?.bairro);
