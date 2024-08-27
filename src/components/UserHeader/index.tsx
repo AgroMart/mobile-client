@@ -40,7 +40,7 @@ const UserHeader: React.FC<UserHeaderProps> = ({ photo, name, disabled }) => {
       {name ? (
           <Text logged={!!name}>{""}.</Text>
         ) : (
-          <DropdownComponent logged={name?.length>1?true:false}/>
+          <DropdownComponent logged={name?.length as number>1?true:false}/>
         )}
       
       

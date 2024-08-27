@@ -20,7 +20,7 @@ type NavigationProps = {
   SelectCSA: undefined, 
 }
 
-const DropdownComponent = (logged: boolean) => {
+const DropdownComponent = (logged: boolean | any) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
   const navigation = useNavigation<StackNavigationProp<NavigationProps>>();
