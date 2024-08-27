@@ -119,7 +119,6 @@ const History: React.FC = () => {
                     }, 0)
                   })()}
                   extract={item}
-                  onPress={() => {}}
                 />
               ))}
             </HistoryContainer>
