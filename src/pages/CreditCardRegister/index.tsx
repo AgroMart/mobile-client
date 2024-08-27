@@ -6,7 +6,7 @@ import LottieView from 'lottie-react-native';
 import CreditCardForm, { FormModel } from 'rn-credit-card';
 // import '@expo/browser-polyfill';
 // import JunoCardHash from 'react-native-juno-rn-card-hash';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { ICreditCard } from '../../interfaces';
 
 import initializeApi from '../../services/api';
@@ -18,6 +18,7 @@ import Input from '../../components/Input';
 // Context imports
 import { useAuth } from '../../hooks/AuthProvider';
 import { useCart } from '../../hooks/CartProvider';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 // const PUBLIC_TOKEN = process.env.PUBLIC_TOKEN_JUNO;
 // const JUNO_ENV =
@@ -27,6 +28,10 @@ interface StockParams {
   id: number;
   quantity: number;
   stock: number;
+}
+
+type NavigationProps = {
+  History: undefined, 
 }
 
 const CreditCardPayment: React.FC = () => {
@@ -48,8 +53,8 @@ const CreditCardPayment: React.FC = () => {
   const { storeId, getTotal } = useCart();
   const { cart, cleanUpCart } = useCart();
 
-  const navigation = useNavigation();
-  const route = useRoute();
+  const navigation = useNavigation<StackNavigationProp<NavigationProps>>();
+  const route = useRoute<RouteProp<{ billingAddress: any }>>();
 
   const getCardHash = async (creditCardData: ICreditCard) => {
     // const juno = new JunoCardHash(PUBLIC_TOKEN as string, JUNO_ENV);
@@ -163,7 +168,7 @@ const CreditCardPayment: React.FC = () => {
     setLoading(true);
 
     const cardHash = await getCardHash(model);
-    const billingAddress = route.params.billingAddress;
+    const billingAddress = route?.params?.billingAddress;
     const birthDateSplited = birthDate.split('/');
 
     const currentDate = new Date();
