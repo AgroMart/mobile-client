@@ -20,13 +20,18 @@ import {
   BackLoginButton,
   BackLoginButtonText,
 } from './styles';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type NavigationProps = {
+  Home: undefined, 
+}
 
 const SignUp: React.FC = () => {
   const emailRef = useRef<TextInput | any>();
   const passwordRef = useRef<TextInput | any>();
   const confirmPasswordRef = useRef<TextInput | any>();
   const [loading, setLoading] = useState(false);
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<NavigationProps>>();
 
   const { signUp } = useAuth();
 
