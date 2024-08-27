@@ -31,7 +31,7 @@ const SignUp: React.FC = () => {
   const { signUp } = useAuth();
 
   const handleSubmit = useCallback(
-    async data => {
+    async (data: { name: string; email: string; password: string; }) => {
       setLoading(true);
 
       try {

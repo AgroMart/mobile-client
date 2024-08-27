@@ -55,7 +55,7 @@ const SignIn: React.FC = () => {
   const { signIn } = useAuth();
 
   const handleSubmit = useCallback(
-    async data => {
+    async (data: { email: string; password: string; }) => {
       setLoading(true);
 
       try {
