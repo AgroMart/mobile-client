@@ -147,7 +147,7 @@ const StoreDetails: React.FC = () => {
     [],
   );
 
-  const selectMenu = useCallback(index => {
+  const selectMenu = useCallback((index: React.SetStateAction<number>) => {
     setSelectedMenu(index);
     if (flatListRef.current) {
       flatListRef.current?.scrollToIndex({
