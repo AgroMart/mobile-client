@@ -21,7 +21,7 @@ export function isIphoneX() {
  * @param {any} iphoneXStyle Estilo para determinar se for iPhone X
  * @param {any} regularStyle Estilo para os demais dispositivos
  */
-export function ifIphoneX(iphoneXStyle, regularStyle) {
+export function ifIphoneX(iphoneXStyle: number, regularStyle: number) {
   if (isIphoneX()) {
     return iphoneXStyle;
   }
@@ -32,7 +32,7 @@ export function ifIphoneX(iphoneXStyle, regularStyle) {
  * Retorna o tamanho do status bar
  * @param {boolean} safe Determina se a precisa de uma margem de segurança
  */
-export function getStatusBarHeight(safe) {
+export function getStatusBarHeight(safe: boolean) {
   return Platform.select({
     ios: ifIphoneX(safe ? 44 : 30, 20),
     android: StatusBar.currentHeight,
