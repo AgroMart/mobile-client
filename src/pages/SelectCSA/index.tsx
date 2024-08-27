@@ -15,12 +15,19 @@ import Button from '../../components/Button';
 import { ButtonText, Text, Row } from './styles';
 import { parseISO } from 'date-fns';
 import axios from 'axios';
+import { StackNavigationProp } from '@react-navigation/stack';
+
 type CSAObj = {
   urlBase: string;
   nomeCSA: string;
   responsavelCSA: string;
   emailCSA: string;
 };
+
+type NavigationProps = {
+  SignIn: undefined, 
+}
+
 const SelectCSA: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [chosenCsa, setChosenCsa] = useState<CSAObj | null>(null);
@@ -49,7 +56,7 @@ const SelectCSA: React.FC = () => {
       setLoading(false);
     }
   }, []);
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<NavigationProps>>();
   const setAssyncCSA = async () => {
     await AsyncStorage.setItem('@BaseUrlChosen', `${chosenCsa?.urlBase}`);
     await AsyncStorage.setItem('@csaChosen', JSON.stringify(chosenCsa));
