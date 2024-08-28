@@ -18,6 +18,7 @@ import {
   RowView,
   ButtonContainer,
 } from './styles';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 type ParamList = {
   ProductPage: {
@@ -38,7 +39,11 @@ const Product: React.FC = () => {
   const [hasOnCart, setHasOnCart] = useState(false);
   const [wishQuantity, setWishQuantity] = useState(0);
 
-  const navigation = useNavigation();
+type NavigationProp = {
+  Cart: undefined
+}
+
+  const navigation = useNavigation<StackNavigationProp<NavigationProp>>();
   const {
     params: { id, name, type, quantity, value, image, description, storeId },
   } = useRoute<RouteProp<ParamList, 'ProductPage'>>();

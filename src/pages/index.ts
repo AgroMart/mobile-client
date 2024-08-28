@@ -11,3 +11,7 @@ export { default as SignUp } from './SignUp';
 export { default as ProductPage } from './ProductPage';
 export { default as SearchResult } from './SearchResult';
 export { default as Cart } from './Cart';
+export { default as Notifications } from './Notifications';
+export { default as CreditCardRegister } from './CreditCardRegister';
+export { default as BillingAddress } from './BillingAddress';
+export { default as SelectCSA } from './SelectCSA';

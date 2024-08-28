@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { Alert } from 'react-native';
-import api from '../../services/api';
+import initializeApi from '../../services/api';
 import { useAuth } from '../../hooks/AuthProvider';
 
 import DefaultProfile from '../../assets/defaultAvatar.png';
@@ -19,6 +19,7 @@ const ProfileInfo: React.FC = () => {
 
   const handleSave = async () => {
     try {
+      const api = await initializeApi();
       const { data } = await api.put(`users/${user.id}`, {
         ...user,
         username: name,

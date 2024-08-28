@@ -3,7 +3,7 @@ import { ActivityIndicator, Alert, View } from 'react-native';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 import { format } from 'date-fns';
 
-import api, { baseURL } from '../../services/api';
+import initializeApi from '../../services/api';
 
 import SwitchButton from '../SwitchButton';
 // import RadioButton from '../RadioButton';
@@ -21,20 +21,22 @@ import {
 
 interface StoreCardProps {
   id: number;
-  store: string;
-  contact: string;
+  store?: string;
+  contact?: string;
   acquisitionDate: string;
   avaliableBasket: number;
   recievedBasket: number;
   image: string;
   switchInitialValue: boolean;
+  name: string;
 }
 
 const PlanCard: React.FC<StoreCardProps> = ({
   id,
   image,
-  store,
-  contact,
+  name,
+  // store,
+  // contact,
   acquisitionDate,
   avaliableBasket,
   recievedBasket,
@@ -52,8 +54,9 @@ const PlanCard: React.FC<StoreCardProps> = ({
     setSwitchValue(state => !state);
     setLoading(true);
 
+    const api = await initializeApi();
     try {
-      await api.put(`/assinantes/${id}`, {
+      await api.put(`assinantes/${id}`, {
         pular_cesta: !switchValue,
       });
     } catch (error) {
@@ -75,12 +78,14 @@ const PlanCard: React.FC<StoreCardProps> = ({
           <Image source={{ uri: `${image}` }} />
           <InfoContainer>
             <InfoView>
-              <InfoTitle>Loja: </InfoTitle>
+              <InfoTitle>Nome: </InfoTitle>
+              <Info>{name}</Info>
+              {/* <InfoTitle>Loja: </InfoTitle>
               <Info>{store}</Info>
             </InfoView>
             <InfoView>
               <InfoTitle>Contato: </InfoTitle>
-              <Info>{contact}</Info>
+              <Info>{contact}</Info> */}
             </InfoView>
             <InfoView>
               <InfoTitle>Data de aquisição: </InfoTitle>

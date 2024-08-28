@@ -2,6 +2,22 @@
   <img alt="AgroMart" title="AgroMart" src="https://raw.githubusercontent.com/Hackathon-FGA-2020/Desafio-3-Grupo-6-mobile/master/src/assets/images/logo_0.5.png"/>
 </h1>
 
+## Imagens
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/5bba49ff-9f85-4392-ba0b-bf4c24d04b66" alt="print1" width="180"/>
+  <img src="https://github.com/user-attachments/assets/ddda62b3-1ec1-4a24-af7c-302cf9819820" alt="print3" width="180"/>
+  <img src="https://github.com/user-attachments/assets/dbed868f-8265-4438-a6ed-7992fea7e80c" alt="print4" width="180"/>
+  <img src="https://github.com/user-attachments/assets/ae5b1965-10c6-4af9-bc2e-64845493d630" alt="print5" width="180"/>
+</p>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/db20af10-2934-45a2-84d4-e8cf36960aa1" alt="print6" width="180"/>
+  <img src="https://github.com/user-attachments/assets/eaacd0e4-964f-4a6b-b537-8b8b8b3e14ad" alt="print7" width="180"/>
+  <img src="https://github.com/user-attachments/assets/9c682736-b79c-47ae-8703-7bd4bf16a8fd" alt="print8" width="180"/>
+  <img src="https://github.com/user-attachments/assets/220a78cb-a22e-466a-b300-da64028ae8ab" alt="print9" width="180"/>
+</p>
+
+
 ## Funcionalidades
 
 - Criação de conta de usuário e Autenticação;
@@ -15,6 +31,16 @@
 - Visualizar planos assinados e pular cesta da semana;
 - Cadastrar e editar endereço;
 - Editar perfil;
+
+## Download do Agromart:
+O aplicativo do Agromart está disponível para ser baixado para Android na PlayStore.
+
+<p align="center">
+  <a href="https://play.google.com/store/apps/details?id=com.ct.agromart">
+    <img src="https://github.com/user-attachments/assets/df5925d4-2593-4728-ae54-97edd0440e35" alt="playstore" width="180"/>
+  </a>
+</p>
+  
 
 ## Principais Tecnologias Utilizadas:
 

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { baseURL } from '../../services/api';
 import { priceFormat } from '../../utils';
 
 import {

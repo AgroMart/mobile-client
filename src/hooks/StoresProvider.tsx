@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useCallback } from 'react';
+import React, { createContext, useState, useContext, useCallback, ReactNode } from 'react';
 
 import { useCart } from './CartProvider';
 
@@ -11,7 +11,11 @@ interface StoresContextData {
 
 const StoresContext = createContext<StoresContextData>({} as StoresContextData);
 
-const StoresProvider: React.FC = ({ children }) => {
+interface StoresProps {
+  children: ReactNode;
+}
+
+const StoresProvider: React.FC<StoresProps> = ({ children }) => {
   const [stores, setStores] = useState<Store[]>([]);
 
   const { cleanUpCart } = useCart();

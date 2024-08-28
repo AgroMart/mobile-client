@@ -12,7 +12,12 @@ import {
   ProductPage,
   SearchResult,
   Cart,
+  Notifications,
+  CreditCardRegister,
+  BillingAddress,
+  SelectCSA
 } from '../pages';
+import History from '../pages/History';
 
 const App = createStackNavigator();
 
@@ -25,6 +30,7 @@ const routes: React.FC = () => {
       }}
     >
       <App.Screen name="Home" component={TabRoutes} />
+      <App.Screen name="SelectCSA" component={SelectCSA} />
       <App.Screen name="StoreDetail" component={StoreDetails} />
       <App.Screen name="Plan" component={Plan} />
       <App.Screen name="ProfileInfo" component={ProfileInfo} />
@@ -34,6 +40,11 @@ const routes: React.FC = () => {
       <App.Screen name="ProductPage" component={ProductPage} />
       <App.Screen name="SearchResult" component={SearchResult} />
       <App.Screen name="Cart" component={Cart} />
+      <App.Screen name="Notifications" component={Notifications} />
+      <App.Screen name="CreditCardRegister" component={CreditCardRegister} />
+      <App.Screen name="BillingAddress" component={BillingAddress} />
+      <App.Screen name="History" component={History} />
+
     </App.Navigator>
   );
 };

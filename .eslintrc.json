@@ -26,7 +26,13 @@
   "rules": {
     "react/no-array-index-key": "off",
     "no-nested-ternary": "off",
-    "prettier/prettier": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      },
+    
+    ],
     "no-underscore-dangle": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
