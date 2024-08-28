@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useCallback } from 'react';
+import React, { createContext, useState, useContext, useCallback, ReactNode } from 'react';
 
 export type TypeItem = 'produto' | 'cesta' | 'plano';
 
@@ -23,7 +23,11 @@ interface CartContextData {
 
 const CartContext = createContext<CartContextData>({} as CartContextData);
 
-const CartProvider: React.FC = ({ children }) => {
+interface CartProviderProps {
+  children: ReactNode;
+}
+
+const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [storeId, setStoreId] = useState<number>();
 

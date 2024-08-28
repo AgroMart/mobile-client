@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { TextInput, Alert } from 'react-native';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -17,24 +17,58 @@ import {
   Logo,
   AnimationCircule,
   AppName,
+  CSAChosen,
   CreateAccountButton,
   CreateAccountButtonText,
 } from './styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type CSAObj = {
+  urlBase: string;
+  nomeCSA: string;
+  responsavelCSA: string;
+  emailCSA: string;
+};
+
+type NavigationProps = {
+  SelectCSA: undefined
+  Home: undefined
+  SignUp: undefined
+}
 
 const SignIn: React.FC = () => {
   const passwordRef = useRef<TextInput | any>();
+  const navigation = useNavigation<StackNavigationProp<NavigationProps>>();
+
+  const [csa, setcsa] = useState<CSAObj | null>(null);
+  const [urlcsa, seturl] = useState<string | null>('');
+
+  const getCSA = async () => {
+    const url = await AsyncStorage.getItem('@csaChosen');
+    const urls = await AsyncStorage.getItem('@BaseUrlChosen');
+    seturl(urls);
+    if (url) {
+      const jsonparsed = JSON.parse(url ? url : '');
+      setcsa(jsonparsed as unknown as CSAObj);
+    } else {
+      navigation.navigate('SelectCSA');
+    }
+  };
+  useEffect(() => {
+    getCSA();
+  }, []);
   const [loading, setLoading] = useState(false);
-  const navigation = useNavigation();
 
   const { signIn } = useAuth();
 
   const handleSubmit = useCallback(
-    async data => {
+    async (data: { email: string; password: string; }) => {
       setLoading(true);
 
       try {
         await signIn({ username: data.email, password: data.password });
-        navigation.goBack();
+        navigation.navigate('Home');
       } catch (error) {
         Alert.alert('Erro ao fazer login');
         console.log(error);
@@ -66,6 +100,8 @@ const SignIn: React.FC = () => {
       <Container>
         <Logo source={LogoAgromart} />
         <AppName>AgroMart</AppName>
+        <CSAChosen>{`utilizando CSA: "${csa?.nomeCSA}"`}</CSAChosen>
+        <CSAChosen>{`utilizando CSA: "${urlcsa}"`}</CSAChosen>
         <Input
           placeholder="E-mail"
           autoCorrect={false}

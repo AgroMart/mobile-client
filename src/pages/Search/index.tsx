@@ -12,9 +12,15 @@ import StoreCard from '../../components/StoreCard';
 import data from '../../utils/mockCitys';
 
 import { Container, InputContainer, StoresContainer } from './styles';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type NavigationProps = {
+  StoreDetail: Store
+  SearchResult: { key: string; city: string; urlImage: string };
+}
 
 const Search: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<NavigationProps>>();
   const { stores } = useStores();
 
   const [search, setSearch] = useState('');

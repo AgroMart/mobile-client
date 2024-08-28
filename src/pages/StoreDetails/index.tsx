@@ -28,6 +28,7 @@ import {
   TitleMenu,
   IconView,
 } from './styles';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 interface Category {
   id: number;
@@ -54,7 +55,7 @@ type ParamList = {
     banner: {
       url: string;
     };
-    produtos_avulsos: any[];
+    produto_avulsos: any[];
     cestas: any[];
     planos: any[];
     endereco: {
@@ -63,13 +64,19 @@ type ParamList = {
   };
 };
 
+type NavigationProps = {
+  ProductPage: Item, 
+  Cart: undefined
+}
+
 const StoreDetails: React.FC = () => {
   const flatListRef = useRef<any>(null);
   const selectListRef = useRef<any>(null);
   const [selecedMenu, setSelectedMenu] = useState(0);
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<NavigationProps>>();
 
   const [data, setData] = useState<Category[]>([]);
+  console.log({ data });
   const { addItemToCart, cart } = useCart();
   const { user } = useAuth();
 
@@ -80,7 +87,7 @@ const StoreDetails: React.FC = () => {
       contato,
       descricao,
       banner,
-      produtos_avulsos,
+      produto_avulsos,
       cestas,
       planos,
       endereco,
@@ -96,7 +103,7 @@ const StoreDetails: React.FC = () => {
           id: item.id,
           name: `Cesta ${item.id}`,
           type: 'cesta',
-          image: item.imagem ? item.imagem.url : '',
+          image: item.url ?? '',
           quantity: item.quantidade,
           value: item.valor,
           unity: 'unidade',
@@ -111,7 +118,7 @@ const StoreDetails: React.FC = () => {
           id: item.id,
           type: 'plano',
           name: item.nome,
-          image: item.imagem ? item.imagem.url : '',
+          image: item.url ?? '',
           quantity: item.quantidade,
           value: item.valor,
           unity: 'unidade',
@@ -122,11 +129,11 @@ const StoreDetails: React.FC = () => {
       {
         id: 3,
         title: 'Produtos',
-        data: produtos_avulsos.map(item => ({
+        data: produto_avulsos.map(item => ({
           id: item.id,
           type: 'produto',
           name: item.nome,
-          image: item.imagem ? item.imagem.url : '',
+          image: item.url ?? '',
           quantity: item.quantidade,
           value: item.valor,
           unity: item.unidade_medida,
@@ -135,7 +142,7 @@ const StoreDetails: React.FC = () => {
         })),
       },
     ]);
-  }, [cestas, planos, produtos_avulsos, id]);
+  }, [cestas, planos, produto_avulsos, id]);
 
   const handleWhatsAppMessage = useCallback(
     async (phoneNumber: string): Promise<void> => {
@@ -146,7 +153,7 @@ const StoreDetails: React.FC = () => {
     [],
   );
 
-  const selectMenu = useCallback(index => {
+  const selectMenu = useCallback((index: React.SetStateAction<number>) => {
     setSelectedMenu(index);
     if (flatListRef.current) {
       flatListRef.current?.scrollToIndex({
@@ -199,7 +206,10 @@ const StoreDetails: React.FC = () => {
                 onPress={() => {
                   if (!cart.length) {
                     if (!user) {
-                      return Alert.alert('Ops...', 'Você deve estar logado para acessar o carrinho.');
+                      return Alert.alert(
+                        'Ops...',
+                        'Você deve estar logado para acessar o carrinho.',
+                      );
                     }
                     return Alert.alert('Ops...', 'Seu carrinho está vazio');
                   }
@@ -263,7 +273,10 @@ const StoreDetails: React.FC = () => {
                   navigation.navigate('ProductPage', item);
                 } else {
                   if (!user) {
-                    return Alert.alert('Ops...', 'Você deve estar logado para adicionar um plano ao carrinho.');
+                    return Alert.alert(
+                      'Ops...',
+                      'Você deve estar logado para adicionar um plano ao carrinho.',
+                    );
                   }
                   const plan = {
                     id: item.id,

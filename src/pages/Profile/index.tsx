@@ -7,9 +7,18 @@ import ProfileItemAccess from '../../components/ProfileItemAccess';
 import UserHeader from '../../components/UserHeader';
 
 import { Container } from './styles';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type NavigationProps = {
+  SignIn: undefined, 
+  ProfileInfo: undefined, 
+  AddressForm: undefined, 
+  Plan: undefined
+  Notifications: undefined
+}
 
 const Profile: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<NavigationProps>>();
 
   const { user, signOut } = useAuth();
 
@@ -44,17 +53,17 @@ const Profile: React.FC = () => {
             subtitle="Planos assinados"
             onPress={() => navigation.navigate('Plan')}
           />
+            <ProfileItemAccess
+              icon="logout"
+              title="Sair"
+              subtitle="Fazer logout do app"
+              onPress={signOut}
+            />
           <ProfileItemAccess
             icon="message-text-outline"
             title="Notificações"
             subtitle="Informações úteis sobe sua CSA"
             onPress={() => navigation.navigate('Notifications')}
-          />
-          <ProfileItemAccess
-            icon="logout"
-            title="Sair"
-            subtitle="Fazer logout do app"
-            onPress={signOut}
           />
         </>
       )}

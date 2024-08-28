@@ -24,6 +24,6 @@ export default {
   EXTRA_BIG: normalize(24),
   REGULAR: 'Montserrat_400Regular',
   LIGHT: 'Montserrat_300Light',
-  SEMIBOLD: 'Montserrat_600SemiBold',
+  SEMIBOLD: 'Montserrat_700Bold',
   BOLD: 'Montserrat_700Bold',
 };

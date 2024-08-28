@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { TextInput, Alert } from 'react-native';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -11,7 +11,7 @@ import BackHeader from '../../components/BackHeader';
 import Select from '../../components/Select';
 import neighborhoods from '../../utils/mockCitys';
 
-import api from '../../services/api';
+import initializeApi from '../../services/api';
 import { useAuth } from '../../hooks/AuthProvider';
 
 import {
@@ -33,8 +33,10 @@ const AddressForm: React.FC = () => {
   const navigation = useNavigation();
 
   const handleSubmit = useCallback(
-    async data => {
+    async (data: { city: string; number: string; complement: string; street: string; cep: string; neighborhood: string; }) => {
       try {
+        const api = await initializeApi()
+
         setLoading(true);
 
         const body = {
@@ -60,7 +62,7 @@ const AddressForm: React.FC = () => {
         await updateAddress(response.data);
         navigation.goBack();
       } catch (error) {
-        Alert.alert('Erro ao cadastrar usuario');
+        Alert.alert('Erro ao cadastrar endereço');
       }
       setLoading(false);
     },

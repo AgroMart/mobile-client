@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { baseURL } from '../../services/api';
-
 import { Container, Card, Image, Title, Location } from './styles';
 
 export interface StoreCardProps {

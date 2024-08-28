@@ -1,30 +1,95 @@
 import React, { useEffect, useCallback } from 'react';
 import { ScrollView, Alert } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
-
+import util from 'util';
 import { useAuth } from '../../hooks/AuthProvider';
 import { useStores } from '../../hooks/StoresProvider';
 
-import api from '../../services/api';
+import initializeApi from '../../services/api';
 
 import UserHeader from '../../components/UserHeader';
 import Carousel from '../../components/Carousel';
 import StoreCard from '../../components/StoreCard';
 
 import { Container, CarouselContainer, StoresContainer } from './styles';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Store } from '../../interfaces';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type NavigationProps = {
+  StoreDetail: Store
+}
+
+function appendBaseUrlToImageUrls(data: any, baseUrl: string) {
+  data.forEach((loja: any) => {
+    if (loja?.cestas?.length) {
+      for (let cesta of loja.cestas) {
+        cesta.url = baseUrl + cesta?.imagem[0]?.url;
+      }
+    }
+
+    if (loja?.planos?.length) {
+      for (let plano of loja.planos) {
+        if (plano?.imagem?.length) {
+          plano.url = baseUrl + plano.imagem[0]?.url;
+        } else {
+          plano.url = baseUrl + plano?.imagem?.url;
+        }
+      }
+    }
+
+    if (loja?.produto_avulsos?.length) {
+      for (let produto of loja.produto_avulsos) {
+        if (produto?.imagem?.length) {
+          produto.url = baseUrl + produto.imagem[0]?.url;
+        } else {
+          produto.url = baseUrl + produto?.imagem?.url;
+        }
+      }
+    }
+
+    if (loja.banner && loja.banner.url) {
+      loja.banner.url = baseUrl + loja.banner.url;
+    }
+
+    if (loja.banner && loja.banner.formats) {
+      for (let format in loja.banner.formats) {
+        if (loja.banner.formats[format].url) {
+          loja.banner.formats[format].url =
+            baseUrl + loja.banner.formats[format].url;
+        }
+      }
+    }
+  });
+}
 
 const Home: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<NavigationProps>>();
 
   const { user } = useAuth();
   const { stores, updateStores } = useStores();
 
   const loadStores = useCallback(() => {
     async function load() {
+      const baseUrl = await AsyncStorage.getItem('@BaseUrlChosen');
+
       try {
-        const response = await api.get('lojas');
-        updateStores(response.data);
+        // Only try to load stores at home if Url has been chosen.
+        // The api should be a singleton with an public attribute that tells if its Url is already defined
+        // Do this in a future refactor
+        if (baseUrl?.length) {
+          const api = await initializeApi();
+
+          const response = await api.get('lojas');
+          appendBaseUrlToImageUrls(response.data, baseUrl);
+          console.log('response =====> ', response.data);
+
+          updateStores(response.data);
+        }
       } catch (err) {
+        console.dir('AQUI ERRO LOJA' + err, { depth: null });
+        console.log('ERROLOJA');
+        // console.log(util.inspect(err, { depth: null, colors: true }));
         Alert.alert('Ops', 'Não foi possivel carregar as lojas');
       }
     }

@@ -1,33 +1,27 @@
 {
   "expo": {
-    "name": "AgroMart",
-    "owner": "agromart",
+    "name": "Agromart",
     "slug": "agromart",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "permissions": [ ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#ffffff"
       },
-      "package": "com.agromart",
-      "googleServicesFile": "./google-services.json",
-      "versionCode": 1
+      "package": "com.agromart"
     },
     "web": {
       "favicon": "./assets/favicon.png"

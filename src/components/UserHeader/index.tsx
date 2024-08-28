@@ -3,7 +3,10 @@ import { useNavigation } from '@react-navigation/native';
 
 import DefaultProfile from '../../assets/defaultAvatar.png';
 
+import DropdownComponent from '../DropdownComponent';
+
 import { Container, Img, Text } from './styles';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 interface UserHeaderProps {
   photo?: string;
@@ -11,12 +14,18 @@ interface UserHeaderProps {
   disabled?: boolean;
 }
 
-const UserHeader: React.FC<UserHeaderProps> = ({ photo, name, disabled }) => {
-  const navigation = useNavigation();
+type NavigationProps = {
+  SelectCSA: undefined, 
+}
 
+const UserHeader: React.FC<UserHeaderProps> = ({ photo, name, disabled }) => {
+  const navigation = useNavigation<StackNavigationProp<NavigationProps>>();
+
+  
   return (
     <Container
-      onPress={() => navigation.navigate('SignIn')}
+    style={{display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"space-between"}}
+      onPress={() => navigation.navigate('SelectCSA')}
       disabled={disabled}
     >
       <Img source={photo ? { uri: photo } : DefaultProfile} />
@@ -28,6 +37,13 @@ const UserHeader: React.FC<UserHeaderProps> = ({ photo, name, disabled }) => {
           'faça login ou cadastro.'
         )}
       </Text>
+      {name ? (
+          <Text logged={!!name}>{""}.</Text>
+        ) : (
+          <DropdownComponent logged={name?.length as number>1?true:false}/>
+        )}
+      
+      
     </Container>
   );
 };

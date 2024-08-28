@@ -32,6 +32,7 @@ const HistoryItemCard: React.FC<HistoryCardProps> = ({
 }) => {
   const [isVisibleModal, setIsVisibleModal] = useState(false);
 
+  
   const handleModal = useCallback(() => {
     setIsVisibleModal(!isVisibleModal);
   }, [isVisibleModal]);

@@ -17,6 +17,11 @@ import {
   StreetContainer,
   NumberContainer,
 } from './styles';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type NavigationProps = {
+  CreditCardRegister: any
+}
 
 const BillingAddress: React.FC = () => {
   const cityRef = useRef<TextInput | any>();
@@ -26,10 +31,10 @@ const BillingAddress: React.FC = () => {
   const complementRef = useRef<TextInput | any>();
   const stateRef = useRef<TextInput | any>();
   const [loading, setLoading] = useState(false);
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<NavigationProps>>();
 
   const handleSubmit = useCallback(
-    async data => {
+    async (data: { street: string; number: string; complement: string; neighborhood: string; city: string; state: string; cep: string; }) => {
       try {
         setLoading(true);
 

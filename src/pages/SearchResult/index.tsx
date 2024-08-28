@@ -9,6 +9,7 @@ import BackHeader from '../../components/BackHeader';
 import StoreCard from '../../components/StoreCard';
 
 import { Container, StoresContainer } from './styles';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 type ParamList = {
   RA: {
@@ -16,8 +17,12 @@ type ParamList = {
   };
 };
 
+type NavigationProps = {
+  StoreDetail: Store
+}
+
 const SearchResult: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<NavigationProps>>();
   const { stores } = useStores();
   const {
     params: { key },

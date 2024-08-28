@@ -1,7 +1,6 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-import { baseURL } from '../../services/api';
 import { priceFormat } from '../../utils';
 
 import {

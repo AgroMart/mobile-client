@@ -74,7 +74,6 @@ export const ContainerItem = styled.View<MenuItemProps>`
 
 export const MenuItem = styled.Text<MenuItemProps>`
   font-size: ${fonts.MEDIUM}px;
-  font-family: Montserrat-SemiBold;
   margin: 0px 15px 15px;
   color: ${props => (props.selected ? colors.primary : '#000')};
 `;
@@ -86,7 +85,6 @@ export const TitleContainer = styled.View`
 
 export const TitleMenu = styled.Text`
   font-size: ${fonts.MEDIUM}px;
-  font-family: Montserrat-SemiBold;
   margin: 20px 0px;
 `;
 

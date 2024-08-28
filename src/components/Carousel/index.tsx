@@ -8,7 +8,7 @@ import Img3 from '../../assets/carrousel3.png';
 import { colors } from '../../styles';
 
 type ItemProps = {
-  image: string;
+  image: any;
 };
 
 const imagesUrl = [
@@ -30,7 +30,7 @@ const CustomCarousel: React.FC = () => {
 
   const windowWidth = Dimensions.get('window').width;
 
-  const renderItem = useCallback(({ item }) => {
+  const renderItem = useCallback(({ item }: { item: ItemProps }) => {
     return (
       <Image
         source={item.image}
