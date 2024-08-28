@@ -21,8 +21,8 @@ import {
 
 interface StoreCardProps {
   id: number;
-  store: string;
-  contact: string;
+  store?: string;
+  contact?: string;
   acquisitionDate: string;
   avaliableBasket: number;
   recievedBasket: number;

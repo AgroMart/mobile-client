@@ -46,7 +46,7 @@ type PlanInfo = {
         loja: number;
       }>;
   created_at: string;
-};
+} | any;
 
 const Plan: React.FC = () => {
   const [plans, setPlans] = useState<PlanInfo[]>([]);
