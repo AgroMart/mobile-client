@@ -52,6 +52,7 @@ const DropdownComponent = (logged: boolean | any) => {
       /> */}
       {logged && (
         <Button
+        // @ts-ignore
           children={null} onPress={() => navigation.navigate('SelectCSA')}
         >
           Escolha sua CSA

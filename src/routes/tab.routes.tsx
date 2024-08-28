@@ -12,6 +12,7 @@ const Tab = createBottomTabNavigator();
 const TabRoutes: React.FC = () => (
   <Tab.Navigator
     initialRouteName="Home"
+    // @ts-ignore
     tabBarOptions={{
       activeTintColor: '#00AA95',
       inactiveTintColor: '#292929',

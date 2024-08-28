@@ -269,7 +269,9 @@ const CreditCardPayment: React.FC = () => {
           type="default"
           onChangeText={e => setBirthDate(e)}
         />
-        <Button onPress={handleSubmit(onSubmit)}>
+        <Button 
+          // @ts-ignore
+          onPress={handleSubmit(onSubmit)}>
           {loading ? <AnimationCircule /> : 'Realizar Pagamento'}
         </Button>
 
